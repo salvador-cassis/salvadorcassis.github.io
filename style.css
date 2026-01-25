@@ -25,9 +25,9 @@ header {
 }
 
 h1 {
-  font-size: 3rem;
-  margin-bottom: 0.3rem;
-  letter-spacing: -0.02em;
+  font-size: 3.2rem;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.03em;
 }
 
 .subtitle {
@@ -39,7 +39,7 @@ h1 {
 /* Secciones */
 
 section {
-  margin-bottom: 3.5rem;
+  margin-bottom: 4.5rem;
 }
 
 h2 {
@@ -85,4 +85,8 @@ section:not(:last-child)::after {
   width: 60px;
   height: 1px;
   background-color: #ddd;
+}
+::selection {
+  background-color: var(--color-acento);
+  color: white;
 }
