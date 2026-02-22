@@ -122,11 +122,20 @@ section {
 
 /* INICIO */
 
-#inicio ul {
+#inicio .external-links {
   display: flex;
   gap: 1.5rem;
-  font-size: 0.9rem;
-  color: #444;
+  margin-top: 1rem;
+}
+
+#inicio .external-links a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+#inicio .external-links a:hover {
+  text-decoration: underline;
 }
 
 /* PRACTICA */
@@ -139,12 +148,42 @@ section {
 /* PROYECTOS */
 
 #proyectos article {
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   border-bottom: 1px solid #eee;
 }
 
 #proyectos article:last-child {
   border-bottom: none;
+}
+
+#proyectos h3 {
+  margin-bottom: 0.75rem;
+}
+
+#proyectos a {
+  color: #111;
+  text-decoration: underline;
+}
+
+#proyectos a:hover {
+  color: #555;
+}
+
+/* ACERCA DE */
+
+#acerca article {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+#acerca article:last-child {
+  border-bottom: none;
+}
+
+#acerca h3 {
+  margin-bottom: 0.75rem;
+  color: #555;
+  font-size: 1rem;
 }
 
 /* CONTACTO */
@@ -256,10 +295,11 @@ footer {
 }
 
 /* --------------------
-   STRUDEL
--------------------- */
+   STRUDEL + SPOTIFY
+ -------------------- */
 
-.strudel-container {
+.strudel-container,
+.spotify-container {
   width: 100%;
   max-width: 100%;
   margin-top: 1rem;
@@ -272,4 +312,8 @@ footer {
   border: 1px solid #ddd;
   border-radius: 4px;
   overflow: hidden;
+}
+
+.spotify-container iframe {
+  border-radius: 12px;
 }
