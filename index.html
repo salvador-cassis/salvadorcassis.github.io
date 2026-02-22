@@ -19,6 +19,7 @@
     <nav>
       <ul>
         <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#audio-interactivo">Audio</a></li>
         <li><a href="#practica">Cómo trabajo</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#contacto">Contacto</a></li>
@@ -49,6 +50,32 @@
         Me interesa el sonido como experiencia, como herramienta de aprendizaje
         y como forma de construir identidad, más que como mero resultado técnico.
       </p>
+    </section>
+
+    <!-- AUDIO INTERACTIVO -->
+    <section id="audio-interactivo">
+      <h2>Audio interactivo</h2>
+      <p>Explora el código que genera este loop. Puedes modificarlo y escuchar los cambios en tiempo real.</p>
+      
+      <div class="strudel-container">
+        <script src="https://unpkg.com/@strudel.cycles@latest/embed.min.js"></script>
+        <strudel-repl>
+setcpm(80/4)
+let chords = chord("<[Am9 Am7]Gadd9 [F [F6 F7]] [E7b9 [Esus E7]]>/2").dict('ireal')
+stack( 
+  stack( 
+  s("cp:3").struct("~ ~ x ~ x ~ x ~ ~ x x x ~ ~ x ~"),
+  s("cp:5").struct("~ x ~ x"),
+  s("darbuka").struct("~ ~ ~ x ~ ~ x ~ ~ ~ ~ x ~ ~ x ~"),
+  s("cajon").struct("x ~ x x ~ ~ x ~ ~ ~ x x ~ ~ x ~")
+        )
+  .mask("<[0 1] 1 1 1>/16".early(.5)), 
+  stack(
+  chords.offset(-1).voicing().s("gm_epiano1:1")
+  .phaser(4).room(.5))
+  )
+        </strudel-repl>
+      </div>
     </section>
 
     <!-- PRACTICA -->
