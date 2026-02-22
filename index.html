@@ -1,42 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  
   <meta charset="UTF-8">
-  <title>Salvador Cassis</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salvador Cassis — Artista educador y productor musical</title>
+  <meta name="description" content="Artista educador y productor musical. Desarrollo proyectos de creación sonora, educación artística y música para contextos culturales, educativos y audiovisuales.">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <!-- HEADER -->
   <header>
     <h1>Salvador Cassis</h1>
-    <p class="subtitle">Artista educador y productor musical</p>
+    <p>Artista educador · Productor musical</p>
+
+    <nav>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#practica">Cómo trabajo</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <section>
-    <h2>Sobre mí</h2>
-    <p>
-      Trabajo en educación artística y producción musical,
-      creando experiencias sonoras y proyectos educativos.
-    </p>
-  </section>
+  <!-- MAIN -->
+  <main>
 
-  <section>
-    <h2>Servicios</h2>
-    <ul>
-      <li>Producción musical</li>
-      <li>Audio para animación</li>
-      <li>Educación artística</li>
-    </ul>
-  </section>
+    <!-- INICIO -->
+    <section id="inicio">
+      <h2>Creación sonora, educación artística y procesos con sentido.</h2>
 
-  <section>
-    <h2>Contacto</h2>
-    <p>
-      Escríbeme a:
-      <a href="mailto:salvador@soniketesur.com">salvador@soniketesur.com</a>
-    </p>
-  </section>
+      <p>
+        Trabajo entre la música, el sonido y la educación, desarrollando proyectos que combinan
+        creación artística, escucha activa y pensamiento crítico, para contextos culturales,
+        educativos y audiovisuales.
+      </p>
+
+      <ul>
+        <li>Educación artística</li>
+        <li>Creación musical</li>
+        <li>Sonido y narrativa</li>
+      </ul>
+
+      <p>
+        Me interesa el sonido como experiencia, como herramienta de aprendizaje
+        y como forma de construir identidad, más que como mero resultado técnico.
+      </p>
+    </section>
+
+    <!-- PRACTICA -->
+    <section id="practica">
+      <h2>Práctica</h2>
+
+      <article>
+        <h3>Educación artística</h3>
+        <p>
+          Desarrollo proyectos de mediación artística en contextos educativos, poniendo
+          énfasis en la escucha, el proceso creativo y la participación activa de niñas,
+          niños y jóvenes.
+        </p>
+        <p>
+          Mi trabajo se basa en el enfoque de derechos, la construcción colectiva
+          y el arte como espacio de exploración, expresión y reflexión.
+        </p>
+      </article>
+
+      <article>
+        <h3>Creación y producción musical</h3>
+        <p>
+          Compongo y produzco música para proyectos autorales, audiovisuales y escénicos,
+          cuidando tanto la identidad sonora como el diálogo con la imagen, el relato
+          y el contexto.
+        </p>
+        <p>
+          Me interesa acompañar procesos creativos de manera situada, entendiendo
+          la música como parte de una narrativa mayor.
+        </p>
+      </article>
+
+      <article>
+        <h3>Música en vivo</h3>
+        <p>
+          Realizo música en vivo para eventos y encuentros en formatos acústicos
+          y personalizados, priorizando la calidad sonora, el contexto
+          y la experiencia compartida.
+        </p>
+      </article>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos">
+      <h2>Proyectos</h2>
+
+      <article>
+        <h3>Clavito</h3>
+        <p>
+          Proyecto musical autoral donde exploro identidad, territorio
+          y creación sonora desde una mirada contemporánea.
+        </p>
+      </article>
+
+      <article>
+        <h3>Proyectos educativos</h3>
+        <p>
+          Experiencias de creación colectiva, exploración sonora
+          y mediación artística desarrolladas en contextos educativos.
+        </p>
+      </article>
+
+      <article>
+        <h3>Sonido y audiovisual</h3>
+        <p>
+          Música y diseño sonoro para animación, piezas audiovisuales
+          y proyectos narrativos.
+        </p>
+      </article>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <h2>Contacto</h2>
+
+      <p>
+        Si tienes un proyecto, una idea o una pregunta,
+        podemos conversarlo.
+      </p>
+
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="6" required></textarea>
+        </div>
+        
+        <button type="submit">Enviar</button>
+      </form>
+      
+      <p class="contact-email">
+        O escribe directamente a <a href="mailto:salvador@soniketesur.com">salvador@soniketesur.com</a>
+      </p>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 · Salvador Cassis</p>
+  </footer>
 
 </body>
 </html>
