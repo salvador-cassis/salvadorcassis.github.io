@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Salvador Cassis — Artista educador y productor musical</title>
   <meta name="description" content="Artista educador y productor musical. Desarrollo proyectos de creación sonora, educación artística y música para contextos culturales, educativos y audiovisuales.">
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -19,9 +18,8 @@
     <nav>
       <ul>
         <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#audio-interactivo">Audio</a></li>
-        <li><a href="#practica">Cómo trabajo</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#acerca">Acerca de</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
@@ -32,34 +30,57 @@
 
     <!-- INICIO -->
     <section id="inicio">
-      <h2>Creación sonora, educación artística y procesos con sentido.</h2>
-
       <p>
         Trabajo entre la música, el sonido y la educación, desarrollando proyectos que combinan
         creación artística, escucha activa y pensamiento crítico, para contextos culturales,
         educativos y audiovisuales.
       </p>
 
-      <ul>
-        <li>Educación artística</li>
-        <li>Creación musical</li>
-        <li>Sonido y narrativa</li>
+      <ul class="external-links">
+        <li><a href="https://open.spotify.com/artist/1jUZtLu5Xh59xrnpdHJimI" target="_blank" rel="noopener">Spotify</a></li>
+        <li><a href="https://acciona.cultura.gob.cl/author/salvadorcassis-2/" target="_blank" rel="noopener">Acciona</a></li>
       </ul>
-
-      <p>
-        Me interesa el sonido como experiencia, como herramienta de aprendizaje
-        y como forma de construir identidad, más que como mero resultado técnico.
-      </p>
     </section>
 
-    <!-- AUDIO INTERACTIVO -->
-    <section id="audio-interactivo">
-      <h2>Audio interactivo</h2>
-      <p>Explora el código que genera este loop. Puedes modificarlo y escuchar los cambios en tiempo real.</p>
-      
-      <div class="strudel-container">
-        <script src="https://unpkg.com/@strudel.cycles@latest/embed.min.js"></script>
-        <strudel-repl>
+    <!-- PROYECTOS -->
+    <section id="proyectos">
+      <h2>Proyectos</h2>
+
+      <article>
+        <h3>Educación</h3>
+        <p>
+          Desarrollo proyectos de mediación artística en contextos educativos, poniendo
+          énfasis en la escucha, el proceso creativo y la participación activa.
+        </p>
+        <p>
+          Formo parte del programa <a href="https://acciona.cultura.gob.cl/author/salvadorcassis-2/" target="_blank" rel="noopener">Acciona</a>,
+          iniciativa del Ministerio de las Culturas que trabaja con metodologías basadas en artes
+          para la educación en La Araucanía.
+        </p>
+      </article>
+
+      <article>
+        <h3>Música</h3>
+        <p>
+          Proyectos musicales autorales. Exploro la Cueca chilena y el Flamenco desde una
+          mirada contemporánea. Actualmente produciendo un EP.
+        </p>
+        
+        <div class="spotify-container">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/1jUZtLu5Xh59xrnpdHJimI?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </article>
+
+      <article>
+        <h3>Arte medial</h3>
+        <p>
+          Exploración de audio interactivo, live coding y software libre.
+          Investigo nuevas formas de creación sonora mediadas por tecnología.
+        </p>
+        
+        <div class="strudel-container">
+          <script src="https://unpkg.com/@strudel.cycles@latest/embed.min.js"></script>
+          <strudel-repl>
 setcpm(80/4)
 let chords = chord("<[Am9 Am7]Gadd9 [F [F6 F7]] [E7b9 [Esus E7]]>/2").dict('ireal')
 stack( 
@@ -74,75 +95,49 @@ stack(
   chords.offset(-1).voicing().s("gm_epiano1:1")
   .phaser(4).room(.5))
   )
-        </strudel-repl>
-      </div>
-    </section>
-
-    <!-- PRACTICA -->
-    <section id="practica">
-      <h2>Práctica</h2>
-
-      <article>
-        <h3>Educación artística</h3>
-        <p>
-          Desarrollo proyectos de mediación artística en contextos educativos, poniendo
-          énfasis en la escucha, el proceso creativo y la participación activa de niñas,
-          niños y jóvenes.
-        </p>
-        <p>
-          Mi trabajo se basa en el enfoque de derechos, la construcción colectiva
-          y el arte como espacio de exploración, expresión y reflexión.
-        </p>
+          </strudel-repl>
+        </div>
       </article>
 
       <article>
-        <h3>Creación y producción musical</h3>
+        <h3>Producción</h3>
         <p>
-          Compongo y produzco música para proyectos autorales, audiovisuales y escénicos,
-          cuidando tanto la identidad sonora como el diálogo con la imagen, el relato
-          y el contexto.
-        </p>
-        <p>
-          Me interesa acompañar procesos creativos de manera situada, entendiendo
-          la música como parte de una narrativa mayor.
-        </p>
-      </article>
-
-      <article>
-        <h3>Música en vivo</h3>
-        <p>
-          Realizo música en vivo para eventos y encuentros en formatos acústicos
-          y personalizados, priorizando la calidad sonora, el contexto
-          y la experiencia compartida.
+          Producción musical para otros artistas. Diseño de sonido para cine y animación.
+          Servicios de audio para proyectos audiovisuales.
         </p>
       </article>
     </section>
 
-    <!-- PROYECTOS -->
-    <section id="proyectos">
-      <h2>Proyectos</h2>
+    <!-- ACERCA DE -->
+    <section id="acerca">
+      <h2>Acerca de</h2>
 
       <article>
-        <h3>Clavito</h3>
+        <h3>Formación</h3>
         <p>
-          Proyecto musical autoral donde exploro identidad, territorio
-          y creación sonora desde una mirada contemporánea.
+          Licenciado en Ciencias y Artes Musicales. Músico de formación con experiencia
+          en educación artística, producción musical y sonido para audiovisual.
         </p>
       </article>
 
       <article>
-        <h3>Proyectos educativos</h3>
+        <h3>Enfoque</h3>
         <p>
-          Experiencias de creación colectiva, exploración sonora
-          y mediación artística desarrolladas en contextos educativos.
+          Mi trabajo se basa en la investigación basada en artes, priorizando el proceso
+          sobre el resultado. Me interesa usar métodos y conocimientos de la ciencia,
+          tecnología y artes como herramientas de exploración, más que técnicas específicas.
+        </p>
+        <p>
+          El sonido como experiencia, como herramienta de aprendizaje y como forma de
+          construir identidad.
         </p>
       </article>
 
       <article>
-        <h3>Sonido y audiovisual</h3>
+        <h3>Búsqueda actual</h3>
         <p>
-          Música y diseño sonoro para animación, piezas audiovisuales
-          y proyectos narrativos.
+          Explorando el mundo del arte medial, audio interactivo y live coding.
+          Entusiasta del software libre y las herramientas abiertas de creación.
         </p>
       </article>
     </section>
