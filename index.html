@@ -99,6 +99,28 @@ stack(
 -->
           </strudel-repl>
         </div>
+          <pre id="strudel-code">setcpm(80/4)
+let chords = chord("<[Am9 Am7]Gadd9 [F [F6 F7]] [E7b9 [Esus E7]]>/2").dict('ireal')
+stack( 
+  stack( 
+  s("cp:3").struct("~ ~ x ~ x ~ x ~ ~ x x x ~ ~ x ~"),
+  s("cp:5").struct("~ x ~ x"),
+  s("darbuka").struct("~ ~ ~ x ~ ~ x ~ ~ ~ ~ x ~ ~ x ~"),
+  s("cajon").struct("x ~ x x ~ ~ x ~ ~ ~ x x ~ ~ x ~")
+        )
+  .mask("<[0 1] 1 1 1>/16".early(.5)), 
+  stack(
+  chords.offset(-1).voicing().s("gm_epiano1:1")
+  .phaser(4).room(.5))
+  )</pre>
+          <script src="https://unpkg.com/@strudel/web@latest"></script>
+          <script>
+            initStrudel();
+            const code = document.getElementById('strudel-code').textContent;
+            document.getElementById('strudel-play').addEventListener('click', () => evaluate(code));
+            document.getElementById('strudel-stop').addEventListener('click', () => hush());
+          </script>
+        </div>
       </article>
 
       <article>
