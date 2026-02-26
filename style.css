@@ -456,7 +456,8 @@ section {
   margin-top: 1.5rem;
 }
 
-.strudel-launch button {
+.strudel-launch button,
+.strudel-launch .strudel-btn {
   margin-top: 0.75rem;
   background-color: #111;
   color: #fff;
@@ -466,9 +467,12 @@ section {
   border-radius: 2px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 
-.strudel-launch button:hover {
+.strudel-launch button:hover,
+.strudel-launch .strudel-btn:hover {
   background-color: #333;
 }
 
@@ -483,6 +487,32 @@ section {
 
 #strudel-overlay.active {
   display: flex;
+}
+
+.strudel-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.strudel-placeholder p {
+  margin-bottom: 1.5rem;
+}
+
+.strudel-link {
+  background-color: #111;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2px;
+  text-decoration: none;
+}
+
+.strudel-link:hover {
+  background-color: #333;
 }
 
 #strudel-overlay iframe {
