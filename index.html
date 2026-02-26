@@ -98,7 +98,7 @@
         
         <div class="strudel-launch">
           <p>Explora una pieza de live coding interactivo.</p>
-          <button id="open-strudel" onclick="document.getElementById('strudel-overlay').classList.add('active'); document.body.style.overflow='hidden';">Abrir exploración</button>
+          <a href="https://strudel.cc/#Ci8vICJUQU5HT1MgMSIgQGJ5IFNhbHZhZG9yQ2Fzc2lzCgpzZXRjcG0oODAvNCkKbGV0IGNob3JkcyA9IGNob3JkCigiPFtBbTkgQW03XUdhZGQ5IFtGIFtGNiBGN11dIFtFN2I5IFtFc3VzIEU3XV0%2BLzIiKQogIC5kaWN0KCdpcmVhbCcpCgpzdGFjayggCiAgc3RhY2soIC8vIFJJVE1PCiAgcygiY3A6MyIpLnN0cnVjdCgifiB%2BIHggfiB4IH4geCB%2BIH4geCB4IHggeCB%2BIHggfiIpLAogIHMoImNwOjUiKS5zdHJ1Y3QoIn4geCB%2BIHggfiB4IH4geCIpLAogIHMoImRhcmJ1a2EiKS5zdHJ1Y3QoIn4gfiB%2BIHggfiB%2BIHggfiB%2BIH4gfiB4IH4gfiB4IH4iKSwKICBzKCJjYWpvbiIpLnN0cnVjdCgieCB%2BIHggeCB%2BIH4geCB%2BIH4gfiB4IHggfiB%2BIHggfiIpCiAgICAgICAgKQoKICAubWFzaygiPFswIDFdIDEgMSAxPi8xNiIuZWFybHkoLjUpKSwgCiAgCiAgc3RhY2soLy8gQVJNT05JQQogIGNob3Jkcy5vZmZzZXQoLTEpLnZvaWNpbmcoKS5zKCJnbV9lcGlhbm8xOjEiKQogIC5waGFzZXIoNCkucm9vbSguNSkpCiAgKQ%3D%3D" target="_blank" class="strudel-btn">Abrir en Strudel</a>
         </div>
       </article>
 
@@ -211,11 +211,10 @@
 
   <div id="strudel-overlay" aria-hidden="true">
     <button id="close-strudel" aria-label="Cerrar exploración" onclick="document.getElementById('strudel-overlay').classList.remove('active'); document.body.style.overflow='';">Cerrar</button>
-    <iframe 
-      src="https://strudel.cc/?q=setcpm(80%2F4)%0Alet%20chords%20%3D%20chord(%22%3C%5BAm9%20Am7%5DGadd9%20%5BF%20%5BF6%20F7%5D%5D%20%5BE7b9%20%5BEsus%20E7%5D%5D%3E%2F2%22).dict(%27ireal%27)%0Astack(%20%20stack(%20%20s(%22cp%3A3%22).struct(%22~%20~%20x%20~%20x%20~%20x%20~%20~%20x%20x%20x%20~%20~%20x%20~%22)%2C%20s(%22cp%3A5%22).struct(%22~%20x%20~%20x%22)%2C%20s(%22darbuka%22).struct(%22~%20~%20~%20x%20~%20~%20x%20~%20~%20~%20x%20~%20~%20x%20~%22)%2C%20s(%22cajon%22).struct(%22x%20~%20x%20x%20~%20~%20x%20~%20~%20x%20x%20~%20~%20x%20~%22)%20%20)%20.mask(%22%3C%5B0%201%5D%201%201%201%3E%2F16%22.early(.5))%2C%20stack(%20chords.offset(-1).voicing().s(%22gm_epiano1%3A1%22).phaser(4).room(.5))%20)"
-      title="Strudel REPL"
-      loading="lazy">
-    </iframe>
+    <div class="strudel-placeholder">
+      <p>El REPL de Strudel se abrirá en una nueva pestaña.</p>
+      <a href="https://strudel.cc/" target="_blank" class="strudel-link">Abrir Strudel</a>
+    </div>
   </div>
 
 </body>
