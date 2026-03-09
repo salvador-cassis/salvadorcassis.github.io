@@ -2,11 +2,11 @@
 
 ## Project Overview
 
-Minimalist portfolio website for Salvador Cassis (musical artist and educator). **Static HTML/CSS site with no build tools, frameworks, or dependencies.**
+Minimalist portfolio website for Salvador Cassis (artist-educator and musician). **Static HTML/CSS/JS site with no build tools, frameworks, or dependencies.**
 
 **Key Files:**
 - `index.html` — Single-page portfolio with semantic sections
-- `style.css` — Design system using vanilla CSS (hardcoded hex values, no CSS variables)
+- `style.css` — Design system using vanilla CSS with hardcoded hex values
 
 ---
 
@@ -14,23 +14,47 @@ Minimalist portfolio website for Salvador Cassis (musical artist and educator). 
 
 ### Running the Site
 ```bash
-python3 -m http.server 8000   # Using Python
-php -S localhost:8000         # Using PHP
-npx serve                     # Using npx
+python3 -m http.server 8000   # Using Python (Recommended)
+php -S localhost:8000        # Using PHP
+npx serve                    # Using npx
 ```
 
-### Linting
+### HTML Validation
 ```bash
-npx html-validate index.html  # HTML validation
-npx stylelint style.css       # CSS linting
+npx html-validate index.html              # Validate single file
+npx html-validate --formatter stylish .   # Validate all files
+```
+
+### CSS Linting
+```bash
+npx stylelint style.css         # Lint single file
+npx stylelint "**/*.css"        # Lint all CSS files
 ```
 
 ### Testing
-No automated tests. Manual verification required:
-- Page loads without errors
-- Navigation links work
-- Form validation works
-- Responsive layout at mobile/tablet/desktop widths
+No automated tests. Manual verification checklist:
+- [ ] Page loads without console errors
+- [ ] All navigation links work correctly
+- [ ] Mobile menu toggles on/off
+- [ ] Strudel embed loads only on overlay click (lazy-loaded)
+- [ ] Strudel overlay is keyboard-accessible (Tab, Enter, Space)
+- [ ] Responsive layout works at mobile/tablet/desktop widths
+- [ ] All external links open in new tabs with proper security attributes
+
+---
+
+## Site Structure
+
+### Sections (in order)
+- **Hero** (`#hero`) — Portrait, name, subtitle, description
+- **Lo que hago** (`#practica`) — Educación artística, Música, Exploración tecnológica
+- **Proyectos** (`#proyectos`) — Ritos Cotidianos, Sonidos que me rodean, EP, Tangos 1 (Strudel embed)
+- **Enfoque** (`#enfoque`) — Manifesto: IBA, proceso sobre resultado, sonido como identidad
+- **Colaboración** (`#colaboracion`) — Oferta para instituciones y artistas
+- **Contacto** (`#contacto`) — Email directo (no form)
+
+### Navigation
+`Lo que hago · Proyectos · Enfoque · Colaboración · Contacto`
 
 ---
 
@@ -38,115 +62,96 @@ No automated tests. Manual verification required:
 
 ### General Principles
 - **Simplicity first**: Prefer simple, readable code over clever solutions
-- **No dependencies**: Avoid adding libraries, frameworks, or build tools
-- **Content-first**: Design serves content
-- **Accessibility**: Semantic HTML, keyboard navigation, focus states
-- **Language**: Spanish (es) throughout
+- **No dependencies**: Never add libraries, frameworks, or build tools
+- **Content-first**: Design serves content, not the other way around
+- **Accessibility**: Semantic HTML, keyboard navigation, focus states required
+- **Language**: Spanish (es) throughout all content
 
 ### HTML Conventions
 
-1. **Semantic structure**:
-   ```html
-   <header>      -- Site header with h1 and nav
-   <main>        -- Primary content
-     <section>   -- Major content areas with id anchors
-       <article> -- Individual items within sections
-   <footer>     -- Copyright notice
-   ```
+**Semantic Structure:**
+```html
+<header>     -- Site header with name, tagline and nav
+<main>       -- Primary content
+  <section>  -- Major content areas with id anchors
+    <article> -- Individual items within sections
+<footer>    -- Copyright notice
+```
 
-2. **Section IDs**: lowercase with hyphens (`id="inicio"`, `id="proyectos"`, `id="contacto"`)
-
-3. **Links**: Use internal anchor links for navigation
-   ```html
-   <a href="#proyectos">Proyectos</a>
-   <a href="mailto:example@email.com">Email</a>
-   ```
-
-4. **Forms**: Include labels and validation attributes
-   ```html
-   <label for="nombre">Nombre</label>
-   <input type="text" id="nombre" name="nombre" required>
-   ```
-
-5. **Meta tags**: Always include viewport and description
-   ```html
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="...">
-   ```
+**Required Elements:**
+- Section IDs: lowercase with hyphens (`id="practica"`, `id="proyectos"`, `id="contacto"`)
+- Meta tags: viewport, description, Open Graph (og:title, og:description, og:image, og:url, og:type)
+- External links: `target="_blank" rel="noopener noreferrer"`
 
 ### CSS Conventions
 
-1. **Organization**: Comment headers for logical sections
-   ```css
-   /* --------------------
-      RESET + BASE
-   -------------------- */
-   ```
+**Organization:**
+- Section comments with dividers: `/* -------------------- SECTION NAME -------------------- */`
+- Prefer type/class/ID selectors, avoid deep nesting
+- Use rem for font sizes/padding, px for borders only
 
-2. **Selectors**: Prefer type/class/ID selectors, avoid deep nesting
-   ```css
-   #contacto input { }
-   /* Avoid: body main section#contacto form div.form-group input { } */
-   ```
+**Color Palette — Autumn:**
+- Primary text: `#2c2218` (dark warm brown)
+- Heading text: `#3d3028` (warm brown)
+- Muted text: `#6d5c4d` / `#7d6c5d` (warm browns)
+- Borders: `#d9cfc2` / `#e6ddd2` (warm light)
+- Background: `#f5f0e8` (warm cream)
+- Input background: `#fffdf9` (warm white)
+- Accent (interactive): `#3d6b4f` (Forest Green)
+- Accent hover: `#325a42` (darker Forest Green)
 
-3. **Units**: rem for font sizes/padding, px for borders. No viewport units.
+**Responsive Design:**
+- Mobile-first with min-width breakpoints
+- Standard breakpoints: 768px (tablet), 820px (desktop)
+- Max content width: 820px centered
 
-4. **Colors**: Hardcode hex values (no CSS custom properties/variables)
+**Typography Scale:**
+- h1: 2.8rem mobile / 3.2rem desktop, weight 700
+- h2: 1.8rem mobile / 2rem desktop, weight 600
+- h3: 1.1rem, weight 600
+- Body: 16px mobile / 17px desktop
 
-5. **Responsive**: Mobile-first with min-width breakpoints
-   ```css
-   @media (min-width: 768px) { }
-   ```
+**Interactive States (required):**
+```css
+input:focus { outline: none; border-color: #3d6b4f; box-shadow: 0 0 0 1px #3d6b4f; }
+a:hover { opacity: 0.6; }
+nav a:hover::after { width: 100%; } /* Forest Green underline */
+```
 
-6. **Focus states**: Required for accessibility
-   ```css
-   input:focus {
-     outline: none;
-     border-color: #111;
-     box-shadow: 0 0 0 1px #111;
-   }
-   ```
+### JavaScript Conventions
 
-7. **Button states**: Include hover and active states
-   ```css
-   button:hover { background-color: #333; }
-   button:active { transform: scale(0.98); }
-   ```
+**Placement & Loading:**
+- Inline `<script>` at end of body, never in `<head>`
+- Scripts run after DOM is parsed
+
+**Accessibility Attributes:**
+- Use `aria-expanded`, `aria-label`, `role`, `tabindex` for interactive elements
+
+**Strudel Embed:**
+- Lazy-loaded: iframe uses `data-src`, `src` is set only on overlay click
+- Overlay handles both click and keyboard events (Enter/Space)
 
 ### Naming Conventions
 - Classes/IDs: lowercase with hyphens (kebab-case)
-  ```css
-  .form-group { }
-  #contact-form { }
-  ```
-
-### Typography (from actual code)
-- Font family: System UI stack (-apple-system, BlinkMacSystemFont, "Segoe UI", etc.)
-- Max content width: 820px centered
-- Line height: 1.65 (1.7 on desktop)
-- Font sizes: h1=2.2rem (desktop 2.5rem), h2=1.5rem (desktop 1.75rem), body=16px (desktop 17px)
-- Section padding: 4rem (desktop 5rem)
+- Examples: `.hero-portrait`, `#main-nav`, `.project-context`, `.strudel-embed`
 
 ---
 
 ## Common Tasks
 
-### Adding a project
+### Adding a Project
 ```html
 <article>
-  <h3>Project Name</h3>
-  <p>Description...</p>
+  <h3>Nombre del proyecto</h3>
+  <p class="project-context">Contexto · Lugar</p>
+  <p>Descripción del proyecto...</p>
 </article>
 ```
 
-### Updating colors
-Modify hex values in `style.css`. Current palette:
-- Primary text: `#111`
-- Muted text: `#555` / `#666`
-- Borders: `#ddd`
-- Background: `#fafafa`
+### Updating Colors
+Modify hex values in `style.css`. Do NOT use CSS custom properties. Refer to the Autumn palette above.
 
-### Adding a new section
+### Adding a New Section
 1. Create `<section id="unique-id">` in `index.html`
 2. Add navigation link in `<nav><ul>`
 3. Add styles in `style.css` if needed
@@ -158,6 +163,7 @@ Modify hex values in `style.css`. Current palette:
 - Do NOT add build tools (webpack, vite, etc.) without explicit permission
 - Do NOT add JavaScript frameworks or libraries
 - Do NOT add CSS frameworks (Tailwind, Bootstrap, etc.)
-- Do NOT use CSS custom properties (use hardcoded hex values)
+- Do NOT use CSS custom properties
 - Keep changes minimal and focused on the specific task
 - Test changes manually in browser before considering complete
+- Prioritize this AGENTS.md over .github/copilot-instructions.md
