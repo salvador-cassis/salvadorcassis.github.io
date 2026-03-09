@@ -40,21 +40,21 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: 1.8rem;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
 
-h2 {
-  font-size: 1.5rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-
 h3 {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #6d5c4d;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #3d3028;
 }
 
 p {
@@ -121,8 +121,20 @@ footer {
   flex-shrink: 0;
 }
 
+.header-title .site-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c2218;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.header-title .site-name:hover {
+  opacity: 1;
+}
+
 .header-title .site-tagline {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: #7d6c5d;
   margin-bottom: 0;
 }
@@ -285,35 +297,6 @@ section {
   gap: 2rem;
 }
 
-.section-header {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.section-nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.section-nav a {
-  font-size: 0.85rem;
-  color: #7d6c5d;
-  padding: 0.25rem 0;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-.section-nav a:hover {
-  color: #3d6b4f;
-  border-color: #3d6b4f;
-  opacity: 1;
-}
-
-.section-nav a::after {
-  display: none;
-}
 
 @media (min-width: 768px) {
   section {
@@ -343,16 +326,17 @@ section {
 }
 
 #hero .hero-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   color: #6d5c4d;
   margin-bottom: 1.5rem;
   margin-top: 0.5rem;
+  letter-spacing: -0.01em;
 }
 
 #hero .hero-description {
   font-size: 1.05rem;
   color: #3d3028;
-  max-width: 35ch;
+  max-width: 50ch;
 }
 
 /* LO QUE HAGO */
@@ -407,76 +391,24 @@ section {
 
 /* CONTACTO */
 
-#contacto form {
-  max-width: 65ch;
-  margin-bottom: 2rem;
-}
-
-#contacto .form-group {
-  margin-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
-}
-
-#contacto label {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #3d3028;
-  margin-bottom: 0.5rem;
-}
-
-#contacto input,
-#contacto textarea {
-  font-family: inherit;
-  font-size: 1rem;
-  padding: 0.85rem;
-  border: 1px solid #d9cfc2;
-  border-radius: 2px;
-  color: #2c2218;
-  background-color: #fffdf9;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-#contacto input:focus,
-#contacto textarea:focus {
-  outline: none;
-  border-color: #3d6b4f;
-  box-shadow: 0 0 0 1px #3d6b4f;
-}
-
-#contacto textarea {
-  resize: vertical;
-  line-height: 1.6;
-}
-
-#contacto button {
-  background-color: #3d6b4f;
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 0.85rem 1.75rem;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-#contacto button:hover {
-  background-color: #325a42;
-}
-
-#contacto button:active {
-  transform: scale(0.98);
-}
-
 #contacto .contact-email {
-  font-size: 0.9rem;
-  color: #7d6c5d;
+  margin-top: 0.5rem;
 }
 
 #contacto .contact-email a {
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #3d6b4f;
-  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: #d9cfc2;
+  transition: text-decoration-color 0.2s ease;
+}
+
+#contacto .contact-email a:hover {
+  text-decoration-color: #3d6b4f;
+  opacity: 1;
 }
 
 /* --------------------
@@ -574,11 +506,11 @@ footer {
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 3.2rem;
   }
 
   h2 {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
 
   footer {
