@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Salvador Cassis — Artista educador y productor musical</title>
   <meta name="description" content="Artista educador y productor musical. Desarrollo proyectos de creación sonora, educación artística y música para contextos culturales, educativos y audiovisuales.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Salvador Cassis — Artista educador y productor musical">
+  <meta property="og:description" content="Proyectos de creación sonora, educación artística y música para contextos culturales, educativos y audiovisuales.">
+  <meta property="og:image" content="https://salvadorcassis.com/images/retrato.jpg">
+  <meta property="og:url" content="https://salvadorcassis.com">
+  <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -15,18 +21,19 @@
   <header>
     <div class="header-inner">
       <div class="header-title">
-        <h1>Salvador Cassis</h1>
-        <p>Artista educador · Productor musical</p>
+        <p class="site-tagline">Artista-educador</p>
       </div>
       
-      <button class="menu-toggle" aria-label="Menú" aria-expanded="false">
+      <button type="button" class="menu-toggle" aria-label="Menú" aria-expanded="false">
         <span></span>
       </button>
 
       <nav id="main-nav">
         <ul>
-          <li><a href="#proyectos">Práctica</a></li>
-          <li><a href="#acerca">Enfoque</a></li>
+          <li><a href="#practica">Lo que hago</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#enfoque">Enfoque</a></li>
+          <li><a href="#colaboracion">Colaboración</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
@@ -36,111 +43,116 @@
   <!-- MAIN -->
   <main>
 
-    <!-- INICIO -->
-    <section id="inicio">
-      <p>
-        Trabajo entre la música, el sonido y la educación, desarrollando proyectos que combinan
-        creación artística, escucha activa y pensamiento crítico, para contextos culturales,
-        educativos y audiovisuales.
+    <!-- HERO -->
+    <section id="hero">
+      <img src="images/retrato.jpg" alt="Salvador Cassis" class="hero-portrait" width="280" height="280">
+      <h1>Salvador Cassis</h1>
+      <p class="hero-subtitle">Artista-educador y músico</p>
+      <p class="hero-description">
+        Trabajo en el cruce entre sonido, educación y tecnología. Desarrollo proyectos donde la música y la experimentación sonora se convierten en herramientas de exploración, creación y aprendizaje.
       </p>
+    </section>
 
-      <ul class="external-links">
-        <li><a href="https://open.spotify.com/artist/1jUZtLu5Xh59xrnpdHJimI" target="_blank" rel="noopener">Spotify</a></li>
-        <li><a href="https://acciona.cultura.gob.cl/author/salvadorcassis-2/" target="_blank" rel="noopener">Acciona</a></li>
-      </ul>
+    <!-- LO QUE HAGO -->
+    <section id="practica">
+      <h2>Lo que hago</h2>
+      
+      <article>
+        <h3>Educación artística</h3>
+        <p>
+          Soy artista-educador en el programa Acciona del Ministerio de las Culturas, en la Región de La Araucanía. Diseño experiencias de mediación artística donde el sonido es herramienta de exploración y pensamiento. Trabajo desde la investigación basada en artes, priorizando el proceso sobre el resultado.
+        </p>
+      </article>
+
+      <article>
+        <h3>Música</h3>
+        <p>
+          Músico de formación, compositor y cantante. Mis principales vertientes son la Cueca chilena y el Flamenco. Actualmente estoy produciendo un EP de música autoral que explora la intersección entre tradiciones musicales chilenas y sonoridades contemporáneas.
+        </p>
+      </article>
+
+      <article>
+        <h3>Exploración tecnológica</h3>
+        <p>
+          Exploro cruces entre música y tecnología a través de live coding, audio interactivo y software libre. Es mi búsqueda artística actual: nuevas formas de creación sonora mediadas por tecnología.
+        </p>
+      </article>
     </section>
 
     <!-- PROYECTOS -->
     <section id="proyectos">
-      <div class="section-header">
-        <h2>Práctica</h2>
-        <nav class="section-nav">
-          <ul>
-            <li><a href="#educacion">Educación</a></li>
-            <li><a href="#musica">Música</a></li>
-            <li><a href="#arte-medial">Arte medial</a></li>
-            <li><a href="#produccion">Producción</a></li>
-          </ul>
-        </nav>
-      </div>
-
-      <article id="educacion">
-        <h3>Educación</h3>
+      <h2>Proyectos</h2>
+      
+      <article>
+        <h3>Ritos Cotidianos</h3>
+        <p class="project-context">Programa Acciona · Escuela Japón, Cherquenco</p>
         <p>
-          Desarrollo proyectos de mediación artística en contextos educativos, poniendo
-          énfasis en la escucha, el proceso creativo y la participación activa.
-        </p>
-        <p>
-          Formo parte del programa <a href="https://acciona.cultura.gob.cl/author/salvadorcassis-2/" target="_blank" rel="noopener">Acciona</a>,
-          iniciativa del Ministerio de las Culturas que trabaja con metodologías basadas en artes
-          para la educación en La Araucanía.
+          Exploración de la identidad y el entorno con niñas y niños de NT2, a través de la experimentación con diversas formas de expresión plástica, sonora y audiovisual. Relacionamos objetos concretos con actividades significativas y frecuentes. Los registros audiovisuales fueron realizados por las propias niñas y niños.
         </p>
       </article>
 
-      <article id="musica">
-        <h3>Música</h3>
+      <article>
+        <h3>Sonidos que me rodean</h3>
+        <p class="project-context">Programa Acciona · Jardín Princesita, Curacautín</p>
         <p>
-          Proyectos musicales autorales. Exploro la Cueca chilena y el Flamenco desde una
-          mirada contemporánea. Actualmente produciendo un EP.
+          Proyecto de exploración sonora y sensorial con niños y niñas. Mediante experimentación con tecnología e intervención sensorial del espacio, propiciamos experiencias de bienestar, expresión y descubrimiento de los sonidos del entorno natural y cultural. Utilizamos espectrogramas, imitación sonora y amplificación de objetos.
         </p>
-        
-        <div class="spotify-container">
-          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/1jUZtLu5Xh59xrnpdHJimI?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </article>
+
+      <article>
+        <h3>EP en producción</h3>
+        <p class="project-context">Proyecto musical autoral</p>
+        <p>
+          Música autoral que explora la intersección entre tradiciones musicales chilenas y sonoridades contemporáneas. Composición, producción y canto propio.
+        </p>
+      </article>
+
+      <article>
+        <h3>Tangos 1</h3>
+        <p class="project-context">Pieza interactiva · Live coding</p>
+        <p>
+          Una pieza musical que se genera en tiempo real. Puedes escucharla, y si quieres, modificar los valores en el código para experimentar con el sonido. Cada cambio que hagas es temporal: al recargar la página, la pieza vuelve a su forma original.
+        </p>
+        <div class="strudel-embed">
+          <div class="strudel-overlay" id="strudel-overlay">
+            <p class="strudel-invite">▶ Presiona para escuchar</p>
+            <p class="strudel-hint">Puedes modificar los números y textos en el código para experimentar.<br><span class="hint-desktop">Presiona Ctrl+Enter para aplicar cambios.</span><span class="hint-mobile">Presiona el botón ▶ para aplicar cambios.</span> Recarga para volver al original.</p>
+          </div>
+          <iframe id="strudel-frame" src="https://strudel.cc/#Ci8vICJUQU5HT1MgMSIgQGJ5IFNhbHZhZG9yQ2Fzc2lzCgpzZXRjcG0oODAvNCkKbGV0IGNob3JkcyA9IGNob3JkKCI8W0FtOSBBbTddR2FkZDkgW0YgW0Y2IEY3XV0gW0U3YjkgW0VzdXMgRTddXT4vMiIpLmRpY3QoJ2lyZWFsJykKCnN0YWNrKCAKICBzdGFjayggLy8gUklUTU8KICBzKCJjcDozIikuc3RydWN0KCJ%2BIH4geCB%2BIHggfiB4IH4gfiB4IHggeCB4IH4geCB%2BIiksCiAgcygiY3A6NSIpLnN0cnVjdCgifiB4IH4geCB%2BIHggfiB4IiksCiAgcygiZGFyYnVrYSIpLnN0cnVjdCgifiB%2BIH4geCB%2BIH4geCB%2BIH4gfiB%2BIHggfiB%2BIHggfiIpLAogIHMoImNham9uIikuc3RydWN0KCJ4IH4geCB4IH4gfiB4IH4gfiB%2BIHggeCB%2BIH4geCB%2BIikKICAgICAgICApCgogIC5tYXNrKCI8WzAgMV0gMSAxIDE%2BLzE2Ii5lYXJseSguNSkpLCAKICAKICBzdGFjaygvLyBBUk1PTklBCiAgY2hvcmRzLm9mZnNldCgtMSkudm9pY2luZygpLnMoImdtX2VwaWFubzE6MSIpCiAgLnBoYXNlcig0KS5yb29tKC41KSkKICAp" title="Tangos 1 — Pieza de live coding por Salvador Cassis" allow="autoplay" loading="lazy"></iframe>
         </div>
       </article>
+    </section>
 
-      <article id="arte-medial">
-        <h3>Arte medial</h3>
+    <!-- ENFOQUE -->
+    <section id="enfoque">
+      <h2>Enfoque</h2>
+      
+      <article>
         <p>
-          Exploración de audio interactivo, live coding y software libre.
-          Investigo nuevas formas de creación sonora mediadas por tecnología.
+          Mi trabajo se basa en la investigación basada en artes. Me interesa el proceso más que el resultado: usar métodos y conocimientos de la ciencia, la tecnología y las artes como herramientas de exploración, más que como técnicas que enseñar.
         </p>
-        
-        <div class="strudel-launch">
-          <p>Explora una pieza de live coding interactivo.</p>
-          <a href="https://strudel.cc/#Ci8vICJUQU5HT1MgMSIgQGJ5IFNhbHZhZG9yQ2Fzc2lzCgpzZXRjcG0oODAvNCkKbGV0IGNob3JkcyA9IGNob3JkCigiPFtBbTkgQW03XUdhZGQ5IFtGIFtGNiBGN11dIFtFN2I5IFtFc3VzIEU3XV0%2BLzIiKQogIC5kaWN0KCdpcmVhbCcpCgpzdGFjayggCiAgc3RhY2soIC8vIFJJVE1PCiAgcygiY3A6MyIpLnN0cnVjdCgifiB%2BIHggfiB4IH4geCB%2BIH4geCB4IHggeCB%2BIHggfiIpLAogIHMoImNwOjUiKS5zdHJ1Y3QoIn4geCB%2BIHggfiB4IH4geCIpLAogIHMoImRhcmJ1a2EiKS5zdHJ1Y3QoIn4gfiB%2BIHggfiB%2BIHggfiB%2BIH4gfiB4IH4gfiB4IH4iKSwKICBzKCJjYWpvbiIpLnN0cnVjdCgieCB%2BIHggeCB%2BIH4geCB%2BIH4gfiB4IHggfiB%2BIHggfiIpCiAgICAgICAgKQoKICAubWFzaygiPFswIDFdIDEgMSAxPi8xNiIuZWFybHkoLjUpKSwgCiAgCiAgc3RhY2soLy8gQVJNT05JQQogIGNob3Jkcy5vZmZzZXQoLTEpLnZvaWNpbmcoKS5zKCJnbV9lcGlhbm8xOjEiKQogIC5waGFzZXIoNCkucm9vbSguNSkpCiAgKQ%3D%3D" target="_blank" class="strudel-btn">Abrir en Strudel</a>
-        </div>
-      </article>
-
-      <article id="produccion">
-        <h3>Producción</h3>
         <p>
-          Producción musical para otros artistas. Diseño de sonido para cine y animación.
-          Servicios de audio para proyectos audiovisuales.
+          El sonido como experiencia. Como herramienta de aprendizaje. Como forma de construir identidad.
+        </p>
+        <p>
+          Licenciado en Ciencias y Artes Musicales. Músico de formación con experiencia en educación artística, producción musical y sonido para audiovisual.
         </p>
       </article>
     </section>
 
-    <!-- ACERCA DE -->
-    <section id="acerca">
-      <h2>Enfoque</h2>
-
+    <!-- COLABORACIÓN -->
+    <section id="colaboracion">
+      <h2>Colaboración</h2>
+      
       <article>
-        <h3>Formación</h3>
         <p>
-          Licenciado en Ciencias y Artes Musicales. Músico de formación con experiencia
-          en educación artística, producción musical y sonido para audiovisual.
-        </p>
-      </article>
-
-      <article>
-        <h3>Enfoque</h3>
-        <p>
-          Mi trabajo se basa en la investigación basada en artes, priorizando el proceso
-          sobre el resultado. Me interesa usar métodos y conocimientos de la ciencia,
-          tecnología y artes como herramientas de exploración, más que técnicas específicas.
+          Para instituciones educativas: talleres y programas de educación artística con enfoque en sonido, música y experimentación.
         </p>
         <p>
-          El sonido como experiencia, como herramienta de aprendizaje y como forma de
-          construir identidad.
+          Para artistas y creadores: producción musical, colaboración artística y consultoría.
         </p>
-      </article>
-
-      <article>
-        <h3>Búsqueda actual</h3>
         <p>
-          Explorando el mundo del arte medial, audio interactivo y live coding.
-          Entusiasta del software libre y las herramientas abiertas de creación.
+          También trabajo en producción musical y audio para cine y animación.
         </p>
       </article>
     </section>
@@ -148,13 +160,12 @@
     <!-- CONTACTO -->
     <section id="contacto">
       <h2>Contacto</h2>
-
+      
       <p>
-        Si tienes un proyecto, una idea o una pregunta,
-        podemos conversarlo.
+        Si tienes un proyecto, una idea o una pregunta, podemos conversarlo.
       </p>
 
-      <form id="contact-form">
+      <form id="contact-form" action="https://formspree.io/f/TU_ID" method="POST">
         <div class="form-group">
           <label for="nombre">Nombre</label>
           <input type="text" id="nombre" name="nombre" autocomplete="name" required>
@@ -178,6 +189,7 @@
       </p>
     </section>
 
+
   </main>
 
   <!-- FOOTER -->
@@ -186,6 +198,14 @@
   </footer>
 
   <script>
+    // Strudel overlay
+    const overlay = document.getElementById('strudel-overlay');
+    if (overlay) {
+      overlay.addEventListener('click', () => {
+        overlay.classList.add('hidden');
+      });
+    }
+
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('#main-nav');
     
@@ -203,19 +223,7 @@
         }
       });
     });
-
-    // Strudel overlay
-    const openStrudel = document.getElementById('open-strudel');
-    const closeStrudel = document.getElementById('close-strudel');
   </script>
-
-  <div id="strudel-overlay" aria-hidden="true">
-    <button id="close-strudel" aria-label="Cerrar exploración" onclick="document.getElementById('strudel-overlay').classList.remove('active'); document.body.style.overflow='';">Cerrar</button>
-    <div class="strudel-placeholder">
-      <p>El REPL de Strudel se abrirá en una nueva pestaña.</p>
-      <a href="https://strudel.cc/" target="_blank" class="strudel-link">Abrir Strudel</a>
-    </div>
-  </div>
 
 </body>
 </html>
