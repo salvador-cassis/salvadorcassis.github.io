@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tangos 1 — Lab — Salvador Cassis</title>
+  <meta name="description" content="Pieza generativa en tiempo real construida con Strudel. El código es editable.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Estilos de pieza individual */
+    .lab-nav {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid #e6ddd2;
+    }
+
+    .lab-nav a {
+      font-size: 0.95rem;
+      color: #7d6c5d;
+    }
+
+    .piece-meta {
+      font-size: 0.85rem;
+      color: #7d6c5d;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .tag-livecoding {
+      background-color: #3d6b4f;
+      color: #fff;
+    }
+
+    .tag-webaudio {
+      background-color: #8b5e3c;
+      color: #fff;
+    }
+
+    .tag-generativo {
+      background-color: #5c6d8a;
+      color: #fff;
+    }
+
+    .piece-instructions {
+      font-size: 0.9rem;
+      color: #7d6c5d;
+      border-left: 2px solid #e6ddd2;
+      padding-left: 1rem;
+    }
+
+    .piece-instructions p {
+      margin-bottom: 0;
+    }
+
+    .piece-footnote {
+      font-size: 0.8rem;
+      color: #7d6c5d;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .lab-nav {
+        padding: 2.5rem 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="lab-nav" aria-label="Volver al Lab">
+    <a href="../../">← Volver al Lab</a>
+  </nav>
+
+  <main>
+
+    <section id="pieza">
+      <h1>Tangos 1</h1>
+      <div class="piece-meta">
+        <time datetime="2026-02">febrero 2026</time>
+        <span class="tag tag-livecoding">Live coding</span>
+      </div>
+      <p>
+        Una pieza musical que se genera en tiempo real usando Strudel. Puedes escucharla tal como está o modificar los valores en el código para experimentar con el sonido. Cada cambio es temporal: al recargar, la pieza vuelve a su forma original.
+      </p>
+      <div class="piece-instructions">
+        <p>
+          Presiona ▶ para escuchar. Modifica los números o textos en el código y presiona Ctrl+Enter para aplicar. Recarga la página para volver al original.
+        </p>
+      </div>
+    </section>
+
+    <section id="embed">
+      <div class="strudel-embed">
+        <div class="strudel-overlay" id="strudel-overlay" role="button" tabindex="0" aria-label="Reproducir pieza de live coding Tangos 1">
+          <p class="strudel-invite">▶ Presiona para escuchar</p>
+          <p class="strudel-hint">Puedes modificar los números y textos en el código para experimentar.<br><span class="hint-desktop">Presiona Ctrl+Enter para aplicar cambios.</span><span class="hint-mobile">Presiona el botón ▶ para aplicar cambios.</span> Recarga para volver al original.</p>
+        </div>
+        <iframe id="strudel-frame" data-src="https://strudel.cc/#Ci8vICJUQU5HT1MgMSIgQGJ5IFNhbHZhZG9yQ2Fzc2lzCgpzZXRjcG0oODAvNCkKbGV0IGNob3JkcyA9IGNob3JkKCI8W0FtOSBBbTddR2FkZDkgW0YgW0Y2IEY3XV0gW0U3YjkgW0VzdXMgRTddXT4vMiIpLmRpY3QoJ2lyZWFsJykKCnN0YWNrKCAKICBzdGFjayggLy8gUklUTU8KICBzKCJjcDozIikuc3RydWN0KCJ%2BIH4geCB%2BIHggfiB4IH4gfiB4IHggeCB4IH4geCB%2BIiksCiAgcygiY3A6NSIpLnN0cnVjdCgifiB4IH4geCB%2BIHggfiB4IiksCiAgcygiZGFyYnVrYSIpLnN0cnVjdCgifiB%2BIH4geCB%2BIH4geCB%2BIH4gfiB%2BIHggfiB%2BIHggfiIpLAogIHMoImNham9uIikuc3RydWN0KCJ4IH4geCB4IH4gfiB4IH4gfiB%2BIHggeCB%2BIH4geCB%2BIikKICAgICAgICApCgogIC5tYXNrKCI8WzAgMV0gMSAxIDE%2BLzE2Ii5lYXJseSguNSkpLCAKICAKICBzdGFjaygvLyBBUk1PTklBCiAgY2hvcmRzLm9mZnNldCgtMSkudm9pY2luZygpLnMoImdtX2VwaWFubzE6MSIpCiAgLnBoYXNlcig0KS5yb29tKC41KSkKICAp" title="Tangos 1 — Pieza de live coding por Salvador Cassis" allow="autoplay"></iframe>
+      </div>
+      <p class="piece-footnote">Tecnología: Strudel (live coding / Web Audio)</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 · Salvador Cassis</p>
+  </footer>
+
+  <script>
+    // Strudel overlay: lazy-load iframe on interaction
+    const overlay = document.getElementById('strudel-overlay');
+    if (overlay) {
+      function activateStrudel() {
+        const iframe = document.getElementById('strudel-frame');
+        if (iframe && !iframe.src) {
+          iframe.src = iframe.dataset.src;
+        }
+        overlay.classList.add('hidden');
+      }
+      overlay.addEventListener('click', activateStrudel);
+      overlay.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activateStrudel();
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
