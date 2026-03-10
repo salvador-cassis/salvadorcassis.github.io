@@ -11,11 +11,15 @@
   <meta property="og:image" content="https://salvadorcassis.com/images/retrato.jpg">
   <meta property="og:url" content="https://salvadorcassis.com">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CL">
+  <link rel="canonical" href="https://salvadorcassis.com">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+  <a href="#hero" class="skip-link">Saltar al contenido</a>
 
   <!-- HEADER -->
   <header>
@@ -46,7 +50,7 @@
 
     <!-- HERO -->
     <section id="hero">
-      <img src="images/retrato.jpg" alt="Salvador Cassis" class="hero-portrait" width="280" height="280">
+      <img src="images/retrato.jpg" alt="Salvador Cassis" class="hero-portrait" width="280" height="280" fetchpriority="high">
       <h1>Salvador Cassis</h1>
       <p class="hero-subtitle">Artista-educador y músico</p>
       <p class="hero-description">
@@ -99,10 +103,22 @@
           Proyecto de exploración sonora y sensorial con niños y niñas. Utilizamos la tecnología para acercarnos a la naturaleza desde una perspectiva nueva, estimulando el asombro con el mundo que nos rodea. Espectrogramas, imitación sonora, amplificación de objetos e intervención sensorial del espacio.
         </p>
         <div class="project-gallery">
-          <video src="images/sonidos-plaza.mp4" controls preload="metadata" playsinline aria-label="Niños amplificando sonidos de un juego en la plaza"></video>
-          <img src="images/sonidos-bosque.jpg" alt="Niños y niñas explorando espectrogramas de sonido en el bosque" loading="lazy">
-          <img src="images/sonidos-aves.jpg" alt="Espectrogramas de aves locales: Choroy y Bandurria, con la visualización de sus cantos" loading="lazy">
-          <img src="images/sonidos-proceso.jpg" alt="Niño explorando un espectrograma proyectado en la sala" loading="lazy">
+          <video src="images/sonidos-plaza.mp4" controls preload="metadata" playsinline width="820" height="462" aria-label="Niños amplificando sonidos de un juego en la plaza"></video>
+          <img src="images/sonidos-bosque.jpg" alt="Niños y niñas explorando espectrogramas de sonido en el bosque" width="820" height="1457" loading="lazy">
+          <img src="images/sonidos-aves.jpg" alt="Espectrogramas de aves locales: Choroy y Bandurria, con la visualización de sus cantos" width="820" height="558" loading="lazy">
+          <img src="images/sonidos-proceso.jpg" alt="Niño explorando un espectrograma proyectado en la sala" width="820" height="1093" loading="lazy">
+        </div>
+      </article>
+
+      <article>
+        <h3>Animación Stop-motion</h3>
+        <p class="project-context">Programa Acciona Barrio · Villa El Estero, Cholchol · 2025</p>
+        <p>
+          Taller de animación stop-motion con niños, niñas y sus familias, en colaboración con la artista titiritera Marcia Olave. Un proceso donde la participación y el compromiso de las familias fue parte fundamental de la creación.
+        </p>
+        <div class="project-gallery">
+          <iframe src="https://player.vimeo.com/video/1105830814?h=977e0005b6" width="640" height="360" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Animación stop-motion — Villa El Estero"></iframe>
+          <iframe src="https://player.vimeo.com/video/1105830874?h=694ea94994" width="640" height="360" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Animación stop-motion — Villa El Estero (2)"></iframe>
         </div>
       </article>
 
