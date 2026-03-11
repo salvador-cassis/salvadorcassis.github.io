@@ -498,8 +498,26 @@ section {
 
 /* ENFOQUE */
 
+#enfoque {
+  border-top: 1px solid #d9cfc2;
+}
+
 #enfoque article {
   padding: 1.5rem 0;
+}
+
+/* LAB CALLOUT */
+
+.callout {
+  background-color: #eee8de;
+  border-radius: 4px;
+  padding: 3rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .callout {
+    padding: 3rem 2rem;
+  }
 }
 
 /* COLABORACIÓN */
@@ -519,6 +537,10 @@ section {
 }
 
 /* CONTACTO */
+
+#contacto {
+  border-top: 1px solid #d9cfc2;
+}
 
 #contacto .contact-email {
   margin-top: 0.5rem;
