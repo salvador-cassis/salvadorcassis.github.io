@@ -404,6 +404,39 @@ section {
   color: #7d6c5d;
 }
 
+/* HERO — Availability */
+
+.hero-availability {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3d6b4f;
+}
+
+/* HERO — CTA */
+
+.hero-cta {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #3d6b4f;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.hero-cta:hover {
+  background-color: #325a42;
+  opacity: 1;
+}
+
+.hero-cta:focus-visible {
+  outline: 2px solid #3d6b4f;
+  outline-offset: 3px;
+}
+
 /* LO QUE HAGO */
 
 #practica article {
