@@ -194,12 +194,27 @@
       <p>
         Para colaboración técnica o artística —diseño sonoro, mezcla, mastering y foley— gestiono esos servicios a través de <a href="https://soniketesur.com" target="_blank" rel="noopener noreferrer">SoniketeSur</a>.
       </p>
-      <p>
-        Respondo en menos de 48 horas.
-      </p>
-      <p class="contact-email">
-        <a href="mailto:hola@salvadorcassis.com">hola@salvadorcassis.com</a>
-      </p>
+      <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+        <input type="hidden" name="access_key" value="865db929-b759-41d5-b3eb-de1a8b7e60d1">
+        <input type="hidden" name="subject" value="Nuevo mensaje desde salvadorcassis.com">
+        
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="institucion">Institución / Contexto</label>
+          <input type="text" id="institucion" name="institucion" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+        </div>
+        
+        <button type="submit">Enviar mensaje</button>
+      </form>
     </section>
 
 
