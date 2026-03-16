@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Minimalist portfolio website for Salvador Cassis (artist-educator and musician). **Static HTML/CSS/JS site with no build tools, frameworks, or dependencies.**
+Minimalist portfolio website for Salvador Cassis (artist-educador y músico). **Static HTML/CSS/JS site with no build tools, frameworks, or dependencies.**
 
 **Key Files:**
 - `index.html` — Single-page portfolio with semantic sections
@@ -32,7 +32,7 @@ npx stylelint "**/*.css"                    # Lint all CSS files
 ```
 
 ### Manual Testing Checklist
-No automated tests. After any change, verify:
+No automated tests exist (static HTML/CSS site). After any change, verify:
 - [ ] Page loads without console errors
 - [ ] All navigation links work correctly
 - [ ] Mobile menu toggles on/off
@@ -86,8 +86,7 @@ No automated tests. After any change, verify:
 **Color Palette — Autumn:**
 - Primary text: `#2c2218` | Heading text: `#3d3028`
 - Muted text: `#6d5c4d` / `#7d6c5d` | Borders: `#d9cfc2` / `#e6ddd2`
-- Background: `#f5f0e8` | Input background: `#fffdf9`
-- Accent: `#3d6b4f` (Forest Green) | Accent hover: `#325a42`
+- Background: `#f5f0e8` | Accent: `#3d6b4f` (Forest Green)
 
 **Responsive Design:**
 - Mobile-first with min-width breakpoints: 768px (tablet), 820px (desktop)
@@ -106,14 +105,14 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
   border-radius: 2px;
 }
 a:hover { opacity: 0.6; }
-nav a:hover::after { width: 100%; } /* Forest Green underline */
+nav a:hover::after { width: 100%; }
 ```
 
 ### JavaScript Conventions
 
 **Placement:** Inline `<script>` at end of body, never in `<head>`
 
-**Mobile Menu Pattern:**
+**Pattern:**
 ```javascript
 const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#main-nav');
@@ -125,33 +124,28 @@ menuToggle.addEventListener('click', () => {
 });
 ```
 
-**Accessibility Attributes:**
-- Use `aria-expanded`, `aria-label`, `role`, `tabindex` for interactive elements
-- Menu toggle must have `aria-label="Menú"` and `aria-expanded="false"`
+**Accessibility:**
+- Use `aria-expanded`, `aria-label`, `role`, `tabindex`
+- Menu toggle: `aria-label="Menú"` and `aria-expanded="false"`
 
 ### Naming Conventions
 - Classes/IDs: lowercase with hyphens (kebab-case)
-- Examples: `.hero-portrait`, `#main-nav`, `.project-context`, `.strudel-embed`
+- Examples: `.hero-portrait`, `#main-nav`, `.project-context`
 
 ### Error Handling
 - No try/catch needed for simple DOM manipulation
-- Always check element exists before adding event listeners
+- Check element exists before adding event listeners
 - Use optional chaining: `document.querySelector('.menu-toggle')?.addEventListener(...)`
 
 ---
 
-## Site Structure
-
-### Sections (in order)
+## Site Sections (in order)
 - **Hero** (`#hero`) — Portrait, name, subtitle, credentials
 - **Lo que hago** (`#practica`) — Educación artística, Música
 - **Proyectos** (`#proyectos`) — Ritos Cotidianos, Sonidos que me rodean, Tangos 1
-- **Trabajo con instituciones** (`#instituciones`) — Proyecto artístico-cultural, Taller intensivo
+- **Trabajo con instituciones** (`#instituciones`)
 - **Enfoque** (`#enfoque`) — IBA, proceso sobre resultado, sonido como identidad
-- **Contacto** (`#contacto`) — Email directo (no form)
-
-### Navigation
-`Lo que hago · Proyectos · Enfoque · Lab · Contacto`
+- **Contacto** (`#contacto`) — Formulario con web3forms
 
 ---
 
@@ -169,7 +163,7 @@ menuToggle.addEventListener('click', () => {
 ### Adding Images
 ```html
 <div class="project-gallery">
-  <img src="images/example.jpg" alt="Descripción accesibilidad" width="820" height="auto" loading="lazy">
+  <img src="images/example.jpg" alt="Descripción" width="820" height="auto" loading="lazy">
 </div>
 ```
 
@@ -188,4 +182,4 @@ menuToggle.addEventListener('click', () => {
 - Do NOT add Tailwind, Bootstrap, or CSS frameworks
 - Keep changes minimal and focused on the specific task
 - Test changes manually in browser before considering complete
-- Prioritize this AGENTS.md over .github/copilot-instructions.md
+- This AGENTS.md takes precedence over .github/copilot-instructions.md
