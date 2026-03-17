@@ -69,6 +69,26 @@
       margin-top: 1rem;
     }
 
+    .strudel-overlay {
+      all: unset;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .strudel-invite {
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .strudel-hint {
+      display: block;
+      line-height: 1.5;
+    }
+
     @media (min-width: 768px) {
       .lab-nav {
         padding: 2.5rem 2rem;
@@ -103,10 +123,10 @@
 
     <section id="embed">
       <div class="strudel-embed">
-        <div class="strudel-overlay" id="strudel-overlay" role="button" tabindex="0" aria-label="Reproducir pieza de live coding Tangos 1">
-          <p class="strudel-invite">▶ Presiona para escuchar</p>
-          <p class="strudel-hint">Puedes modificar los números y textos en el código para experimentar.<br><span class="hint-desktop">Presiona Ctrl+Enter para aplicar cambios.</span><span class="hint-mobile">Presiona el botón ▶ para aplicar cambios.</span> Recarga para volver al original.</p>
-        </div>
+        <button type="button" class="strudel-overlay" id="strudel-overlay" aria-label="Reproducir pieza de live coding Tangos 1">
+          <span class="strudel-invite">▶ Presiona para escuchar</span>
+          <span class="strudel-hint">Puedes modificar los números y textos en el código para experimentar.<br><span class="hint-desktop">Presiona Ctrl+Enter para aplicar cambios.</span><span class="hint-mobile">Presiona el botón ▶ para aplicar cambios.</span> Recarga para volver al original.</span>
+        </button>
         <iframe id="strudel-frame" data-src="https://strudel.cc/#Ci8vICJUQU5HT1MgMSIgQGJ5IFNhbHZhZG9yQ2Fzc2lzCgpzZXRjcG0oODAvNCkKbGV0IGNob3JkcyA9IGNob3JkKCI8W0FtOSBBbTddR2FkZDkgW0YgW0Y2IEY3XV0gW0U3YjkgW0VzdXMgRTddXT4vMiIpLmRpY3QoJ2lyZWFsJykKCnN0YWNrKCAKICBzdGFjayggLy8gUklUTU8KICBzKCJjcDozIikuc3RydWN0KCJ%2BIH4geCB%2BIHggfiB4IH4gfiB4IHggeCB4IH4geCB%2BIiksCiAgcygiY3A6NSIpLnN0cnVjdCgifiB4IH4geCB%2BIHggfiB4IiksCiAgcygiZGFyYnVrYSIpLnN0cnVjdCgifiB%2BIH4geCB%2BIH4geCB%2BIH4gfiB%2BIHggfiB%2BIHggfiIpLAogIHMoImNham9uIikuc3RydWN0KCJ4IH4geCB4IH4gfiB4IH4gfiB%2BIHggeCB%2BIH4geCB%2BIikKICAgICAgICApCgogIC5tYXNrKCI8WzAgMV0gMSAxIDE%2BLzE2Ii5lYXJseSguNSkpLCAKICAKICBzdGFjaygvLyBBUk1PTklBCiAgY2hvcmRzLm9mZnNldCgtMSkudm9pY2luZygpLnMoImdtX2VwaWFubzE6MSIpCiAgLnBoYXNlcig0KS5yb29tKC41KSkKICAp" title="Tangos 1 — Pieza de live coding por Salvador Cassis" allow="autoplay"></iframe>
       </div>
       <p class="piece-footnote">Tecnología: Strudel (live coding / Web Audio)</p>
