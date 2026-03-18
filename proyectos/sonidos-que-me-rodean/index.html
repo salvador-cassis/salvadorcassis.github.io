@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonidos que me rodean — Salvador Cassis</title>
+  <meta name="description" content="Proyecto artístico-educativo de Salvador Cassis. Exploración sonora y sensorial con niños y niñas de jardín infantil. Espectrogramas, imitación sonora, amplificación de objetos e intervención sensorial del espacio.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sonidos que me rodean — Salvador Cassis">
+  <meta property="og:description" content="Exploración sonora y sensorial con niños y niñas. Espectrogramas, imitación sonora, amplificación de objetos e intervención sensorial del espacio.">
+  <meta property="og:url" content="https://salvadorcassis.com/proyectos/sonidos-que-me-rodean/">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CL">
+  <link rel="canonical" href="https://salvadorcassis.com/proyectos/sonidos-que-me-rodean/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="header-title">
+        <a href="/" class="site-name">Salvador Cassis</a>
+        <p class="site-tagline">Artista-educador</p>
+      </div>
+
+      <button type="button" class="menu-toggle" aria-label="Menú" aria-expanded="false">
+        <span></span>
+      </button>
+
+      <nav id="main-nav">
+        <ul>
+          <li><a href="/#practica">Lo que hago</a></li>
+          <li><a href="/#proyectos">Proyectos</a></li>
+          <li><a href="/#enfoque">Enfoque</a></li>
+          <li><a href="/lab">Laboratorio interactivo</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main id="contenido">
+
+    <!-- NAV RETORNO -->
+    <nav class="breadcrumb" aria-label="Ruta de navegación">
+      <a href="/#proyectos">← Proyectos</a>
+    </nav>
+
+    <!-- PROYECTO -->
+    <article class="project-page">
+      <header class="project-header">
+        <h1>Sonidos que me rodean</h1>
+        <p class="project-context">Programa Acciona · Jardín Princesita, Curacautín · 2025</p>
+      </header>
+
+      <p>
+        Proyecto de exploración sonora y sensorial con niños y niñas. Utilizamos la tecnología para acercarnos a la naturaleza desde una perspectiva nueva, estimulando el asombro con el mundo que nos rodea. Espectrogramas, imitación sonora, amplificación de objetos e intervención sensorial del espacio.
+      </p>
+
+      <div class="project-gallery">
+        <video src="../../images/sonidos-plaza.mp4" controls preload="metadata" playsinline width="820" height="462" aria-label="Niños amplificando sonidos de un juego en la plaza"></video>
+        <img src="../../images/sonidos-bosque.jpg" alt="Niños y niñas explorando espectrogramas de sonido en el bosque" width="820" height="1457" loading="lazy">
+        <img src="../../images/sonidos-aves.jpg" alt="Espectrogramas de aves locales: Choroy y Bandurria, con la visualización de sus cantos" width="820" height="558" loading="lazy">
+        <img src="../../images/sonidos-proceso.jpg" alt="Niño explorando un espectrograma proyectado en la sala" width="820" height="1093" loading="lazy">
+      </div>
+
+      <div class="project-cta">
+        <p>¿Estás pensando un proyecto para tu comunidad educativa?</p>
+        <a href="/#contacto" class="cta-link">Conversemos →</a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      <a href="/">Salvador Cassis</a> — Artista-educador, Región de La Araucanía
+    </p>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('#main-nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        nav.classList.toggle('nav-open');
+      });
+    }
+  </script>
+
+</body>
+</html>

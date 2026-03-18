@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anímate: a dar vida a los objetos — Salvador Cassis</title>
+  <meta name="description" content="Proyecto artístico-educativo de Salvador Cassis. Taller de animación stop-motion con niños, niñas y sus familias, en colaboración con la artista titiritera Marcia Olave. Programa Acciona Barrio, Cholchol, 2025.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Anímate: a dar vida a los objetos — Salvador Cassis">
+  <meta property="og:description" content="Taller de animación stop-motion con niños, niñas y sus familias, en colaboración con la artista titiritera Marcia Olave.">
+  <meta property="og:url" content="https://salvadorcassis.com/proyectos/animate/">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CL">
+  <link rel="canonical" href="https://salvadorcassis.com/proyectos/animate/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="header-title">
+        <a href="/" class="site-name">Salvador Cassis</a>
+        <p class="site-tagline">Artista-educador</p>
+      </div>
+
+      <button type="button" class="menu-toggle" aria-label="Menú" aria-expanded="false">
+        <span></span>
+      </button>
+
+      <nav id="main-nav">
+        <ul>
+          <li><a href="/#practica">Lo que hago</a></li>
+          <li><a href="/#proyectos">Proyectos</a></li>
+          <li><a href="/#enfoque">Enfoque</a></li>
+          <li><a href="/lab">Laboratorio interactivo</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main id="contenido">
+
+    <!-- NAV RETORNO -->
+    <nav class="breadcrumb" aria-label="Ruta de navegación">
+      <a href="/#proyectos">← Proyectos</a>
+    </nav>
+
+    <!-- PROYECTO -->
+    <article class="project-page">
+      <header class="project-header">
+        <h1>Anímate: a dar vida a los objetos</h1>
+        <p class="project-context">Programa Acciona Barrio · Villa El Estero, Cholchol · 2025</p>
+      </header>
+
+      <p>
+        Taller de animación stop-motion con niños, niñas y sus familias, en colaboración con la artista titiritera Marcia Olave. Un proceso donde la participación y el compromiso de las familias fue parte fundamental de la creación.
+      </p>
+
+      <div class="project-gallery">
+        <img src="../../images/MonoQueSaluda-3.gif" alt="Animación stop-motion de un mono de peluche saludando" width="640" loading="lazy">
+        <iframe src="https://player.vimeo.com/video/1105830814?h=977e0005b6" width="640" height="360" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Animación stop-motion — Villa El Estero"></iframe>
+        <iframe src="https://player.vimeo.com/video/1105830874?h=694ea94994" width="640" height="360" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Animación stop-motion — Villa El Estero (2)"></iframe>
+      </div>
+
+      <div class="project-cta">
+        <p>¿Estás pensando un proyecto para tu comunidad educativa?</p>
+        <a href="/#contacto" class="cta-link">Conversemos →</a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      <a href="/">Salvador Cassis</a> — Artista-educador, Región de La Araucanía
+    </p>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('#main-nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        nav.classList.toggle('nav-open');
+      });
+    }
+  </script>
+
+</body>
+</html>
