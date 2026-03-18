@@ -1,4 +1,4 @@
-# Copilot Instructions for mi-web
+# Copilot Instructions for salvadorcassis.com
 
 ## Project Overview
 This is a minimalist portfolio website for Salvador Cassis, a musical artist and educator. It's a static HTML/CSS site with no build tools, frameworks, or dependencies—designed for simplicity, accessibility, and performance.

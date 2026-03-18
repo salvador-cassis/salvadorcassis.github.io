@@ -1,4 +1,4 @@
-# AGENTS.md - Developer Guidelines for mi-web
+# AGENTS.md - Developer Guidelines for salvadorcassis.com
 
 ## Project Overview
 

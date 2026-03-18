@@ -11,11 +11,11 @@ Sitio web personal de Salvador Cassis, artista educador y productor musical.
 ## Estructura
 
 ```
-mi-web/
+salvadorcassis.com/
 ├── index.html    # Página principal
-├── style.css    # Estilos
-├── CNAME        # Dominio personalizado
-└── AGENTS.md   # Guía para agentes IA
+├── style.css     # Estilos
+├── CNAME         # Dominio personalizado
+└── AGENTS.md     # Guía para agentes IA
 ```
 
 ## Desarrollo
