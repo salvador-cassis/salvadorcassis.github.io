@@ -828,6 +828,49 @@ footer {
 }
 
 /* --------------------
+   PÁGINAS DE PROYECTO
+-------------------- */
+
+.breadcrumb {
+  padding: 1.5rem 0 0;
+}
+
+.breadcrumb a {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-accent);
+}
+
+.project-page {
+  padding-top: 2rem;
+}
+
+.project-header {
+  margin-bottom: 2rem;
+}
+
+.project-header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.project-cta {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.project-cta p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+/* --------------------
    REDUCED MOTION
 -------------------- */
 
