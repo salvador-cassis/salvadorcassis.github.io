@@ -1,65 +1,73 @@
 # Copilot Instructions for salvadorcassis.com
 
+> **Fuente de verdad:** `codigo/CLAUDE.md`. Claude Code es la herramienta principal — ese archivo siempre estará más actualizado que este. Ante contradicciones, CLAUDE.md tiene precedencia absoluta.
+
+
 ## Project Overview
-This is a minimalist portfolio website for Salvador Cassis, a musical artist and educator. It's a static HTML/CSS site with no build tools, frameworks, or dependencies—designed for simplicity, accessibility, and performance.
+Static portfolio website for Salvador Cassis, an artista-educador from Región de La Araucanía, Chile. No build tools, frameworks, or dependencies.
 
 **Key Files:**
-- `index.html` — Single-page portfolio with semantic sections (inicio, práctica, proyectos, contacto)
-- `style.css` — Design system using CSS custom properties and a 820px max-width layout
+- `index.html` — Single-page portfolio with semantic sections
+- `style.css` — Design tokens via CSS custom properties + mobile-first layout
 
-## Design System & Conventions
+## Design System
 
-### Color Palette
-Uses CSS custom properties defined in `:root`:
-- `--color-acento`: #1f3a5f (deep blue, primary accent)
-- `--color-fondo`: #f7f7f4 (off-white background)
-- `--color-texto`: #222 (dark text)
-- `--color-suave`: #999 (muted secondary text)
+### Tokens (`:root` in style.css)
+Always use `var(--token)` — never hardcode hex values.
 
-Apply accent color to headings, links, and interactive elements. Use `--color-suave` for metadata/descriptions.
+```css
+--color-bg:           #EDE6DA;   /* crema cálido */
+--color-text:         #1E1208;
+--color-text-muted:   #4A3E33;
+--color-accent:       #A04E40;   /* terracota — CTA, links, énfasis */
+--color-accent-hover: #893D34;
+--color-accent-ui:    #3A6642;   /* verde — tags, UI elements */
+--color-border:       #C8B49A;
+--font-display:       'Space Grotesk', sans-serif;
+--font-body:          'DM Sans', sans-serif;
+--font-mono:          'IBM Plex Mono', monospace;
+--max-width:          820px;
+```
 
-### Typography & Spacing
-- **Font family**: System UI stack (no external fonts)
-- **Max content width**: 820px with centered layout
-- **Line height**: 1.7 (generous for readability)
-- **Font sizes**: h1=3.2rem, h2=1.4rem, p/body=1.05rem
-- **Vertical rhythm**: Sections spaced 4.5rem apart; section dividers (60px horizontal line) separate major sections
+### Responsive Design
+Mobile-first with `min-width` breakpoints at 768px and 820px. Max content width: `var(--max-width)`.
+
+### Focus States (required)
+```css
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+```
 
 ## HTML Structure
 
-The site follows a semantic structure with clear section anchors:
 ```html
-<header> — Navigation with internal links (#inicio, #practica, #proyectos, #contacto)
+<header> — Navigation with internal anchor links
 <main>
-  <section id="..."> — Each major content area is a separate section with h2 heading
-    <article> — Individual projects or topics within sections
-</main>
-<footer> — Copyright notice
+  <section id="..."> — Major content areas
+    <article> — Individual projects or items
+<footer>
 ```
 
-**Pattern**: Use semantic sections with id anchors for navigation. Keep articles nested within sections for content hierarchy.
+Sections in order: `#hero` → `#practica` → `#proyectos` → `#instituciones` → `#enfoque` → `#lab-callout` → `#contacto`
 
-## Styling Patterns
-
-1. **Link states**: Default has transparent bottom border; hover shows `border-bottom: 1px solid var(--color-acento)`
-2. **Section dividers**: Use `section:not(:last-child)::after` pseudo-element (avoid adding dividers in HTML)
-3. **Selection styling**: Custom background color (#1f3a5f) with white text for highlighting
-4. **Responsive padding**: Body uses `padding: 60px 24px` (horizontal padding prevents edge-to-edge feel on mobile)
+**Required on all pages:**
+- `<a href="#hero" class="skip-link">Saltar al contenido</a>` (accessibility)
+- External links: `target="_blank" rel="noopener noreferrer"`
+- Images: `alt`, `width`, `height` attributes
 
 ## Development Notes
 
-- **No build process**: Serve files directly; no minification or bundling needed
-- **Language**: Spanish (es) throughout the site
-- **Content-first**: Design is intentionally minimal to prioritize written content
-- **Accessibility**: Semantic HTML + system fonts = good default accessibility
-- **Meta tags**: Remember to update `<title>` and `<meta name="description">` if renaming/repurposing
+- **No build process** — serve files directly
+- **Language**: Spanish (`lang="es"`) throughout
+- **JS**: Inline `<script>` at end of `<body>`, never in `<head>`
+- **Classes/IDs**: kebab-case (`#main-nav`, `.hero-portrait`)
 
 ## Common Tasks
 
-**Adding a new project**: Add `<article>` block inside `#proyectos` section with `<h3>` and `<p>` tags.
+**Adding a project**: Add `<article>` with `<h3>` and `<p class="project-context">` inside `#proyectos`.
 
-**Updating colors**: Modify `:root` custom properties in `style.css`; all color references use variables.
+**Adding a section**: Create `<section id="unique-id">`, link in nav, add styles using `var(--token)`.
 
-**Changing layout width**: Update `max-width: 820px` on `body` and adjust `max-width` on `p` tags proportionally if needed.
-
-**Adding new sections**: Create `<section id="unique-id">`, link in header nav, and follow existing article/heading pattern.
+**Updating colors**: Modify `:root` tokens in `style.css` — do not change individual selectors.

@@ -1,12 +1,15 @@
 # AGENTS.md - Developer Guidelines for salvadorcassis.com
 
+> **Fuente de verdad:** `codigo/CLAUDE.md` (directorio padre). Claude Code es la herramienta principal — ese archivo siempre estará más actualizado que este.
+> Este archivo cubre convenciones técnicas de implementación. Ante cualquier contradicción, CLAUDE.md tiene precedencia absoluta.
+
 ## Project Overview
 
-Minimalist portfolio website for Salvador Cassis (artist-educador y músico). **Static HTML/CSS/JS site with no build tools, frameworks, or dependencies.**
+Minimalist portfolio website for Salvador Cassis (artista-educador). **Static HTML/CSS/JS site with no build tools, frameworks, or dependencies.**
 
 **Key Files:**
 - `index.html` — Single-page portfolio with semantic sections
-- `style.css` — Vanilla CSS with hardcoded hex values (no CSS custom properties)
+- `style.css` — Vanilla CSS with CSS custom properties (design tokens in `:root`)
 
 ---
 
@@ -14,21 +17,19 @@ Minimalist portfolio website for Salvador Cassis (artist-educador y músico). **
 
 ### Running the Site
 ```bash
-python3 -m http.server 8000   # Using Python (Recommended)
-php -S localhost:8000        # Using PHP
-npx serve                    # Using npx
+python3 -m http.server 8000   # Ejecutar desde codigo/salvadorcassis.com/
 ```
 
 ### HTML Validation
 ```bash
-npx html-validate index.html               # Validate single file
-npx html-validate --formatter stylish .   # Validate all files
+npx html-validate index.html
+npx html-validate --formatter stylish .
 ```
 
 ### CSS Linting
 ```bash
-npx stylelint style.css                     # Lint single file
-npx stylelint "**/*.css"                    # Lint all CSS files
+npx stylelint style.css
+npx stylelint "**/*.css"
 ```
 
 ### Manual Testing Checklist
@@ -37,20 +38,48 @@ No automated tests exist (static HTML/CSS site). After any change, verify:
 - [ ] All navigation links work correctly
 - [ ] Mobile menu toggles on/off
 - [ ] Strudel overlay is keyboard-accessible (Tab, Enter, Space)
-- [ ] Responsive layout works at mobile/tablet/desktop widths
+- [ ] Responsive layout works at 768px and 820px breakpoints
 - [ ] All external links have `target="_blank" rel="noopener noreferrer"`
 - [ ] Skip link works for keyboard users
 
 ---
 
-## Code Style Guidelines
+## Design Tokens (style.css `:root`)
 
-### General Principles
-- **Simplicity first**: Prefer simple, readable code over clever solutions
-- **No dependencies**: Never add libraries, frameworks, or build tools
-- **Content-first**: Design serves content, not the other way around
-- **Accessibility**: Semantic HTML, keyboard navigation, focus states required
-- **Language**: Spanish (es) throughout all content
+Always use `var(--token)` — never hardcode hex values in new CSS.
+
+```css
+:root {
+  --color-bg:           #EDE6DA;   /* crema cálido */
+  --color-surface:      #E2D9CA;
+  --color-text:         #1E1208;   /* casi negro */
+  --color-text-muted:   #4A3E33;
+  --color-accent:       #A04E40;   /* terracota — CTA, links, énfasis */
+  --color-accent-hover: #893D34;
+  --color-accent-ui:    #3A6642;   /* verde — tags, elementos UI */
+  --color-border:       #C8B49A;
+  --color-bg-input:     #FAF5EE;
+  --color-focus-ring:   rgba(160, 78, 64, 0.15);
+
+  /* /lab (dark theme) */
+  --color-lab-bg:       #1A1A12;
+  --color-lab-surface:  #252518;
+  --color-lab-text:     #E8DEC8;
+  --color-lab-accent:   #C47A50;
+  --color-lab-tag-bg:   #2A3A18;
+  --color-lab-border:   #3E4A28;
+
+  --font-display:  'Space Grotesk', sans-serif;
+  --font-body:     'DM Sans', sans-serif;
+  --font-mono:     'IBM Plex Mono', monospace;
+  --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700;
+  --max-width: 820px;
+}
+```
+
+---
+
+## Code Style Guidelines
 
 ### HTML Conventions
 
@@ -80,49 +109,25 @@ No automated tests exist (static HTML/CSS site). After any change, verify:
 **Organization:**
 - Section comments with dividers: `/* -------------------- SECTION NAME -------------------- */`
 - No deep nesting; prefer type/class/ID selectors
-- Use rem for font sizes/padding, px for borders only
-- No CSS custom properties — use hardcoded hex values
-
-**Color Palette — Autumn:**
-- Primary text: `#2c2218` | Heading text: `#3d3028`
-- Muted text: `#6d5c4d` / `#7d6c5d` | Borders: `#d9cfc2` / `#e6ddd2`
-- Background: `#f5f0e8` | Accent: `#3d6b4f` (Forest Green)
+- Use `rem` for font sizes/padding, `px` for borders only
+- Use `var(--token)` — do NOT hardcode hex values in new CSS
 
 **Responsive Design:**
-- Mobile-first with min-width breakpoints: 768px (tablet), 820px (desktop)
-- Max content width: 820px centered
-
-**Typography Scale:**
-- h1: 2.8rem mobile / 3.2rem desktop, weight 700
-- h2: 1.8rem mobile / 2rem desktop, weight 600
-- h3: 1.1rem, weight 600 | Body: 16px mobile / 17px desktop
+- Mobile-first with `min-width` breakpoints: 768px (tablet), 820px (desktop)
+- Max content width: `var(--max-width)` (820px) centered
 
 **Interactive States (required):**
 ```css
 a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
-  outline: 2px solid #3d6b4f;
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
-a:hover { opacity: 0.6; }
-nav a:hover::after { width: 100%; }
 ```
 
 ### JavaScript Conventions
 
 **Placement:** Inline `<script>` at end of body, never in `<head>`
-
-**Pattern:**
-```javascript
-const menuToggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('#main-nav');
-
-menuToggle.addEventListener('click', () => {
-  const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-  menuToggle.setAttribute('aria-expanded', !expanded);
-  nav.classList.toggle('active');
-});
-```
 
 **Accessibility:**
 - Use `aria-expanded`, `aria-label`, `role`, `tabindex`
@@ -132,20 +137,11 @@ menuToggle.addEventListener('click', () => {
 - Classes/IDs: lowercase with hyphens (kebab-case)
 - Examples: `.hero-portrait`, `#main-nav`, `.project-context`
 
-### Error Handling
-- No try/catch needed for simple DOM manipulation
-- Check element exists before adding event listeners
-- Use optional chaining: `document.querySelector('.menu-toggle')?.addEventListener(...)`
-
 ---
 
 ## Site Sections (in order)
-- **Hero** (`#hero`) — Portrait, name, subtitle, credentials
-- **Lo que hago** (`#practica`) — Educación artística, Música
-- **Proyectos** (`#proyectos`) — Ritos Cotidianos, Sonidos que me rodean, Tangos 1
-- **Trabajo con instituciones** (`#instituciones`)
-- **Enfoque** (`#enfoque`) — IBA, proceso sobre resultado, sonido como identidad
-- **Contacto** (`#contacto`) — Formulario con web3forms
+
+`#hero` → `#practica` → `#proyectos` → `#instituciones` → `#enfoque` → `#lab-callout` → `#contacto`
 
 ---
 
@@ -162,24 +158,21 @@ menuToggle.addEventListener('click', () => {
 
 ### Adding Images
 ```html
-<div class="project-gallery">
-  <img src="images/example.jpg" alt="Descripción" width="820" height="auto" loading="lazy">
-</div>
+<img src="images/example.jpg" alt="Descripción" width="820" height="auto" loading="lazy">
 ```
 
 ### Adding a New Section
 1. Create `<section id="unique-id">` in `index.html`
 2. Add navigation link in `<nav><ul>`
-3. Add styles in `style.css` if needed
+3. Add styles in `style.css` using `var(--token)` values
 
 ---
 
-## Notes for Agents
+## Hard Constraints
 
-- Do NOT add build tools (webpack, vite, etc.) without explicit permission
+- Do NOT add build tools (webpack, vite, etc.)
 - Do NOT add JavaScript frameworks or libraries
-- Do NOT use CSS custom properties
 - Do NOT add Tailwind, Bootstrap, or CSS frameworks
+- Do NOT hardcode hex values in new CSS — use `var(--token)`
+- All content in Spanish (`lang="es"`)
 - Keep changes minimal and focused on the specific task
-- Test changes manually in browser before considering complete
-- This AGENTS.md takes precedence over .github/copilot-instructions.md
