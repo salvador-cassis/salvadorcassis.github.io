@@ -6,22 +6,14 @@
   <title>Tangos 1 — Laboratorio interactivo — Salvador Cassis</title>
   <meta name="description" content="Pieza generativa en tiempo real construida con Strudel. El código es editable.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:ital,wght@0,400;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../../style.css">
   <style>
-    /* Estilos de pieza individual */
-    .lab-nav {
-      padding: 2rem 1.5rem;
-      border-bottom: 1px solid #e6ddd2;
-    }
-
-    .lab-nav a {
-      font-size: 0.95rem;
-      color: #7d6c5d;
-    }
-
     .piece-meta {
       font-size: 0.85rem;
-      color: #7d6c5d;
+      color: rgba(232, 222, 200, 0.6);
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -38,24 +30,14 @@
     }
 
     .tag-livecoding {
-      background-color: #3d6b4f;
-      color: #fff;
-    }
-
-    .tag-webaudio {
-      background-color: #8b5e3c;
-      color: #fff;
-    }
-
-    .tag-generativo {
-      background-color: #5c6d8a;
-      color: #fff;
+      background-color: var(--color-lab-tag-bg);
+      color: rgba(232, 222, 200, 0.9);
     }
 
     .piece-instructions {
       font-size: 0.9rem;
-      color: #7d6c5d;
-      border-left: 2px solid #e6ddd2;
+      color: rgba(232, 222, 200, 0.6);
+      border-left: 2px solid var(--color-lab-border);
       padding-left: 1rem;
     }
 
@@ -65,7 +47,7 @@
 
     .piece-footnote {
       font-size: 0.8rem;
-      color: #7d6c5d;
+      color: rgba(232, 222, 200, 0.4);
       margin-top: 1rem;
     }
 
@@ -89,21 +71,67 @@
       line-height: 1.5;
     }
 
-    @media (min-width: 768px) {
-      .lab-nav {
-        padding: 2.5rem 2rem;
-      }
+    /* Display tipografía nerd */
+    h1 {
+      font-family: var(--font-mono-lab);
+      letter-spacing: -0.03em;
+    }
+
+    /* Header tipografía nerd */
+    .site-name {
+      font-family: var(--font-mono-lab) !important;
+      font-size: 1rem !important;
+      letter-spacing: -0.02em !important;
+    }
+
+    .site-tagline {
+      font-family: var(--font-mono-lab) !important;
+      font-size: 0.78rem !important;
+      letter-spacing: -0.01em !important;
+      opacity: 0.6;
+    }
+
+    #main-nav a {
+      font-family: var(--font-mono-lab) !important;
+      font-size: 0.82rem !important;
     }
   </style>
 </head>
 
-<body>
+<body class="lab-page">
 
-  <nav class="lab-nav" aria-label="Volver al Laboratorio interactivo">
-    <a href="../../">← Volver al Laboratorio</a>
-  </nav>
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
 
-  <main>
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="header-title">
+        <a href="/" class="site-name">Salvador Cassis</a>
+        <p class="site-tagline">Artista-educador</p>
+      </div>
+
+      <button type="button" class="menu-toggle" aria-label="Menú" aria-expanded="false">
+        <span></span>
+      </button>
+
+      <nav id="main-nav">
+        <ul>
+          <li><a href="/#practica">Lo que hago</a></li>
+          <li><a href="/#proyectos">Proyectos</a></li>
+          <li><a href="/#instituciones">Instituciones</a></li>
+          <li><a href="/#enfoque">Enfoque</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main id="contenido">
+
+    <nav class="breadcrumb" aria-label="Ruta de navegación">
+      <a href="../../">← Laboratorio interactivo</a>
+    </nav>
 
     <section id="pieza">
       <h1>Tangos 1</h1>
@@ -127,7 +155,7 @@
           <span class="strudel-invite">▶ Presiona para escuchar</span>
           <span class="strudel-hint">Puedes modificar los números y textos en el código para experimentar.<br><span class="hint-desktop">Presiona Ctrl+Enter para aplicar cambios.</span><span class="hint-mobile">Presiona el botón ▶ para aplicar cambios.</span> Recarga para volver al original.</span>
         </button>
-        <iframe id="strudel-frame" data-src="https://strudel.cc/#Ci8vICJUQU5HT1MgMSIgQGJ5IFNhbHZhZG9yQ2Fzc2lzCgpzZXRjcG0oODAvNCkKbGV0IGNob3JkcyA9IGNob3JkKCI8W0FtOSBBbTddR2FkZDkgW0YgW0Y2IEY3XV0gW0U3YjkgW0VzdXMgRTddXT4vMiIpLmRpY3QoJ2lyZWFsJykKCnN0YWNrKCAKICBzdGFjayggLy8gUklUTU8KICBzKCJjcDozIikuc3RydWN0KCJ%2BIH4geCB%2BIHggfiB4IH4gfiB4IHggeCB4IH4geCB%2BIiksCiAgcygiY3A6NSIpLnN0cnVjdCgifiB4IH4geCB%2BIHggfiB4IiksCiAgcygiZGFyYnVrYSIpLnN0cnVjdCgifiB%2BIH4geCB%2BIH4geCB%2BIH4gfiB%2BIHggfiB%2BIHggfiIpLAogIHMoImNham9uIikuc3RydWN0KCJ4IH4geCB4IH4gfiB4IH4gfiB%2BIHggeCB%2BIH4geCB%2BIikKICAgICAgICApCgogIC5tYXNrKCI8WzAgMV0gMSAxIDE%2BLzE2Ii5lYXJseSguNSkpLCAKICAKICBzdGFjaygvLyBBUk1PTklBCiAgY2hvcmRzLm9mZnNldCgtMSkudm9pY2luZygpLnMoImdtX2VwaWFubzE6MSIpCiAgLnBoYXNlcig0KS5yb29tKC41KSkKICAp" title="Tangos 1 — Pieza de live coding por Salvador Cassis" allow="autoplay"></iframe>
+        <iframe id="strudel-frame" data-src="https://strudel.cc/#Ci8vICJUQU5HT1MgMSIgQGJ5IFNhbHZhZG9yQ2Fzc2lzCgpzZXRjcG0oODAvNCkKbGV0IGNob3JkcyA9IGNob3JkKCI8W0FtOSBBbTddR2FkZDkgW0YgW0Y2IEY3XV0gW0U3YjkgW0VzdXMgRTddXT4vMiIpLmRpY3QoJ2lyZWFsJykKCnN0YWNrKCAKICBzdGFjayggLy8gUklUTU8KICBzKCJjcDozIikuc3RydWN0KCJ%2BIH4geCB%2BIHggfiB4IH4gfiB4IHggeCB4IH4geCB%2BIiksCiAgcygiY3A6NSIpLnN0cnVjdCgifiB4IH4geCB%2BIHggfiB4IiksCiAgcygiZGFyYnVrYSIpLnN0cnVjdCgifiB%2BIH4geCB%2BIH4geCB%2BIH4gfiB%2BIHggfiB%2BIHggfiIpLAogIHMoImNham9uIikuc3RydWN0KCJ4IH4geCB4IH4gfiB4IH4gfiB%2BIHggeCB%2BIH4geCB%2BIikKICAgICAgICApCgogIC5tYXNrKCI8WzAgMV0gMSAxIDE%2BLzE2Ii5lYXJseSguNSkpLCAKICAKICBzdGFjayguLy8gQVJNT05JQQogIGNob3Jkcy5vZmZzZXQoLTEpLnZvaWNpbmcoKS5zKCJnbV9lcGlhbm8xOjEiKQogIC5waGFzZXIoNCkucm9vbSguNSkpCiAgKQ==" title="Tangos 1 — Pieza de live coding por Salvador Cassis" allow="autoplay"></iframe>
       </div>
       <p class="piece-footnote">Tecnología: Strudel (live coding / Web Audio)</p>
     </section>
@@ -139,6 +167,24 @@
   </footer>
 
   <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('#main-nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        nav.classList.toggle('active');
+      });
+      nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            toggle.setAttribute('aria-expanded', 'false');
+            nav.classList.remove('active');
+          }
+        });
+      });
+    }
+
     // Strudel overlay: lazy-load iframe on interaction
     const overlay = document.getElementById('strudel-overlay');
     if (overlay) {
