@@ -828,6 +828,73 @@ footer {
 }
 
 /* --------------------
+   HERO CTA SECUNDARIO
+-------------------- */
+
+.hero-cta-secondary {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.hero-cta-secondary:hover {
+  opacity: 0.75;
+}
+
+/* --------------------
+   LAB — DARK MODE
+-------------------- */
+
+body.lab-page {
+  background-color: var(--color-lab-bg);
+  color: var(--color-lab-text);
+}
+
+body.lab-page header {
+  background-color: var(--color-lab-bg);
+  border-bottom-color: var(--color-lab-border);
+}
+
+body.lab-page .site-name,
+body.lab-page .site-tagline {
+  color: var(--color-lab-text);
+  font-family: var(--font-mono-lab);
+  letter-spacing: -0.02em;
+}
+
+body.lab-page .site-name {
+  font-size: 1rem;
+}
+
+body.lab-page .site-tagline {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+body.lab-page nav a {
+  color: var(--color-lab-text);
+  font-family: var(--font-mono-lab);
+  font-size: 0.85rem;
+}
+
+body.lab-page nav a::after {
+  background-color: var(--color-lab-accent);
+}
+
+body.lab-page .menu-toggle span,
+body.lab-page .menu-toggle span::before,
+body.lab-page .menu-toggle span::after {
+  background-color: var(--color-lab-text);
+}
+
+body.lab-page footer {
+  border-top-color: var(--color-lab-border);
+  color: var(--color-lab-text);
+}
+
+/* --------------------
    PÁGINAS DE PROYECTO
 -------------------- */
 
