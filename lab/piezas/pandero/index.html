@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pandero — Laboratorio interactivo — Salvador Cassis</title>
+  <meta name="description" content="Loop de pandero de cueca. Pieza de exploración rítmica con Web Audio.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="https://salvador-cassis.github.io/pandero-web/pandero/player.css">
+  <style>
+    .lab-nav {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid #e6ddd2;
+    }
+
+    .lab-nav a {
+      font-size: 0.95rem;
+      color: #7d6c5d;
+    }
+
+    .piece-meta {
+      font-size: 0.85rem;
+      color: #7d6c5d;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .tag-webaudio {
+      background-color: #8b5e3c;
+      color: #fff;
+    }
+
+    .piece-footnote {
+      font-size: 0.8rem;
+      color: #7d6c5d;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .lab-nav {
+        padding: 2.5rem 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="lab-nav" aria-label="Volver al Laboratorio interactivo">
+    <a href="../../">← Volver al Laboratorio</a>
+  </nav>
+
+  <main>
+
+    <section id="pieza">
+      <h1>Pandero</h1>
+      <div class="piece-meta">
+        <time datetime="2026-03">marzo 2026</time>
+        <span class="tag tag-webaudio">Web Audio</span>
+      </div>
+      <p>
+        Loop de pandero de cueca. Una exploración rítmica con el instrumento central del género.
+      </p>
+    </section>
+
+    <section id="embed">
+      <div id="pandero-player"></div>
+      <p class="piece-footnote">Tecnología: Pandero (Web Audio)</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 · Salvador Cassis</p>
+  </footer>
+
+  <script src="https://salvador-cassis.github.io/pandero-web/pandero/player.js" type="module"></script>
+
+</body>
+</html>
