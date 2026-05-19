@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Compás Flamenco</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cr: #f4efe6;
+  --dk: #14100a;
+  --mu: #8a7a68;
+  --ri: #ccc0ae;
+  --me: #6a6050;
+  --pa: #b87d0c;
+  --or: #c84810;
+}
+
+body {
+  background: var(--cr);
+  color: var(--dk);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
+}
+
+.app {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+/* título */
+.title {
+  font-size: 0.62rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ri);
+  align-self: flex-start;
+}
+
+/* canvas */
+.canvas-wrap {
+  width: 100%;
+  aspect-ratio: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+canvas { display: block; width: 100%; height: 100%; }
+
+/* BPM: número grande + botones +/− */
+.bpm-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.bpm-num {
+  font-size: 3rem;
+  font-weight: 200;
+  letter-spacing: 0.04em;
+  color: var(--dk);
+  line-height: 1;
+  min-width: 4.5ch;
+  text-align: center;
+}
+.bpm-num small {
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--mu);
+  margin-left: 4px;
+}
+.bpm-adj {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ri);
+  background: transparent;
+  color: var(--dk);
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: 200;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.bpm-adj:hover { border-color: var(--dk); background: var(--dk); color: var(--cr); }
+.bpm-adj:active { transform: scale(0.93); }
+
+/* slider */
+input[type=range] {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: var(--ri);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 0; /* zona de toque más grande */
+  box-sizing: content-box;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px; height: 24px;
+  background: var(--dk);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+input[type=range]::-webkit-slider-thumb:active { transform: scale(1.2); }
+input[type=range]::-moz-range-thumb {
+  width: 24px; height: 24px;
+  background: var(--dk);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+/* play */
+#playBtn {
+  width: 100%;
+  padding: 20px;
+  background: var(--dk);
+  color: var(--cr);
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+#playBtn:hover, #playBtn.playing { background: var(--or); }
+
+/* reset: secundario, solo texto */
+#resetBtn {
+  background: none;
+  border: none;
+  color: var(--ri);
+  font-family: inherit;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+#resetBtn:hover { color: var(--mu); }
+
+/* info */
+.info {
+  font-size: 0.68rem;
+  color: var(--ri);
+  letter-spacing: 0.06em;
+  text-align: center;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="title">Compás flamenco · 12 tiempos</div>
+
+  <div class="canvas-wrap">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <div class="bpm-ctrl">
+    <button class="bpm-adj" id="bpmMinus">−</button>
+    <div class="bpm-num" id="bpmBadge">120<small>BPM</small></div>
+    <button class="bpm-adj" id="bpmPlus">+</button>
+  </div>
+
+  <input type="range" id="bpmSlider" min="30" max="320" value="120">
+
+  <button id="playBtn">▶  Empezar</button>
+
+  <button id="resetBtn">Restablecer patrón</button>
+
+  <div class="info">
+    Anillo exterior: metrónomo &nbsp;·&nbsp; Anillo interior: palmas<br>
+    Toca cualquier punto para activar o desactivar
+  </div>
+</div>
+
+<script>
+// ─── COMPÁS BASE (índice 0 = tiempo 12, arriba, como un reloj) ────────────────
+// Tiempos visibles:  12  1  2  3  4  5  6  7  8  9  10 11
+// Índices:            0  1  2  3  4  5  6  7  8  9  10 11
+
+const TOTAL = 12;
+const DEFAULT_BPM = 120;
+
+// Patrón canónico de bulerías/soleá: acentos en 12, 3, 6, 8, 10
+const DEFAULT_PALMAS   = [1,0,0,1,0,0,1,0,1,0,1,0];
+const DEFAULT_METRO    = [1,1,1,1,1,1,1,1,1,1,1,1];
+
+// ─── ESTADO ───────────────────────────────────────────────────────────────────
+const S = {
+  bpm: DEFAULT_BPM,
+  playing: false,
+  currentBeat: -1,
+  metro:  [...DEFAULT_METRO],
+  palmas: [...DEFAULT_PALMAS],
+  pulses: [],
+};
+
+function beatLabel(i) {
+  return i === 0 ? 12 : i;
+}
+
+// ─── AUDIO ────────────────────────────────────────────────────────────────────
+let audioCtx, masterGain;
+
+function initAudio() {
+  if (audioCtx) return;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.value = 0.8;
+  masterGain.connect(audioCtx.destination);
+}
+
+function oscBurst(time, freq, type, vol, dur) {
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  o.connect(g); g.connect(masterGain);
+  o.type = type; o.frequency.value = freq;
+  g.gain.setValueAtTime(vol, time);
+  g.gain.exponentialRampToValueAtTime(0.0001, time + dur);
+  o.start(time); o.stop(time + dur + 0.01);
+}
+
+function noiseBurst(time, fType, fFreq, fQ, vol, atk, dec) {
+  const len = Math.ceil(audioCtx.sampleRate * (atk + dec + 0.04));
+  const buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+  const src = audioCtx.createBufferSource();
+  src.buffer = buf;
+  const flt = audioCtx.createBiquadFilter();
+  flt.type = fType; flt.frequency.value = fFreq; flt.Q.value = fQ;
+  const g = audioCtx.createGain();
+  g.gain.setValueAtTime(0, time);
+  g.gain.linearRampToValueAtTime(vol, time + atk);
+  g.gain.exponentialRampToValueAtTime(0.0001, time + atk + dec);
+  src.connect(flt); flt.connect(g); g.connect(masterGain);
+  src.start(time); src.stop(time + atk + dec + 0.04);
+}
+
+function soundMetro(time, strong) {
+  oscBurst(time, strong ? 1100 : 820, 'triangle', strong ? 0.55 : 0.22, 0.05);
+}
+
+function soundPalmas(time) {
+  noiseBurst(time, 'bandpass', 1100, 0.6, 1.0, 0.003, 0.07);
+  noiseBurst(time, 'highpass', 3200, 1.0, 0.4, 0.002, 0.035);
+}
+
+// ─── SCHEDULER ────────────────────────────────────────────────────────────────
+let schedTimer = null, nextBeatTime = 0, schedBeat = 0;
+
+function scheduleNote(beat, time) {
+  const delay = Math.max(0, (time - audioCtx.currentTime) * 1000);
+  setTimeout(() => {
+    if (!S.playing) return;
+    S.currentBeat = beat;
+    S.pulses.push({ beat, t: performance.now() });
+    if (!animRunning) startAnim();
+  }, delay);
+
+  const isStrong = !!S.palmas[beat];
+  if (S.metro[beat])  soundMetro(time, isStrong);
+  if (S.palmas[beat]) soundPalmas(time);
+}
+
+function sched() {
+  while (nextBeatTime < audioCtx.currentTime + 0.1) {
+    scheduleNote(schedBeat, nextBeatTime);
+    nextBeatTime += 60 / S.bpm;
+    schedBeat = (schedBeat + 1) % TOTAL;
+  }
+  schedTimer = setTimeout(sched, 25);
+}
+
+function startPlayback() {
+  initAudio();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  S.playing = true;
+  schedBeat = 0;
+  nextBeatTime = audioCtx.currentTime + 0.08;
+  sched();
+}
+
+function stopPlayback() {
+  S.playing = false;
+  clearTimeout(schedTimer);
+  schedTimer = null;
+  S.currentBeat = -1;
+  S.pulses = [];
+  stopAnim();
+  draw();
+}
+
+// ─── CANVAS ───────────────────────────────────────────────────────────────────
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let animRunning = false, rafID = null;
+
+const C = {
+  cream: '#f4efe6',
+  dark:  '#14100a',
+  ring:  '#d0c4b4',
+  me:    '#6a6050',
+  pa:    '#b87d0c',
+  or:    '#c84810',
+};
+
+// Radios como fracción del half-size
+const R_METRO  = 0.84;
+const R_PALMAS = 0.50;
+
+function resizeCanvas() {
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.parentElement.clientWidth;
+  canvas.width  = w * dpr;
+  canvas.height = w * dpr;
+  ctx.scale(dpr, dpr);
+  draw();
+}
+
+function beatPos(i, cx, cy, r) {
+  const a = (i / TOTAL) * Math.PI * 2 - Math.PI / 2;
+  return [cx + Math.cos(a) * r, cy + Math.sin(a) * r];
+}
+
+function drawRing(pattern, r, color, half, cx, cy, drawPoly) {
+  const isCur = S.currentBeat;
+
+  // Círculo base
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.strokeStyle = color + '50';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Polígono
+  if (drawPoly) {
+    const active = pattern.reduce((a, v, i) => v ? [...a, i] : a, []);
+    if (active.length >= 2) {
+      const pts = active.map(i => beatPos(i, cx, cy, r));
+      ctx.beginPath();
+      pts.forEach(([x, y], idx) => idx === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y));
+      ctx.closePath();
+      ctx.globalAlpha = 0.13;
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.globalAlpha = 0.75;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  // Puntos
+  for (let i = 0; i < TOTAL; i++) {
+    const [x, y] = beatPos(i, cx, cy, r);
+    const isOn  = !!pattern[i];
+    const isCurrent = i === S.currentBeat;
+
+    let dotR, fill;
+    if (isCurrent && isOn)  { dotR = 9.5; fill = C.or; }
+    else if (isCurrent)     { dotR = 5;   fill = C.or + 'aa'; }
+    else if (isOn)          { dotR = 7;   fill = color; }
+    else                    { dotR = 3;   fill = color + '38'; }
+
+    if (isCurrent && isOn) {
+      ctx.beginPath();
+      ctx.arc(x, y, dotR + 7, 0, Math.PI * 2);
+      ctx.fillStyle = C.or + '1a';
+      ctx.fill();
+    }
+
+    ctx.beginPath();
+    ctx.arc(x, y, dotR, 0, Math.PI * 2);
+    ctx.fillStyle = fill;
+    ctx.fill();
+
+    if (isOn || isCurrent) {
+      ctx.fillStyle = 'rgba(255,255,255,0.92)';
+      ctx.font = `${Math.round(dotR * 0.88)}px Helvetica Neue,Arial,sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(beatLabel(i), x, y);
+    }
+  }
+}
+
+function draw() {
+  const dpr  = window.devicePixelRatio || 1;
+  const W    = canvas.width  / dpr;
+  const H    = canvas.height / dpr;
+  const cx   = W / 2, cy = H / 2;
+  const half = Math.min(W, H) / 2;
+  const now  = performance.now();
+  const R_me = half * R_METRO;
+  const R_pa = half * R_PALMAS;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = C.cream;
+  ctx.fillRect(0, 0, W, H);
+
+  // Marcas de subdivisión en el anillo externo
+  for (let i = 0; i < TOTAL * 2; i++) {
+    const a = (i / (TOTAL * 2)) * Math.PI * 2 - Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo(cx + Math.cos(a) * (R_me - 5), cy + Math.sin(a) * (R_me - 5));
+    ctx.lineTo(cx + Math.cos(a) * (R_me + 5), cy + Math.sin(a) * (R_me + 5));
+    ctx.strokeStyle = C.ring;
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+
+  // Línea radial del beat actual
+  if (S.currentBeat >= 0) {
+    const a = (S.currentBeat / TOTAL) * Math.PI * 2 - Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.cos(a) * R_me, cy + Math.sin(a) * R_me);
+    ctx.strokeStyle = 'rgba(200,72,16,0.10)';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+  }
+
+  // Anillo metro (exterior, sin polígono — es siempre completo)
+  drawRing(S.metro, R_me, C.me, half, cx, cy, false);
+
+  // Anillo palmas (interior, con polígono)
+  drawRing(S.palmas, R_pa, C.pa, half, cx, cy, true);
+
+  // Etiquetas entre los anillos
+  const labelA = -Math.PI / 2 + (Math.PI * 2 / TOTAL) * 0.5; // entre tiempo 12 y 1
+  ctx.font = '8px Helvetica Neue,Arial,sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = C.me + '80';
+  ctx.fillText('METRO', cx + Math.cos(labelA) * (R_me + 14), cy + Math.sin(labelA) * (R_me + 14));
+  ctx.fillStyle = C.pa + '80';
+  ctx.fillText('PALMAS', cx + Math.cos(labelA) * (R_pa + 14), cy + Math.sin(labelA) * (R_pa + 14));
+
+  // Pulsos de animación
+  S.pulses = S.pulses.filter(p => now - p.t < 450);
+  S.pulses.forEach(({ beat, t }) => {
+    const age = (now - t) / 380;
+    if (age > 1) return;
+    [[S.metro, R_me], [S.palmas, R_pa]].forEach(([pat, r]) => {
+      if (!pat[beat]) return;
+      const [x, y] = beatPos(beat, cx, cy, r);
+      ctx.beginPath();
+      ctx.arc(x, y, 9 + age * 18, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(200,72,16,${(1 - age) * 0.4})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    });
+  });
+
+  // Número de beat en el centro
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  if (S.currentBeat >= 0) {
+    ctx.font = `200 ${Math.floor(H * 0.16)}px Helvetica Neue,Arial,sans-serif`;
+    ctx.fillStyle = C.dark;
+    ctx.fillText(beatLabel(S.currentBeat), cx, cy);
+  } else {
+    ctx.font = `200 ${Math.floor(H * 0.09)}px Helvetica Neue,Arial,sans-serif`;
+    ctx.fillStyle = C.ring;
+    ctx.fillText(TOTAL, cx, cy);
+  }
+}
+
+function startAnim() {
+  if (animRunning) return;
+  animRunning = true;
+  function loop() { draw(); if (animRunning) rafID = requestAnimationFrame(loop); }
+  rafID = requestAnimationFrame(loop);
+}
+function stopAnim() {
+  animRunning = false;
+  if (rafID) cancelAnimationFrame(rafID);
+}
+
+// ─── CLIC EN CANVAS → detecta qué anillo y alterna el beat ───────────────────
+canvas.addEventListener('click', e => {
+  const rect = canvas.getBoundingClientRect();
+  const dpr  = window.devicePixelRatio || 1;
+  const W    = canvas.width  / dpr;
+  const H    = canvas.height / dpr;
+  const cx   = W / 2, cy = H / 2;
+  const half = Math.min(W, H) / 2;
+  const R_me = half * R_METRO;
+  const R_pa = half * R_PALMAS;
+  const mx   = (e.clientX - rect.left) * (W / rect.width);
+  const my   = (e.clientY - rect.top)  * (H / rect.height);
+
+  let bestBeat = -1, bestPat = null, bestDist = 36;
+
+  [{ pat: S.metro, r: R_me }, { pat: S.palmas, r: R_pa }].forEach(({ pat, r }) => {
+    for (let i = 0; i < TOTAL; i++) {
+      const [x, y] = beatPos(i, cx, cy, r);
+      const d = Math.hypot(mx - x, my - y);
+      if (d < bestDist) { bestDist = d; bestBeat = i; bestPat = pat; }
+    }
+  });
+
+  if (bestBeat >= 0) {
+    bestPat[bestBeat] ^= 1;
+    if (!animRunning) draw();
+  }
+});
+
+// ─── CONTROLES ────────────────────────────────────────────────────────────────
+function updateBpm(val) {
+  S.bpm = Math.min(320, Math.max(30, val));
+  document.getElementById('bpmSlider').value = S.bpm;
+  document.getElementById('bpmBadge').innerHTML = S.bpm + '<small>BPM</small>';
+}
+
+document.getElementById('bpmSlider').addEventListener('input', e => updateBpm(parseInt(e.target.value)));
+document.getElementById('bpmMinus').addEventListener('click', () => updateBpm(S.bpm - 5));
+document.getElementById('bpmPlus').addEventListener('click',  () => updateBpm(S.bpm + 5));
+
+document.getElementById('playBtn').addEventListener('click', () => {
+  if (S.playing) {
+    stopPlayback();
+    document.getElementById('playBtn').textContent = '▶  Empezar';
+    document.getElementById('playBtn').classList.remove('playing');
+  } else {
+    startPlayback();
+    document.getElementById('playBtn').textContent = '■  Detener';
+    document.getElementById('playBtn').classList.add('playing');
+  }
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  S.metro  = [...DEFAULT_METRO];
+  S.palmas = [...DEFAULT_PALMAS];
+  if (!animRunning) draw();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space' && e.target === document.body) {
+    e.preventDefault();
+    document.getElementById('playBtn').click();
+  }
+});
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+draw();
+</script>
+</body>
+</html>
