@@ -9,6 +9,7 @@
   <meta property="og:title" content="Ritos Cotidianos — Salvador Cassis">
   <meta property="og:description" content="Exploración de la identidad y el entorno con niñas y niños de NT2, a través de la experimentación con diversas formas de expresión plástica, sonora y audiovisual.">
   <meta property="og:url" content="https://salvadorcassis.com/proyectos/ritos-cotidianos/">
+  <meta property="og:image" content="https://salvadorcassis.com/images/retrato.jpg">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="es_CL">
   <link rel="canonical" href="https://salvadorcassis.com/proyectos/ritos-cotidianos/">
@@ -90,7 +91,16 @@
       toggle.addEventListener('click', () => {
         const expanded = toggle.getAttribute('aria-expanded') === 'true';
         toggle.setAttribute('aria-expanded', String(!expanded));
-        nav.classList.toggle('nav-open');
+        nav.classList.toggle('active');
+      });
+
+      nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            toggle.setAttribute('aria-expanded', 'false');
+            nav.classList.remove('active');
+          }
+        });
       });
     }
   </script>

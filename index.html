@@ -18,6 +18,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Salvador Cassis",
+    "jobTitle": "Artista-educador",
+    "url": "https://salvadorcassis.com",
+    "description": "Artista-educador. Desarrollo proyectos artístico-culturales y talleres de educación artística con establecimientos educacionales y organizaciones culturales de la Región de La Araucanía.",
+    "image": "https://salvadorcassis.com/images/retrato.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "La Araucanía",
+      "addressCountry": "CL"
+    },
+    "sameAs": [
+      "https://salvadorcassis.com"
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -60,7 +79,6 @@
       <p class="hero-description">
         Mi área de trabajo es el sonido: como experiencia, como herramienta de exploración y como forma de construir identidad colectiva. Trabajo con comunidades educativas y organizaciones culturales de la Región de La Araucanía.
       </p>
-      <a href="#contacto" class="hero-cta-secondary">¿Tienes un proyecto? Conversemos →</a>
       <ul class="hero-credentials">
         <li>Licenciado en Ciencias y Artes Musicales</li>
         <li>Artista-educador — Programa Acciona, Ministerio de las Culturas de Chile</li>
@@ -241,7 +259,7 @@
 
     menuToggle.addEventListener('click', () => {
       const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', !expanded);
+      menuToggle.setAttribute('aria-expanded', String(!expanded));
       nav.classList.toggle('active');
     });
 
@@ -252,6 +270,34 @@
           nav.classList.remove('active');
         }
       });
+    });
+
+    const form = document.querySelector('.contact-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: new FormData(form)
+        });
+        const data = await res.json();
+        if (data.success) {
+          form.innerHTML = '<p class="form-feedback form-feedback--ok">Mensaje enviado. Te respondo pronto.</p>';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        const msg = form.querySelector('.form-feedback--err') || document.createElement('p');
+        msg.className = 'form-feedback form-feedback--err';
+        msg.textContent = 'Hubo un error al enviar. Intenta de nuevo o escríbeme directo.';
+        if (!form.contains(msg)) form.appendChild(msg);
+        btn.disabled = false;
+        btn.textContent = 'Enviar mensaje';
+      }
     });
   </script>
 

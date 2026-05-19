@@ -9,6 +9,7 @@
   <meta property="og:title" content="Anímate: a dar vida a los objetos — Salvador Cassis">
   <meta property="og:description" content="Taller de animación stop-motion con niños, niñas y sus familias, en colaboración con la artista titiritera Marcia Olave.">
   <meta property="og:url" content="https://salvadorcassis.com/proyectos/animate/">
+  <meta property="og:image" content="https://salvadorcassis.com/images/retrato.jpg">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="es_CL">
   <link rel="canonical" href="https://salvadorcassis.com/proyectos/animate/">
@@ -94,7 +95,16 @@
       toggle.addEventListener('click', () => {
         const expanded = toggle.getAttribute('aria-expanded') === 'true';
         toggle.setAttribute('aria-expanded', String(!expanded));
-        nav.classList.toggle('nav-open');
+        nav.classList.toggle('active');
+      });
+
+      nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            toggle.setAttribute('aria-expanded', 'false');
+            nav.classList.remove('active');
+          }
+        });
       });
     }
   </script>
