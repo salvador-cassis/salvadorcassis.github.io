@@ -3,73 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laboratorio interactivo — Salvador Cassis</title>
-  <meta name="description" content="Piezas interactivas de exploración sonora, visual y generativa.">
+  <title>Caja de Herramientas — Salvador Cassis</title>
+  <meta name="description" content="Aplicaciones web para la práctica musical: metrónomo de compás flamenco, loops de pandero para cueca y más. Funcionan en el navegador, sin instalación.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:ital,wght@0,400;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
   <style>
-    /* Grilla de piezas */
-    .lab-grid {
+    .tool-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 1.5rem;
+      margin-top: 1.5rem;
     }
 
     @media (min-width: 600px) {
-      .lab-grid {
+      .tool-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (min-width: 900px) {
-      .lab-grid {
+      .tool-grid {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
-    .lab-card {
+    .tool-card {
       padding: 1.5rem;
-      border: 1px solid var(--color-lab-border);
+      border: 1px solid var(--color-border);
       border-radius: 4px;
+      background-color: var(--color-surface);
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      position: relative;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
 
-    .lab-card h3 {
+    .tool-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: 0 2px 8px var(--color-focus-ring);
+    }
+
+    .tool-card h3 {
       margin-bottom: 0;
-      color: var(--color-lab-text);
+      color: var(--color-text);
     }
 
-    .lab-card p {
-      margin-bottom: 0;
-    }
-
-    .lab-card-meta {
+    .tool-card-meta {
       font-size: 0.85rem;
-      color: rgba(232, 222, 200, 0.6);
+      color: var(--color-text-muted);
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      flex-wrap: wrap;
     }
 
-    .lab-card-description {
+    .tool-card-description {
       font-size: 0.95rem;
-      color: var(--color-lab-text);
+      color: var(--color-text-muted);
       flex-grow: 1;
+      margin-bottom: 0;
     }
 
-    .lab-card-link {
+    .tool-card-link {
       font-size: 0.9rem;
       font-weight: 500;
-      color: var(--color-lab-accent);
+      color: var(--color-accent);
       margin-top: 0.5rem;
     }
 
-    /* Etiquetas de tecnología */
+    .tool-card-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+
     .tag {
       display: inline-block;
       font-size: 0.75rem;
@@ -78,68 +89,28 @@
       border-radius: 3px;
       letter-spacing: 0.01em;
       white-space: nowrap;
+      background-color: var(--color-accent-ui);
+      color: #fff;
     }
 
-    .tag-livecoding {
-      background-color: var(--color-lab-tag-bg);
-      color: rgba(232, 222, 200, 0.9);
+    #laboratorio {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-border);
     }
 
-    .tag-webaudio {
-      background-color: #4a2e16;
-      color: rgba(232, 222, 200, 0.9);
+    #laboratorio .tool-card {
+      background-color: var(--color-bg);
     }
 
-    .tag-generativo {
-      background-color: #2a3550;
-      color: rgba(232, 222, 200, 0.9);
-    }
-
-    .tag-cueca {
-      background-color: #2a3550;
-      color: rgba(232, 222, 200, 0.9);
-    }
-
-    /* Display tipografía nerd */
-    h1, h2 {
-      font-family: var(--font-mono-lab);
-      letter-spacing: -0.03em;
-    }
-
-    .hero-subtitle {
-      font-family: var(--font-mono-lab);
-      font-size: 0.95rem;
-      letter-spacing: -0.01em;
-      opacity: 0.7;
-    }
-
-    .lab-card h3 {
-      font-family: var(--font-mono-lab);
-      letter-spacing: -0.02em;
-    }
-
-    /* Header tipografía nerd */
-    .site-name {
-      font-family: var(--font-mono-lab) !important;
-      font-size: 1rem !important;
-      letter-spacing: -0.02em !important;
-    }
-
-    .site-tagline {
-      font-family: var(--font-mono-lab) !important;
-      font-size: 0.78rem !important;
-      letter-spacing: -0.01em !important;
-      opacity: 0.6;
-    }
-
-    #main-nav a {
-      font-family: var(--font-mono-lab) !important;
-      font-size: 0.82rem !important;
+    .tag-experimental {
+      background-color: var(--color-text-muted);
+      color: var(--color-bg);
     }
   </style>
 </head>
 
-<body class="lab-page">
+<body>
 
   <a href="#contenido" class="skip-link">Saltar al contenido</a>
 
@@ -161,7 +132,7 @@
           <li><a href="/#proyectos">Proyectos</a></li>
           <li><a href="/#instituciones">Instituciones</a></li>
           <li><a href="/#enfoque">Enfoque</a></li>
-          <li><a href="/#contacto">Contacto</a></li>
+          <li><a href="#contacto">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -170,48 +141,54 @@
   <!-- MAIN -->
   <main id="contenido">
 
-    <section id="lab-intro">
-      <h1>Laboratorio interactivo</h1>
-      <p class="hero-subtitle">Piezas interactivas de exploración sonora, visual y generativa.</p>
+    <section id="intro">
+      <h1>Caja de Herramientas</h1>
+      <p class="hero-subtitle">Aplicaciones para la práctica musical. Funcionan en el navegador, sin instalación.</p>
       <p>
-        Un espacio de experimentación paralelo al trabajo educativo. Aquí no hay formato de portfolio: las piezas están para explorar, modificar y escuchar. Cada una es un ejercicio de búsqueda con código, sonido o imagen.
+        Una colección de herramientas que uso en mi práctica como músico y educador, y que pueden ser útiles para otros. Cada una resuelve un problema concreto: practicar un compás, estudiar un ritmo, explorar una idea.
       </p>
     </section>
 
-    <section id="piezas">
-      <h2>Piezas</h2>
-      <div class="lab-grid">
+    <section id="herramientas">
+      <h2>Herramientas</h2>
+      <div class="tool-grid">
 
-        <article class="lab-card">
-          <h3>Tangos 1</h3>
-          <div class="lab-card-meta">
-            <time datetime="2026-02">febrero 2026</time>
-            <span class="tag tag-livecoding">Live coding</span>
-          </div>
-          <p class="lab-card-description">Pieza generativa en tiempo real construida con Strudel. El código es editable.</p>
-          <a href="./piezas/tangos-1/" class="lab-card-link">Abrir pieza →</a>
-        </article>
-
-        <article class="lab-card">
+        <article class="tool-card">
           <h3>Compás flamenco</h3>
-          <div class="lab-card-meta">
-            <time datetime="2026-05">mayo 2026</time>
-            <span class="tag tag-webaudio">Web Audio</span>
-            <span class="tag tag-generativo">Flamenco</span>
+          <div class="tool-card-meta">
+            <span class="tag">Flamenco</span>
+            <span class="tag">Metrónomo</span>
           </div>
-          <p class="lab-card-description">Metrónomo interactivo de 12 tiempos. Explora los polígonos que forman los acentos del compás flamenco.</p>
-          <a href="./compas-flamenco/" class="lab-card-link">Abrir herramienta →</a>
+          <p class="tool-card-description">Metrónomo interactivo de 12 tiempos. Visualiza los polígonos que forman los distintos acentos del compás flamenco.</p>
+          <a href="./compas-flamenco/" class="tool-card-link">Abrir herramienta →</a>
         </article>
 
-        <article class="lab-card">
+        <article class="tool-card">
           <h3>Pandero</h3>
-          <div class="lab-card-meta">
-            <time datetime="2026-03">marzo 2026</time>
-            <span class="tag tag-webaudio">Web Audio</span>
-            <span class="tag tag-cueca">Cueca</span>
+          <div class="tool-card-meta">
+            <span class="tag">Cueca</span>
+            <span class="tag">Referencia rítmica</span>
           </div>
-          <p class="lab-card-description">Loop de pandero de cueca para estudiar y experimentar. Herramienta de referencia rítmica.</p>
-          <a href="./pandero-web/" class="lab-card-link">Abrir herramienta →</a>
+          <p class="tool-card-description">Loop de pandero de cueca para estudiar y practicar. Útil como referencia rítmica al aprender o enseñar cueca chilena.</p>
+          <a href="./pandero-web/" class="tool-card-link">Abrir herramienta →</a>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="laboratorio">
+      <h2>Laboratorio</h2>
+      <p>Piezas de exploración con código y sonido. Más experimentales, sin un uso específico definido.</p>
+      <div class="tool-grid">
+
+        <article class="tool-card">
+          <h3>Tangos 1</h3>
+          <div class="tool-card-meta">
+            <time datetime="2026-02">febrero 2026</time>
+            <span class="tag tag-experimental">Live coding</span>
+          </div>
+          <p class="tool-card-description">Pieza generativa en tiempo real construida con Strudel. El código es visible y editable.</p>
+          <a href="./piezas/tangos-1/" class="tool-card-link">Abrir pieza →</a>
         </article>
 
       </div>
