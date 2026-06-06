@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tangos 1</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: #1A1A12; }
+
+    .wrap {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .strudel-container {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26, 26, 18, 0.92);
+      cursor: pointer;
+      gap: 1.25rem;
+      text-align: center;
+      padding: 2rem;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      transition: opacity 0.3s ease;
+    }
+
+    .play-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .play-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid rgba(232, 222, 200, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #E8DEC8;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    .play-overlay:hover .play-icon {
+      border-color: #C47A50;
+      background-color: rgba(196, 122, 80, 0.15);
+    }
+
+    .play-label {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #E8DEC8;
+    }
+
+    .play-hint {
+      font-size: 0.82rem;
+      color: rgba(232, 222, 200, 0.5);
+      max-width: 28ch;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="strudel-container">
+      <iframe id="strudel-frame" src="" allow="autoplay" title="Tangos 1 — Live coding"></iframe>
+      <div class="play-overlay" id="play-overlay">
+        <div class="play-icon">▶</div>
+        <p class="play-label">Toca para escuchar</p>
+        <p class="play-hint">Puedes modificar el código y presionar Ctrl+Enter para experimentar.</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    const overlay = document.getElementById('play-overlay');
+    const frame   = document.getElementById('strudel-frame');
+    const src = "https://strudel.cc/#Ci8vICJUQU5HT1MgMSIgQGJ5IFNhbHZhZG9yQ2Fzc2lzCgpzZXRjcG0oODAvNCkKbGV0IGNob3JkcyA9IGNob3JkKCI8W0FtOSBBbTddR2FkZDkgW0YgW0Y2IEY3XV0gW0U3YjkgW0VzdXMgRTddXT4vMiIpLmRpY3QoJ2lyZWFsJykKCnN0YWNrKCAKICBzdGFjayggLy8gUklUTU8KICBzKCJjcDozIikuc3RydWN0KCJ%2BIH4geCB%2BIHggfiB4IH4gfiB4IHggeCB4IH4geCB%2BIiksCiAgcygiY3A6NSIpLnN0cnVjdCgifiB4IH4geCB%2BIHggfiB4IiksCiAgcygiZGFyYnVrYSIpLnN0cnVjdCgifiB%2BIH4geCB%2BIH4geCB%2BIH4gfiB%2BIHggfiB%2BIHggfiIpLAogIHMoImNham9uIikuc3RydWN0KCJ4IH4geCB4IH4gfiB4IH4gfiB%2BIHggeCB%2BIH4geCB%2BIikKICAgICAgICApCgogIC5tYXNrKCI8WzAgMV0gMSAxIDE%2BLzE2Ii5lYXJseSguNSkpLCAKICAKICBzdGFjayguLy8gQVJNT05JQQogIGNob3Jkcy5vZmZzZXQoLTEpLnZvaWNpbmcoKS5zKCJnbV9lcGlhbm8xOjEiKQogIC5waGFzZXIoNCkucm9vbSguNSkpCiAgKQ==";
+    overlay.addEventListener('click', () => {
+      frame.src = src;
+      overlay.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
