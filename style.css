@@ -14,6 +14,11 @@
   --color-border:       #C8B49A;
   --color-bg-input:     #FAF5EE;
   --color-focus-ring:   rgba(160, 78, 64, 0.15);
+  --color-surface-hover: #E5DAC9;
+
+  /* Sombras */
+  --shadow-card-hover: 0 6px 20px rgba(160, 78, 64, 0.12);
+  --shadow-drawer:     0 -8px 40px rgba(30, 18, 8, 0.2);
 
   /* /lab */
   --color-lab-bg:       #1A1A12;
@@ -311,6 +316,14 @@ nav a:hover::after {
 
 nav a:hover {
   opacity: 1;
+}
+
+nav a[aria-current="page"] {
+  color: var(--color-accent);
+}
+
+nav a[aria-current="page"]::after {
+  width: 100%;
 }
 
 /* Desktop header */

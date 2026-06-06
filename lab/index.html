@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Caja de Herramientas — Salvador Cassis</title>
   <meta name="description" content="Herramientas musicales para la práctica. Funcionan en el navegador, sin instalación: metrónomo de compás flamenco, loops de pandero para cueca y más.">
+  <meta property="og:title" content="Caja de Herramientas — Salvador Cassis">
+  <meta property="og:description" content="Herramientas musicales para la práctica. Funcionan en el navegador, sin instalación: metrónomo de compás flamenco, loops de pandero para cueca y más.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://salvadorcassis.com/lab/">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://salvadorcassis.com/lab/">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +49,7 @@
 
     .tool-card:hover {
       border-color: var(--color-accent);
-      box-shadow: 0 6px 20px rgba(160, 78, 64, 0.12);
+      box-shadow: var(--shadow-card-hover);
       transform: translateY(-3px);
     }
 
@@ -86,7 +92,7 @@
     }
 
     .tool-card:hover .tool-visual {
-      background-color: #E5DAC9;
+      background-color: var(--color-surface-hover);
     }
 
     .tool-visual svg {
@@ -189,6 +195,16 @@
       background-color: var(--color-bg);
     }
 
+    /* === PÁRRAFOS INTRO === */
+
+    #intro p {
+      margin-bottom: 0.35rem;
+    }
+
+    #intro p:last-of-type {
+      margin-bottom: 0;
+    }
+
     /* === CALLOUT INTRO === */
 
     .intro-callout {
@@ -285,7 +301,7 @@
       flex-direction: column;
       transform: translateY(100%);
       transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
-      box-shadow: 0 -8px 40px rgba(30, 18, 8, 0.2);
+      box-shadow: var(--shadow-drawer);
     }
 
     .tool-drawer.open {
@@ -402,6 +418,7 @@
           <li><a href="/#proyectos">Proyectos</a></li>
           <li><a href="/#instituciones">Instituciones</a></li>
           <li><a href="/#enfoque">Enfoque</a></li>
+          <li><a href="/lab/" aria-current="page">Herramientas</a></li>
           <li><a href="/#contacto">Contacto</a></li>
         </ul>
       </nav>
@@ -414,19 +431,9 @@
     <section id="intro">
       <h1>Caja de Herramientas</h1>
       <p class="hero-subtitle">Herramientas para practicar música</p>
-      <p>
-        Una colección de aplicaciones que uso en mi práctica como músico y educador.
-        
-        No necesitas instalar nada: se abren directo en el navegador de tu teléfono o computador.
-
-        Todo gratis. 
-
-        Si quieres apoyar mi trabajo, la mejor forma es compartiendo estas herramientas con otras personas a las que les puedan servir.
-
-        Cualquier sugerencia la recibo a mi correo hola@salvadorcassis.com
-      
-    
-      </p>
+      <p>Una colección de aplicaciones que uso en mi práctica como músico y educador. No necesitas instalar nada: se abren directo en el navegador de tu teléfono o computador. Todo gratis.</p>
+      <p>Si quieres apoyar mi trabajo, la mejor forma es compartiendo estas herramientas con otras personas a las que les puedan servir.</p>
+      <p>Cualquier sugerencia la recibo a mi correo <a href="mailto:hola@salvadorcassis.com">hola@salvadorcassis.com</a></p>
       <div class="intro-callout">
         <span class="intro-callout-dot" aria-hidden="true"></span>
         Sin descarga ni instalación — solo ábrelas y úsalas
@@ -631,24 +638,52 @@
     }
 
     /* --- Drawer --- */
-    const drawer  = document.getElementById('toolDrawer');
-    const overlay = document.getElementById('toolOverlay');
-    const frame   = document.getElementById('drawerFrame');
-    const titleEl = document.getElementById('drawerTitle');
-    const hintEl  = document.getElementById('drawerHintText');
+    const drawer   = document.getElementById('toolDrawer');
+    const overlay  = document.getElementById('toolOverlay');
+    const frame    = document.getElementById('drawerFrame');
+    const titleEl  = document.getElementById('drawerTitle');
+    const hintEl   = document.getElementById('drawerHintText');
     const closeBtn = document.getElementById('drawerClose');
 
-    function openDrawer(src, title, hint) {
+    let lastTrigger = null;
+
+    /* Elementos focusables dentro del drawer */
+    function getFocusable() {
+      return Array.from(drawer.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      ));
+    }
+
+    /* Focus trap: mantiene el foco dentro del drawer mientras está abierto */
+    function handleFocusTrap(e) {
+      if (e.key !== 'Tab') return;
+      const focusable = getFocusable();
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      }
+    }
+
+    function openDrawer(src, title, hint, trigger) {
+      lastTrigger = trigger || null;
       titleEl.textContent = title;
       hintEl.textContent  = hint;
       frame.src = src;
       drawer.hidden = false;
+      /* ocultar el fondo a lectores de pantalla mientras el modal está abierto */
+      document.querySelector('main').setAttribute('aria-hidden', 'true');
+      document.querySelector('header').setAttribute('aria-hidden', 'true');
       /* doble rAF para que el navegador pinte `hidden=false` antes de la transición */
       requestAnimationFrame(() => requestAnimationFrame(() => {
         drawer.classList.add('open');
         overlay.classList.add('visible');
         document.body.style.overflow = 'hidden';
         closeBtn.focus();
+        drawer.addEventListener('keydown', handleFocusTrap);
       }));
     }
 
@@ -656,6 +691,12 @@
       drawer.classList.remove('open');
       overlay.classList.remove('visible');
       document.body.style.overflow = '';
+      drawer.removeEventListener('keydown', handleFocusTrap);
+      /* restaurar acceso al fondo para lectores de pantalla */
+      document.querySelector('main').removeAttribute('aria-hidden');
+      document.querySelector('header').removeAttribute('aria-hidden');
+      /* devolver foco al trigger que abrió el drawer */
+      if (lastTrigger) lastTrigger.focus();
       /* esperar que termine la transición antes de ocultar y limpiar iframe */
       drawer.addEventListener('transitionend', function onEnd() {
         drawer.hidden = true;
@@ -666,7 +707,7 @@
 
     document.querySelectorAll('.card-trigger').forEach(btn => {
       btn.addEventListener('click', () => {
-        openDrawer(btn.dataset.src, btn.dataset.title, btn.dataset.hint);
+        openDrawer(btn.dataset.src, btn.dataset.title, btn.dataset.hint, btn);
       });
     });
 
