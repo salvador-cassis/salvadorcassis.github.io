@@ -16,6 +16,14 @@
   --color-focus-ring:   rgba(160, 78, 64, 0.15);
   --color-surface-hover: #E5DAC9;
 
+  /* Feedback states */
+  --color-feedback-ok-bg:     #e8f0e9;
+  --color-feedback-ok-text:   #2a5030;
+  --color-feedback-ok-border: #b3ceb6;
+  --color-feedback-err-bg:    #f5e8e6;
+  --color-feedback-err-text:  #6b2a22;
+  --color-feedback-err-border:#d4a09a;
+
   /* Sombras */
   --shadow-card-hover: 0 6px 20px rgba(160, 78, 64, 0.12);
   --shadow-drawer:     0 -8px 40px rgba(30, 18, 8, 0.2);
@@ -95,6 +103,7 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
+  scrollbar-gutter: stable;
 }
 
 /* --------------------
@@ -104,6 +113,7 @@ body {
 h1, h2, h3 {
   font-weight: 500;
   line-height: 1.2;
+  text-wrap: balance;
 }
 
 h1 {
@@ -383,7 +393,7 @@ nav a[aria-current="page"]::after {
 
   #main-nav a {
     display: block;
-    padding: 0.5rem 0;
+    padding: 0.65rem 0;
   }
 }
 
@@ -395,6 +405,12 @@ section {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+/* H2 editorial — línea de capítulo */
+section > h2 {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
 }
 
 
@@ -415,10 +431,22 @@ section {
 
 #hero {
   padding-top: 3rem;
+  align-items: flex-start;
+}
+
+/* Hero — wrappers */
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-visual {
+  flex-shrink: 0;
+  order: -1; /* portrait arriba en mobile */
 }
 
 .hero-portrait {
-  width: 280px;
+  width: 200px;
   max-width: 100%;
   height: auto;
   aspect-ratio: 1 / 1;
@@ -427,13 +455,38 @@ section {
   object-position: center top;
 }
 
-#hero .hero-subtitle {
-  font-family: var(--font-body);
-  font-size: 1.35rem;
-  color: var(--color-text-muted);
+/* Desktop: dos columnas — texto izq, retrato der */
+@media (min-width: 768px) {
+  #hero {
+    flex-direction: row;
+    gap: 4rem;
+  }
+  .hero-visual {
+    order: 0;
+    padding-top: 0.75rem;
+  }
+  .hero-portrait {
+    width: 180px;
+  }
+}
+
+/* Hero — label mono sobre el nombre */
+.hero-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: var(--fw-regular);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.4rem;
+}
+
+/* Hero — nombre a escala display */
+#hero h1 {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
   margin-bottom: 1.5rem;
-  margin-top: 0.5rem;
-  letter-spacing: -0.01em;
 }
 
 #hero .hero-description {
@@ -474,6 +527,19 @@ section {
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-availability::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-accent-ui);
+  flex-shrink: 0;
 }
 
 /* HERO — CTA */
@@ -618,6 +684,37 @@ section {
   }
 }
 
+/* Lab callout — mundo oscuro */
+#lab-callout {
+  background-color: var(--color-lab-bg);
+  color: var(--color-lab-text);
+  border-radius: 8px;
+}
+
+#lab-callout h2 {
+  color: var(--color-lab-text);
+  border-bottom-color: var(--color-lab-border);
+}
+
+#lab-callout p {
+  color: var(--color-lab-text);
+  opacity: 0.85;
+}
+
+#lab-callout .cta-link {
+  color: var(--color-lab-accent);
+  font-weight: var(--fw-semibold);
+  opacity: 1;
+}
+
+#lab-callout .cta-link:hover {
+  opacity: 0.75;
+}
+
+#lab-callout a:focus-visible {
+  outline-color: var(--color-lab-accent);
+}
+
 /* CONTACTO */
 
 #contacto {
@@ -726,15 +823,15 @@ section {
 }
 
 .form-feedback--ok {
-  background-color: #e8f0e9;
-  color: #2a5030;
-  border: 1px solid #b3ceB6;
+  background-color: var(--color-feedback-ok-bg);
+  color: var(--color-feedback-ok-text);
+  border: 1px solid var(--color-feedback-ok-border);
 }
 
 .form-feedback--err {
-  background-color: #f5e8e6;
-  color: #6b2a22;
-  border: 1px solid #d4a09a;
+  background-color: var(--color-feedback-err-bg);
+  color: var(--color-feedback-err-text);
+  border: 1px solid var(--color-feedback-err-border);
 }
 
 /* --------------------
