@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regalos — Salvador Cassis</title>
+  <meta name="description" content="Algunas de las cosas que niñas, niños y jóvenes me han regalado a lo largo del trabajo.">
+  <meta property="og:title" content="Regalos — Salvador Cassis">
+  <meta property="og:description" content="Algunas de las cosas que niñas, niños y jóvenes me han regalado a lo largo del trabajo.">
+  <meta property="og:url" content="https://salvadorcassis.com/regalos/">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_CL">
+  <link rel="canonical" href="https://salvadorcassis.com/regalos/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♪</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Strichpunkt+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .page-hero {
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 3rem;
+    }
+
+    .page-back {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
+    }
+    .page-back:hover { color: var(--color-accent); }
+
+    .page-hero h1 {
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-hero p {
+      color: var(--color-text-muted);
+      max-width: 480px;
+      margin: 0;
+    }
+
+    .regalos-grid {
+      columns: 1;
+      gap: 2rem;
+      margin-bottom: 5rem;
+      padding: 0.5rem 0.25rem;
+    }
+
+    @media (min-width: 480px) {
+      .regalos-grid { columns: 2; gap: 2.5rem; }
+    }
+
+    @media (min-width: 768px) {
+      .regalos-grid { columns: 3; gap: 3rem; }
+    }
+
+    .regalo-item {
+      break-inside: avoid;
+      margin: 0 0 2.5rem;
+      background: var(--color-bg-input);
+      padding: 0.75rem 0.75rem 2.25rem;
+      box-shadow: 2px 3px 8px rgba(30, 18, 8, 0.15);
+    }
+
+    .regalo-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .regalo-item img {
+      cursor: zoom-in;
+    }
+
+    .regalo-item figcaption {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      color: var(--color-text-muted);
+      padding-top: 0.85rem;
+      text-align: center;
+      letter-spacing: 0.03em;
+      line-height: 1.65;
+    }
+
+    #lightbox {
+      border: none;
+      padding: 0;
+      background: transparent;
+      max-width: 92vw;
+      max-height: 92dvh;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      overflow: hidden;
+    }
+
+    #lightbox.zoomed {
+      overflow: auto;
+    }
+
+    #lightbox::backdrop {
+      background: rgba(30, 18, 8, 0.88);
+      cursor: pointer;
+    }
+
+    #lightbox img {
+      display: block;
+      max-width: 92vw;
+      max-height: 92dvh;
+      object-fit: contain;
+      cursor: zoom-in;
+    }
+
+    #lightbox.zoomed img {
+      max-width: none;
+      max-height: none;
+      width: auto;
+      height: auto;
+      cursor: zoom-out;
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <header>
+    <div class="header-inner">
+      <div class="header-title">
+        <a href="/" class="site-name">Salvador Cassis</a>
+        <p class="site-tagline">Artista-educador</p>
+      </div>
+
+      <button type="button" class="menu-toggle" aria-label="Menú" aria-expanded="false" aria-controls="main-nav">
+        <span></span>
+      </button>
+
+      <nav id="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="/#practica">Lo que hago</a></li>
+          <li><a href="/#proyectos">Proyectos</a></li>
+          <li><a href="/regalos/" aria-current="page">Regalos</a></li>
+          <li><a href="/#instituciones">Instituciones</a></li>
+          <li><a href="/#enfoque">Enfoque</a></li>
+          <li><a href="/lab">Caja de Herramientas</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <div class="page-hero">
+      <a href="/" class="page-back">← Salvador Cassis</a>
+      <h1>Regalos</h1>
+      <p>Trabajar en educación es difícil. Estos recuerdos los atesoro porque me dan ánimo en los momentos adversos.
+        Algunas de las cosas que niñas, niños y jóvenes me han regalado a lo largo del ejercicio.</p>
+    </div>
+
+    <div class="regalos-grid">
+
+      <figure class="regalo-item">
+        <img src="assets/diaprofe1.jpg"
+             alt="Dibujo a color de un hombre con guitarra cantando, con texto «¡feliz día Profe!»"
+             width="595" height="842" loading="lazy">
+        <!-- Completar: institución o contexto -->
+        <figcaption>Día del profesor.</figcaption>
+      </figure>
+
+      <figure class="regalo-item">
+        <img src="assets/gran-corazon.jpg"
+             alt="Hoja escrita a mano con letra de cueca titulada «Gran corazón», dibujos de guitarra, pandero y músico en escena"
+             width="595" height="842" loading="lazy">
+        <!-- Completar: institución o contexto -->
+        <figcaption>Es muy lindo que te regalen una cueca. Temuco, 2025.</figcaption>
+      </figure>
+
+      <figure class="regalo-item">
+        <img src="assets/guitarra-tio-salvador.jpg"
+             alt="Dibujo de guitarra recortada en papel con texto «Tío SALVADOR lo quiero mucho» y corazones en verde y café"
+             width="2480" height="3508" loading="lazy">
+        <!-- Completar: institución o contexto -->
+        <figcaption>Dibujo de guitarra · «Tío Salvador lo quiero mucho»</figcaption>
+      </figure>
+
+      <figure class="regalo-item">
+        <img src="assets/taza-texto.jpg"
+             alt="Taza blanca con texto impreso «Gracias por inspirar y transmitir, gracias por enseñarnos y por despertar el asombro. Kinder A, 2024»"
+             width="3508" height="2480" loading="lazy">
+        <figcaption>Así se ve una taza cuando la escaneas. No lo intenten en casa. Loncoche, 2024.</figcaption>
+      </figure>
+
+      <figure class="regalo-item">
+        <img src="assets/nota-admiro.jpg"
+             alt="Nota escrita a mano: «Profe, quería decirle que lo admiro mucho. Transmite una energía increíble, además que en este taller se nota el cariño con un ambiente cálido y agradable.»"
+             width="595" height="842" loading="lazy">
+        <!-- Completar: institución o contexto -->
+        <figcaption>Nota adhesiva al reverso de la cueca. Como si fuera poco. Temuco, 2025.</figcaption>
+      </figure>
+
+      <figure class="regalo-item">
+        <img src="assets/carta-tapa.jpg"
+             alt="Tarjeta doblada con dibujo de guitarra en lápiz de color y manchas de pintura verde en las esquinas"
+             width="2480" height="3508" loading="lazy">
+        <!-- Completar: institución o contexto -->
+        <figcaption>Tarjeta · dibujo de guitarra</figcaption>
+      </figure>
+
+      <figure class="regalo-item">
+        <img src="assets/carta-interior.jpg"
+             alt="Interior de tarjeta con dibujos de micrófono, triángulo y parlante en lápiz de color amarillo y café, y texto de agradecimiento escrito a mano"
+             width="3508" height="2480" loading="lazy">
+        <!-- Completar: institución o contexto -->
+        <figcaption>Portada de tarjeta que en su interior tiene un bello mensaje. Maquehue, 2023.</figcaption>
+      </figure>
+
+      <figure class="regalo-item">
+        <img src="assets/dos-guitarras.jpg"
+             alt="Dibujo a lápiz grafito de dos guitarras cruzadas sobre hoja cuadriculada, con texto «Eres el mejor profesor del mundo»"
+             width="2480" height="3508" loading="lazy">
+        <!-- Completar: institución o contexto -->
+        <figcaption>Un mensaje muy lindo. Maquehue, 2023.</figcaption>
+      </figure>
+
+      <figure class="regalo-item">
+        <img src="assets/greda-flores.jpg"
+             alt="Pieza de greda con forma de hoja y flores secas pegadas, presentada sobre papel decorado con espirales de colores"
+             width="2480" height="3508" loading="lazy">
+        <!-- Completar: institución o contexto -->
+        <figcaption>Pieza de greda con flores secas · 2026</figcaption>
+      </figure>
+
+      <figure class="regalo-item">
+        <img src="assets/taza-vista.jpg"
+             alt="Dos tazas blancas con ilustración de lápiz con sombrero y nubes y textos del Día del Profesor"
+             width="3508" height="2480" loading="lazy">
+        <figcaption>Taza (dos vistas) Loncoche, 2024.</figcaption>
+      </figure>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2026 · Salvador Cassis</p>
+  </footer>
+
+  <dialog id="lightbox">
+    <img id="lightbox-img" src="" alt="">
+  </dialog>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('#main-nav');
+
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('active');
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const images = Array.from(document.querySelectorAll('.regalo-item img'));
+    let current = 0;
+    let zoomed = false;
+    let touchStartX = 0;
+
+    function show(i) {
+      zoomed = false;
+      lightbox.classList.remove('zoomed');
+      lightbox.scrollTop = 0;
+      lightbox.scrollLeft = 0;
+      lightboxImg.src = images[i].src;
+      lightboxImg.alt = images[i].alt;
+    }
+
+    images.forEach((img, i) => {
+      img.addEventListener('click', () => {
+        current = i;
+        show(current);
+        lightbox.showModal();
+      });
+    });
+
+    lightboxImg.addEventListener('click', (e) => {
+      e.stopPropagation();
+      zoomed = !zoomed;
+      lightbox.classList.toggle('zoomed', zoomed);
+      if (!zoomed) { lightbox.scrollTop = 0; lightbox.scrollLeft = 0; }
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) { lightbox.close(); zoomed = false; lightbox.classList.remove('zoomed'); }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.open) return;
+      if (e.key === 'ArrowRight') { current = (current + 1) % images.length; show(current); }
+      if (e.key === 'ArrowLeft')  { current = (current - 1 + images.length) % images.length; show(current); }
+    });
+
+    lightbox.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      if (zoomed) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) {
+        dx < 0 ? current = (current + 1) % images.length : current = (current - 1 + images.length) % images.length;
+        show(current);
+      }
+    });
+
+    document.querySelectorAll('#main-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (nav.classList.contains('active')) {
+          menuToggle.setAttribute('aria-expanded', 'false');
+          nav.classList.remove('active');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
