@@ -18,6 +18,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Strichpunkt+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    body { transition: background-color 0.8s ease; }
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -73,7 +76,7 @@
   <main id="contenido">
 
     <!-- HERO -->
-    <section id="hero">
+    <section id="hero" data-bg="#EDE6DA">
       <div class="hero-text">
         <p class="hero-label">Artista-educador</p>
         <h1>Salvador Cassis</h1>
@@ -84,7 +87,7 @@
           <li>Artista-educador — Programa Acciona, Ministerio de las Culturas de Chile</li>
           <li>Región de La Araucanía</li>
         </ul>
-        <p class="hero-availability">Disponible para proyectos 2026 — Región de La Araucanía</p>
+        <p class="hero-availability">Disponible para proyectos 2027 — Región de La Araucanía</p>
         <a href="#contacto" class="hero-cta">Conversemos sobre tu proyecto →</a>
       </div>
       <div class="hero-visual">
@@ -93,7 +96,7 @@
     </section>
 
     <!-- LO QUE HAGO -->
-    <section id="practica">
+    <section id="practica" data-bg="#E2D9CA">
       <h2>Lo que hago</h2>
 
       <article>
@@ -113,7 +116,7 @@
     </section>
 
     <!-- PROYECTOS -->
-    <section id="proyectos">
+    <section id="proyectos" data-bg="#EDE6DA">
       <h2>Proyectos</h2>
 
       <article>
@@ -152,7 +155,7 @@
     </section>
 
     <!-- TRABAJO CON INSTITUCIONES -->
-    <section id="instituciones">
+    <section id="instituciones" data-bg="#E2D9CA">
       <h2>Trabajo con instituciones</h2>
 
       <p class="section-intro">
@@ -187,7 +190,7 @@
     </section>
 
     <!-- ENFOQUE -->
-    <section id="enfoque">
+    <section id="enfoque" data-bg="#EDE6DA">
       <h2>Enfoque</h2>
 
       <article>
@@ -204,7 +207,7 @@
     </section>
 
     <!-- CAJA DE HERRAMIENTAS -->
-    <section id="lab-callout" class="callout">
+    <section id="lab-callout" class="callout" data-bg="#1A1A12">
       <h2>Caja de Herramientas</h2>
       <p>
         Aplicaciones web para la práctica musical: metrónomo de compás flamenco, loops de pandero para cueca y más. Funcionan en el navegador, sin instalación.
@@ -213,7 +216,7 @@
     </section>
 
     <!-- CONTACTO -->
-    <section id="contacto">
+    <section id="contacto" data-bg="#EDE6DA">
       <h2>Contacto</h2>
       <p>
         Si representas una institución educativa o cultural y estás evaluando un proyecto, escríbeme con el contexto y lo conversamos.
@@ -226,6 +229,8 @@
       <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
         <input type="hidden" name="access_key" value="865db929-b759-41d5-b3eb-de1a8b7e60d1">
         <input type="hidden" name="subject" value="Nuevo mensaje desde salvadorcassis.com">
+        <!-- Honeypot anti-spam (Web3Forms): los humanos no lo ven; si un bot lo marca, se descarta el envío -->
+        <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
 
         <div class="form-group">
           <label for="nombre">Nombre <span aria-hidden="true" style="color:var(--color-accent)">*</span></label>
@@ -277,6 +282,16 @@
         }
       });
     });
+
+    const bgObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.body.style.backgroundColor = entry.target.dataset.bg;
+        }
+      });
+    }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+
+    document.querySelectorAll('section[data-bg]').forEach(s => bgObserver.observe(s));
 
     const form = document.querySelector('.contact-form');
     const formStatus = document.getElementById('form-status');

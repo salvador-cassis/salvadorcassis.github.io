@@ -21,17 +21,27 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://salvadorcassis.com/regalos/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://salvadorcassis.com/lab/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://salvadorcassis.com/lab/piezas/tangos-1/</loc>
+    <loc>https://salvadorcassis.com/lab/compas-flamenco/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://salvadorcassis.com/lab/pandero-web/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://salvadorcassis.com/lab/piezas/tangos-1/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
