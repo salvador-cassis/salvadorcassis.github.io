@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+._*
+
+# Editores
+*.swp
+.idea/
+.vscode/
+
+# Config local de herramientas de IA (contiene rutas de disco)
+.claude/
+
+# Logs y temporales
+*.log
+node_modules/
