@@ -34,22 +34,11 @@
 
     /* --------------------
        EL PASEO
-       Recorrido horizontal: se avanza de izquierda a derecha y el fondo
-       transcurre de crema a noche. Sin tarjetas: las piezas van pegadas
-       sobre el fondo, con alturas y rotaciones libres.
+       Recorrido horizontal, sin tarjetas: las piezas van pegadas sobre el
+       fondo, con alturas y rotaciones libres.
     -------------------- */
 
-    /* Tokens locales del atardecer: pasos intermedios entre --color-bg y
-       la terracota oscura, que no existen en el sistema global */
     :root {
-      --paseo-dia:      var(--color-bg);
-      --paseo-manana:   #E9E0D2;
-      --paseo-mediodia: #DCCFB8;
-      --paseo-tarde:    #C29070;
-      --paseo-ocaso:    var(--color-accent);
-      --paseo-crepusculo: #5A2E22;
-      --paseo-noche:    #26170F;
-      --paseo-texto-noche: #EDE2D2;
       --font-regalos: 'Comico', 'Strichpunkt Sans', cursive;
     }
 
@@ -94,14 +83,6 @@
       height: 100%;
       width: max-content;
       padding-right: 22vw;
-      background: linear-gradient(90deg,
-        var(--paseo-dia) 0%,
-        var(--paseo-manana) 16%,
-        var(--paseo-mediodia) 36%,
-        var(--paseo-tarde) 56%,
-        var(--paseo-ocaso) 70%,
-        var(--paseo-crepusculo) 86%,
-        var(--paseo-noche) 100%);
     }
 
     /* Umbral: la bienvenida antes de las piezas */
@@ -166,9 +147,6 @@
       text-wrap: pretty;
     }
 
-    /* Cae la noche: las últimas piezas necesitan texto claro */
-    .regalo.noche figcaption { color: var(--paseo-texto-noche); }
-
     /* Controles fijos sobre el paseo */
     .paseo-volver,
     .paseo-avanzar {
@@ -232,11 +210,13 @@
 
     #lightbox img {
       display: block;
-      max-width: 92vw;
-      max-height: 92dvh;
+      max-width: min(92vw, var(--nat-w, 92vw));
+      max-height: min(92dvh, var(--nat-h, 92dvh));
       object-fit: contain;
       cursor: zoom-in;
     }
+
+    #lightbox img.a-tamano-real { cursor: default; }
 
     #lightbox.zoomed img {
       max-width: none;
@@ -296,7 +276,7 @@
           <button type="button" class="regalo-trigger">
             <img src="assets/diaprofe1.jpg"
                  alt="Dibujo a color de un hombre con guitarra cantando, con texto «¡feliz día Profe!»"
-                 width="595" height="842">
+                 width="1272" height="1800">
           </button>
           <figcaption>Día del profesor.</figcaption>
         </figure>
@@ -305,7 +285,7 @@
           <button type="button" class="regalo-trigger">
             <img src="assets/gran-corazon.jpg"
                  alt="Hoja escrita a mano con letra de cueca titulada «Gran corazón», dibujos de guitarra, pandero y músico en escena"
-                 width="595" height="842" loading="lazy">
+                 width="1272" height="1800" loading="lazy">
           </button>
           <figcaption>Es muy lindo que te regalen una cueca. Temuco, 2025.</figcaption>
         </figure>
@@ -314,7 +294,7 @@
           <button type="button" class="regalo-trigger">
             <img src="assets/guitarra-tio-salvador.jpg"
                  alt="Dibujo de guitarra recortada en papel con texto «Tío SALVADOR lo quiero mucho» y corazones en verde y café"
-                 width="2480" height="3508" loading="lazy">
+                 width="1272" height="1800" loading="lazy">
           </button>
           <figcaption>Dibujo de guitarra · «Tío Salvador lo quiero mucho»</figcaption>
         </figure>
@@ -323,7 +303,7 @@
           <button type="button" class="regalo-trigger">
             <img src="assets/taza-texto.jpg"
                  alt="Taza blanca con texto impreso «Gracias por inspirar y transmitir, gracias por enseñarnos y por despertar el asombro. Kinder A, 2024»"
-                 width="3508" height="2480" loading="lazy">
+                 width="1800" height="1272" loading="lazy">
           </button>
           <figcaption>Así se ve una taza cuando la escaneas. No lo intenten en casa. Loncoche, 2024.</figcaption>
         </figure>
@@ -332,7 +312,7 @@
           <button type="button" class="regalo-trigger">
             <img src="assets/nota-admiro.jpg"
                  alt="Nota escrita a mano: «Profe, quería decirle que lo admiro mucho. Transmite una energía increíble, además que en este taller se nota el cariño con un ambiente cálido y agradable.»"
-                 width="595" height="842" loading="lazy">
+                 width="725" height="710" loading="lazy">
           </button>
           <figcaption>Nota adhesiva al reverso de la cueca. Como si fuera poco. Temuco, 2025.</figcaption>
         </figure>
@@ -341,43 +321,43 @@
           <button type="button" class="regalo-trigger">
             <img src="assets/carta-tapa.jpg"
                  alt="Tarjeta doblada con dibujo de guitarra en lápiz de color y manchas de pintura verde en las esquinas"
-                 width="2480" height="3508" loading="lazy">
+                 width="1272" height="1800" loading="lazy">
           </button>
           <figcaption>Portada de tarjeta que en su interior tiene un bello mensaje. Maquehue, 2023.</figcaption>
         </figure>
 
-        <figure class="regalo noche" style="--h: 32vh; --y: 6vh; --rot: -1.5deg; --gap: 8.5rem;">
+        <figure class="regalo" style="--h: 32vh; --y: 6vh; --rot: -1.5deg; --gap: 8.5rem;">
           <button type="button" class="regalo-trigger">
             <img src="assets/carta-interior.jpg"
                  alt="Interior de tarjeta con dibujos de micrófono, triángulo y parlante en lápiz de color amarillo y café, y texto de agradecimiento escrito a mano"
-                 width="3508" height="2480" loading="lazy">
+                 width="1800" height="1272" loading="lazy">
           </button>
           <figcaption>Interior de tarjeta con un bello mensaje de agradecimiento. Maquehue, 2023.</figcaption>
         </figure>
 
-        <figure class="regalo noche" style="--h: 42vh; --y: 26vh; --rot: 1deg; --gap: 10rem;">
+        <figure class="regalo" style="--h: 42vh; --y: 26vh; --rot: 1deg; --gap: 10rem;">
           <button type="button" class="regalo-trigger">
             <img src="assets/dos-guitarras.jpg"
                  alt="Dibujo a lápiz grafito de dos guitarras cruzadas sobre hoja cuadriculada, con texto «Eres el mejor profesor del mundo»"
-                 width="2480" height="3508" loading="lazy">
+                 width="1272" height="1800" loading="lazy">
           </button>
           <figcaption>Un mensaje muy lindo. Maquehue, 2023.</figcaption>
         </figure>
 
-        <figure class="regalo noche" style="--h: 38vh; --y: 11vh; --rot: -2deg; --gap: 12rem;">
+        <figure class="regalo" style="--h: 38vh; --y: 11vh; --rot: -2deg; --gap: 12rem;">
           <button type="button" class="regalo-trigger">
             <img src="assets/greda-flores.jpg"
                  alt="Pieza de greda con forma de hoja y flores secas pegadas, presentada sobre papel decorado con espirales de colores"
-                 width="2480" height="3508" loading="lazy">
+                 width="1272" height="1800" loading="lazy">
           </button>
           <figcaption>Pieza de greda con flores secas · 2026</figcaption>
         </figure>
 
-        <figure class="regalo noche" style="--h: 30vh; --y: 32vh; --rot: 1.5deg; --gap: 14rem;">
+        <figure class="regalo" style="--h: 30vh; --y: 32vh; --rot: 1.5deg; --gap: 14rem;">
           <button type="button" class="regalo-trigger">
             <img src="assets/taza-vista.jpg"
                  alt="Dos tazas blancas con ilustración de lápiz con sombrero y nubes y textos del Día del Profesor"
-                 width="3508" height="2480" loading="lazy">
+                 width="1800" height="1272" loading="lazy">
           </button>
           <figcaption>Taza (dos vistas) Temuco, 2024.</figcaption>
         </figure>
@@ -452,6 +432,16 @@
       lightbox.scrollLeft = 0;
       lightboxImg.src = images[i].src;
       lightboxImg.alt = images[i].alt;
+
+      const natW = Number(images[i].getAttribute('width'));
+      const natH = Number(images[i].getAttribute('height'));
+      lightboxImg.style.setProperty('--nat-w', natW ? natW + 'px' : '');
+      lightboxImg.style.setProperty('--nat-h', natH ? natH + 'px' : '');
+
+      const cabeEntera = natW && natH &&
+        natW <= window.innerWidth * 0.92 &&
+        natH <= window.innerHeight * 0.92;
+      lightboxImg.classList.toggle('a-tamano-real', Boolean(cabeEntera));
     }
 
     triggers.forEach((trigger, i) => {
