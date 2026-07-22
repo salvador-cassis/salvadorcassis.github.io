@@ -15,13 +15,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Strichpunkt+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-  <!-- Comico (Indian Type Foundry, licencia ITF FFL: uso web y comercial).
-       Cuarta familia autorizada por Salvador solo para /regalos — es unicase,
-       por eso se usa en el título y nunca en texto corrido. -->
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=comico@400&display=swap" rel="stylesheet">
+  <link rel="preload" href="/fonts/comico-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../style.css">
   <style>
+    /* Comico (Indian Type Foundry, licencia ITF FFL: permite uso web y
+       comercial, incluido self-hosting). Cuarta familia autorizada solo para
+       /regalos — ver DESIGN.md. Es unicase: solo título y controles, nunca
+       texto corrido. Se aloja en el propio sitio porque los navegadores con
+       protección anti-fingerprinting (Brave) bloquean los CDN de fuentes.
+       Subset a latín + acentos: 296 KB -> 65 KB. */
+    @font-face {
+      font-family: 'Comico';
+      src: url('/fonts/comico-400.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
     /* --------------------
        EL PASEO
        Recorrido horizontal: se avanza de izquierda a derecha y el fondo
@@ -48,6 +58,17 @@
     /* Solo en html: si además se pone en body, el body recorta el paseo
        a sus 820px y se pierde el ancho completo */
     html { overflow-x: clip; }
+
+    /* Esta página va a sangre, así que el header y el footer también: si se
+       quedan en los 820px de body, se ven descolocados respecto al paseo y
+       además el nav de 7 ítems no cabe y queda cortado */
+    header, footer {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      padding-inline: clamp(1.5rem, 4vw, 3rem);
+    }
+
+    .header-inner { flex-wrap: wrap; }
 
     .paseo {
       position: relative;
@@ -153,9 +174,9 @@
     .paseo-avanzar {
       position: absolute;
       z-index: 2;
-      font-family: var(--font-body);
+      font-family: var(--font-regalos);
       font-size: 0.82rem;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.03em;
       text-decoration: none;
       background: var(--color-bg);
       border: 1px solid var(--color-border);
