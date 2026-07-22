@@ -289,8 +289,14 @@
     .drawer-handle-bar {
       display: flex;
       justify-content: center;
-      padding: 0.75rem 0 0;
+      padding: 0.75rem 0 0.5rem;
       flex-shrink: 0;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .drawer-handle-bar:active {
+      cursor: grabbing;
     }
 
     .drawer-handle-bar span {
@@ -422,6 +428,7 @@
             data-title="Compás flamenco"
             data-hint="Aprieta «Empezar» para escuchar el compás"
             aria-label="Abrir Compás flamenco"
+            aria-haspopup="dialog"
           ></button>
           <div class="tool-visual" aria-hidden="true">
             <svg viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
@@ -464,6 +471,7 @@
             data-title="Pandero de cueca"
             data-hint="Aprieta el botón de play para activar el pandero"
             aria-label="Abrir Pandero de cueca"
+            aria-haspopup="dialog"
           ></button>
           <div class="tool-visual" aria-hidden="true">
             <svg viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
@@ -517,8 +525,9 @@
           <button class="card-trigger"
             data-src="./piezas/tangos-1/bare.html"
             data-title="Tangos 1"
-            data-hint="Toca el botón ▶ para empezar a escuchar"
+            data-hint="Los «tangos» son un palo del flamenco, aquí recreado con código en vivo"
             aria-label="Abrir Tangos 1"
+            aria-haspopup="dialog"
           ></button>
           <div class="tool-visual" aria-hidden="true">
             <svg viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
@@ -536,19 +545,20 @@
                 <rect x="142" y="88"  width="9" height="12" rx="4.5" opacity="0.35" class="svg-bar-5"/>
                 <rect x="156" y="92"  width="9" height="8"  rx="4"   opacity="0.25" class="svg-bar-1"/>
               </g>
-              <text x="16" y="125" font-size="8.5" fill="#4A3E33" font-family="Space Mono, monospace" opacity="0.5">d1 $ sound "flamenco"</text>
-              <text x="16" y="137" font-size="8.5" fill="#4A3E33" font-family="Space Mono, monospace" opacity="0.3">  # speed 1.5</text>
+              <text x="16" y="125" font-size="8.5" fill="#4A3E33" font-family="Space Mono, monospace" opacity="0.5">s("flamenco")</text>
+              <text x="16" y="137" font-size="8.5" fill="#4A3E33" font-family="Space Mono, monospace" opacity="0.3">  .speed(1.5)</text>
               <rect x="136" y="129" width="6" height="9" rx="1" fill="#A04E40" opacity="0.6" class="svg-pulse"/>
             </svg>
           </div>
           <div class="tool-body">
             <div class="tool-tags">
               <time datetime="2026-02" class="tool-date">feb. 2026</time>
+              <span class="tag">Flamenco</span>
               <span class="tag tag-experimental">Live coding</span>
             </div>
             <h3>Tangos 1</h3>
             <p class="tool-description">
-              Una pieza musical que se genera en tiempo real con código. La música y el código son visibles al mismo tiempo — puedes escuchar y ver cómo funciona.
+              Los «tangos» son un palo del flamenco. Aquí suenan generados en tiempo real con código: escuchas la pieza y ves, al mismo tiempo, el código que la crea.
             </p>
             <span class="tool-cta-label" aria-hidden="true">Abrir pieza →</span>
           </div>
@@ -646,6 +656,9 @@
       hintEl.textContent  = hint;
       frame.src = src;
       drawer.hidden = false;
+      /* limpiar cualquier transform/transition residual de un arrastre previo */
+      drawer.style.transform = '';
+      drawer.style.transition = '';
       /* ocultar el fondo a lectores de pantalla mientras el modal está abierto */
       document.querySelector('main').setAttribute('aria-hidden', 'true');
       document.querySelector('header').setAttribute('aria-hidden', 'true');
@@ -688,6 +701,37 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
     });
+
+    /* --- Arrastrar la barra hacia abajo para cerrar (bottom sheet) --- */
+    const handleBar = drawer.querySelector('.drawer-handle-bar');
+    const CLOSE_THRESHOLD = 110; /* px arrastrados para que cierre */
+    let dragStartY = 0;
+    let dragging = false;
+
+    handleBar.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      dragStartY = e.clientY;
+      drawer.style.transition = 'none';       /* seguir el dedo sin lag */
+      handleBar.setPointerCapture(e.pointerId);
+    });
+
+    handleBar.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const dy = Math.max(0, e.clientY - dragStartY); /* solo hacia abajo */
+      drawer.style.transform = `translateY(${dy}px)`;
+    });
+
+    function endDrag(e) {
+      if (!dragging) return;
+      dragging = false;
+      const dy = Math.max(0, e.clientY - dragStartY);
+      drawer.style.transition = '';            /* restaurar animación */
+      drawer.style.transform  = '';            /* volver a la posición de la clase */
+      if (dy > CLOSE_THRESHOLD) closeDrawer();  /* pasa el umbral → cerrar */
+    }
+
+    handleBar.addEventListener('pointerup', endDrag);
+    handleBar.addEventListener('pointercancel', endDrag);
   </script>
 
 </body>

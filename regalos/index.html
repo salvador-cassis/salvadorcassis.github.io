@@ -15,80 +15,179 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Strichpunkt+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <!-- Comico (Indian Type Foundry, licencia ITF FFL: uso web y comercial).
+       Cuarta familia autorizada por Salvador solo para /regalos — es unicase,
+       por eso se usa en el título y nunca en texto corrido. -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=comico@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
   <style>
-    .page-hero {
-      padding: 3rem 0 2rem;
-      border-bottom: 1px solid var(--color-border);
-      margin-bottom: 3rem;
+    /* --------------------
+       EL PASEO
+       Recorrido horizontal: se avanza de izquierda a derecha y el fondo
+       transcurre de crema a noche. Sin tarjetas: las piezas van pegadas
+       sobre el fondo, con alturas y rotaciones libres.
+    -------------------- */
+
+    /* Tokens locales del atardecer: pasos intermedios entre --color-bg y
+       la terracota oscura, que no existen en el sistema global */
+    :root {
+      --paseo-dia:      var(--color-bg);
+      --paseo-manana:   #E9E0D2;
+      --paseo-mediodia: #DCCFB8;
+      --paseo-tarde:    #C29070;
+      --paseo-ocaso:    var(--color-accent);
+      --paseo-crepusculo: #5A2E22;
+      --paseo-noche:    #26170F;
+      --paseo-texto-noche: #EDE2D2;
+      --font-regalos: 'Comico', 'Strichpunkt Sans', cursive;
     }
 
-    .page-back {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
+    /* El paseo sale del ancho de body (820px); el clip evita que la barra
+       de scroll horizontal del documento aparezca por el 100vw */
+    /* Solo en html: si además se pone en body, el body recorta el paseo
+       a sus 820px y se pierde el ancho completo */
+    html { overflow-x: clip; }
+
+    .paseo {
+      position: relative;
+      padding: 0;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      height: calc(100dvh - 9rem);
+      min-height: 30rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      border-block: 1px solid var(--color-border);
+    }
+
+    .paseo:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: -2px;
+    }
+
+    .paseo-track {
+      display: flex;
+      align-items: flex-start;
+      height: 100%;
+      width: max-content;
+      padding-right: 22vw;
+      background: linear-gradient(90deg,
+        var(--paseo-dia) 0%,
+        var(--paseo-manana) 16%,
+        var(--paseo-mediodia) 36%,
+        var(--paseo-tarde) 56%,
+        var(--paseo-ocaso) 70%,
+        var(--paseo-crepusculo) 86%,
+        var(--paseo-noche) 100%);
+    }
+
+    /* Umbral: la bienvenida antes de las piezas */
+    .paseo-umbral {
+      flex: 0 0 auto;
+      width: min(86vw, 30rem);
+      padding: 0 3rem 0 clamp(1.5rem, 6vw, 5rem);
+      margin-top: 18vh;
+    }
+
+    .paseo-umbral h1 {
+      font-family: var(--font-regalos);
+      font-weight: 400;
+      font-size: clamp(2.4rem, 6.5vw, 3.8rem);
+      line-height: 1.1;
+      letter-spacing: 0.005em;
+      margin-bottom: 1rem;
+    }
+
+    .paseo-umbral p {
       color: var(--color-text-muted);
-      text-decoration: none;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.02em;
-    }
-    .page-back:hover { color: var(--color-accent); }
-
-    .page-hero h1 {
-      font-size: clamp(2.2rem, 6vw, 3.5rem);
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-      margin-bottom: 0.75rem;
-    }
-
-    .page-hero p {
-      color: var(--color-text-muted);
-      max-width: 480px;
       margin: 0;
     }
 
-    .regalos-grid {
-      columns: 1;
-      gap: 2rem;
-      margin-bottom: 5rem;
-      padding: 0.5rem 0.25rem;
+    /* Piezas */
+    .regalo {
+      flex: 0 0 auto;
+      margin: 0;
+      margin-top: var(--y, 10vh);
+      margin-left: var(--gap, 4rem);
+      rotate: var(--rot, 0deg);
     }
 
-    @media (min-width: 480px) {
-      .regalos-grid { columns: 2; gap: 2.5rem; }
-    }
-
-    @media (min-width: 768px) {
-      .regalos-grid { columns: 3; gap: 3rem; }
-    }
-
-    .regalo-item {
-      break-inside: avoid;
-      margin: 0 0 2.5rem;
-      background: var(--color-bg-input);
-      padding: 0.75rem 0.75rem 2.25rem;
-      box-shadow: 2px 3px 8px rgba(30, 18, 8, 0.15);
-    }
-
-    .regalo-item img {
-      width: 100%;
-      height: auto;
+    .regalo-trigger {
       display: block;
-    }
-
-    .regalo-item img {
+      padding: 0;
+      border: none;
+      background: none;
       cursor: zoom-in;
     }
 
-    .regalo-item figcaption {
-      font-family: var(--font-mono);
-      font-size: 0.66rem;
-      color: var(--color-text-muted);
-      padding-top: 0.85rem;
-      text-align: center;
-      letter-spacing: 0.03em;
-      line-height: 1.65;
+    .regalo-trigger:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 6px;
     }
+
+    .regalo img {
+      display: block;
+      height: var(--h, 36vh);
+      width: auto;
+      max-width: none;
+    }
+
+    .regalo figcaption {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.85;
+      letter-spacing: 0.005em;
+      color: var(--color-text);
+      padding-top: 1rem;
+      max-width: 20rem;
+      text-wrap: pretty;
+    }
+
+    /* Cae la noche: las últimas piezas necesitan texto claro */
+    .regalo.noche figcaption { color: var(--paseo-texto-noche); }
+
+    /* Controles fijos sobre el paseo */
+    .paseo-volver,
+    .paseo-avanzar {
+      position: absolute;
+      z-index: 2;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      padding: 0.5rem 0.9rem;
+      cursor: pointer;
+    }
+
+    .paseo-volver { top: 1.25rem; left: 1.25rem; }
+    .paseo-avanzar { bottom: 1.25rem; right: 1.25rem; font-size: 0.9rem; }
+
+    .paseo-volver:hover,
+    .paseo-avanzar:hover {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    .paseo-avanzar[hidden] { display: none; }
+
+    @media (max-width: 767px) {
+      .paseo { height: calc(100dvh - 7rem); }
+      /* El umbral deja asomar la primera pieza: sin ese borde visible
+         nada indica que el recorrido sigue hacia la derecha */
+      .paseo-umbral { width: 74vw; padding-right: 1.5rem; margin-top: 12vh; }
+      .regalo { margin-left: min(var(--gap, 4rem), 3rem); }
+      .regalo img { height: min(var(--h, 36vh), 44vh); }
+      .regalo figcaption { max-width: 15rem; font-size: 0.62rem; }
+    }
+
+    /* --------------------
+       LIGHTBOX
+    -------------------- */
 
     #lightbox {
       border: none;
@@ -103,9 +202,7 @@
       overflow: hidden;
     }
 
-    #lightbox.zoomed {
-      overflow: auto;
-    }
+    #lightbox.zoomed { overflow: auto; }
 
     #lightbox::backdrop {
       background: rgba(30, 18, 8, 0.88);
@@ -161,94 +258,116 @@
 
   <main id="contenido">
 
-    <div class="page-hero">
-      <a href="/" class="page-back">← Salvador Cassis</a>
-      <h1>Regalos</h1>
-      <p>Trabajar en educación es difícil. Estos recuerdos los atesoro porque me dan ánimo en los momentos adversos.
-        Algunas de las cosas que niñas, niños y jóvenes me han regalado a lo largo del ejercicio.</p>
-    </div>
+    <section class="paseo" id="paseo" tabindex="0"
+             aria-label="Paseo de regalos — usa las flechas del teclado para avanzar">
 
-    <div class="regalos-grid">
+      <a href="/" class="paseo-volver">← Salvador Cassis</a>
 
-      <figure class="regalo-item">
-        <img src="assets/diaprofe1.jpg"
-             alt="Dibujo a color de un hombre con guitarra cantando, con texto «¡feliz día Profe!»"
-             width="595" height="842" loading="lazy">
-        <!-- Completar: institución o contexto -->
-        <figcaption>Día del profesor.</figcaption>
-      </figure>
+      <div class="paseo-track">
 
-      <figure class="regalo-item">
-        <img src="assets/gran-corazon.jpg"
-             alt="Hoja escrita a mano con letra de cueca titulada «Gran corazón», dibujos de guitarra, pandero y músico en escena"
-             width="595" height="842" loading="lazy">
-        <!-- Completar: institución o contexto -->
-        <figcaption>Es muy lindo que te regalen una cueca. Temuco, 2025.</figcaption>
-      </figure>
+        <div class="paseo-umbral">
+          <h1>Regalos</h1>
+          <p>Trabajar en educación es difícil. Estos recuerdos los atesoro porque me dan ánimo en los momentos
+            adversos. Algunas de las cosas que niñas, niños y jóvenes me han regalado a lo largo del ejercicio.</p>
+        </div>
 
-      <figure class="regalo-item">
-        <img src="assets/guitarra-tio-salvador.jpg"
-             alt="Dibujo de guitarra recortada en papel con texto «Tío SALVADOR lo quiero mucho» y corazones en verde y café"
-             width="2480" height="3508" loading="lazy">
-        <!-- Completar: institución o contexto -->
-        <figcaption>Dibujo de guitarra · «Tío Salvador lo quiero mucho»</figcaption>
-      </figure>
+        <figure class="regalo" style="--h: 40vh; --y: 8vh; --rot: -1.5deg; --gap: 3rem;">
+          <button type="button" class="regalo-trigger">
+            <img src="assets/diaprofe1.jpg"
+                 alt="Dibujo a color de un hombre con guitarra cantando, con texto «¡feliz día Profe!»"
+                 width="595" height="842">
+          </button>
+          <figcaption>Día del profesor.</figcaption>
+        </figure>
 
-      <figure class="regalo-item">
-        <img src="assets/taza-texto.jpg"
-             alt="Taza blanca con texto impreso «Gracias por inspirar y transmitir, gracias por enseñarnos y por despertar el asombro. Kinder A, 2024»"
-             width="3508" height="2480" loading="lazy">
-        <figcaption>Así se ve una taza cuando la escaneas. No lo intenten en casa. Loncoche, 2024.</figcaption>
-      </figure>
+        <figure class="regalo" style="--h: 46vh; --y: 22vh; --rot: 1deg; --gap: 3.5rem;">
+          <button type="button" class="regalo-trigger">
+            <img src="assets/gran-corazon.jpg"
+                 alt="Hoja escrita a mano con letra de cueca titulada «Gran corazón», dibujos de guitarra, pandero y músico en escena"
+                 width="595" height="842" loading="lazy">
+          </button>
+          <figcaption>Es muy lindo que te regalen una cueca. Temuco, 2025.</figcaption>
+        </figure>
 
-      <figure class="regalo-item">
-        <img src="assets/nota-admiro.jpg"
-             alt="Nota escrita a mano: «Profe, quería decirle que lo admiro mucho. Transmite una energía increíble, además que en este taller se nota el cariño con un ambiente cálido y agradable.»"
-             width="595" height="842" loading="lazy">
-        <!-- Completar: institución o contexto -->
-        <figcaption>Nota adhesiva al reverso de la cueca. Como si fuera poco. Temuco, 2025.</figcaption>
-      </figure>
+        <figure class="regalo" style="--h: 34vh; --y: 5vh; --rot: -2.5deg; --gap: 4.5rem;">
+          <button type="button" class="regalo-trigger">
+            <img src="assets/guitarra-tio-salvador.jpg"
+                 alt="Dibujo de guitarra recortada en papel con texto «Tío SALVADOR lo quiero mucho» y corazones en verde y café"
+                 width="2480" height="3508" loading="lazy">
+          </button>
+          <figcaption>Dibujo de guitarra · «Tío Salvador lo quiero mucho»</figcaption>
+        </figure>
 
-      <figure class="regalo-item">
-        <img src="assets/carta-tapa.jpg"
-             alt="Tarjeta doblada con dibujo de guitarra en lápiz de color y manchas de pintura verde en las esquinas"
-             width="2480" height="3508" loading="lazy">
-        <!-- Completar: institución o contexto -->
-        <figcaption>Portada de tarjeta que en su interior tiene un bello mensaje. Maquehue, 2023.</figcaption>
-      </figure>
+        <figure class="regalo" style="--h: 30vh; --y: 30vh; --rot: 1.5deg; --gap: 5rem;">
+          <button type="button" class="regalo-trigger">
+            <img src="assets/taza-texto.jpg"
+                 alt="Taza blanca con texto impreso «Gracias por inspirar y transmitir, gracias por enseñarnos y por despertar el asombro. Kinder A, 2024»"
+                 width="3508" height="2480" loading="lazy">
+          </button>
+          <figcaption>Así se ve una taza cuando la escaneas. No lo intenten en casa. Loncoche, 2024.</figcaption>
+        </figure>
 
-      <figure class="regalo-item">
-        <img src="assets/carta-interior.jpg"
-             alt="Interior de tarjeta con dibujos de micrófono, triángulo y parlante en lápiz de color amarillo y café, y texto de agradecimiento escrito a mano"
-             width="3508" height="2480" loading="lazy">
-        <!-- Completar: institución o contexto -->
-        <figcaption>Interior de tarjeta con un bello mensaje de agradecimiento. Maquehue, 2023.</figcaption>
-      </figure>
+        <figure class="regalo" style="--h: 26vh; --y: 9vh; --rot: -1deg; --gap: 6rem;">
+          <button type="button" class="regalo-trigger">
+            <img src="assets/nota-admiro.jpg"
+                 alt="Nota escrita a mano: «Profe, quería decirle que lo admiro mucho. Transmite una energía increíble, además que en este taller se nota el cariño con un ambiente cálido y agradable.»"
+                 width="595" height="842" loading="lazy">
+          </button>
+          <figcaption>Nota adhesiva al reverso de la cueca. Como si fuera poco. Temuco, 2025.</figcaption>
+        </figure>
 
-      <figure class="regalo-item">
-        <img src="assets/dos-guitarras.jpg"
-             alt="Dibujo a lápiz grafito de dos guitarras cruzadas sobre hoja cuadriculada, con texto «Eres el mejor profesor del mundo»"
-             width="2480" height="3508" loading="lazy">
-        <!-- Completar: institución o contexto -->
-        <figcaption>Un mensaje muy lindo. Maquehue, 2023.</figcaption>
-      </figure>
+        <figure class="regalo" style="--h: 44vh; --y: 24vh; --rot: 2deg; --gap: 7rem;">
+          <button type="button" class="regalo-trigger">
+            <img src="assets/carta-tapa.jpg"
+                 alt="Tarjeta doblada con dibujo de guitarra en lápiz de color y manchas de pintura verde en las esquinas"
+                 width="2480" height="3508" loading="lazy">
+          </button>
+          <figcaption>Portada de tarjeta que en su interior tiene un bello mensaje. Maquehue, 2023.</figcaption>
+        </figure>
 
-      <figure class="regalo-item">
-        <img src="assets/greda-flores.jpg"
-             alt="Pieza de greda con forma de hoja y flores secas pegadas, presentada sobre papel decorado con espirales de colores"
-             width="2480" height="3508" loading="lazy">
-        <!-- Completar: institución o contexto -->
-        <figcaption>Pieza de greda con flores secas · 2026</figcaption>
-      </figure>
+        <figure class="regalo noche" style="--h: 32vh; --y: 6vh; --rot: -1.5deg; --gap: 8.5rem;">
+          <button type="button" class="regalo-trigger">
+            <img src="assets/carta-interior.jpg"
+                 alt="Interior de tarjeta con dibujos de micrófono, triángulo y parlante en lápiz de color amarillo y café, y texto de agradecimiento escrito a mano"
+                 width="3508" height="2480" loading="lazy">
+          </button>
+          <figcaption>Interior de tarjeta con un bello mensaje de agradecimiento. Maquehue, 2023.</figcaption>
+        </figure>
 
-      <figure class="regalo-item">
-        <img src="assets/taza-vista.jpg"
-             alt="Dos tazas blancas con ilustración de lápiz con sombrero y nubes y textos del Día del Profesor"
-             width="3508" height="2480" loading="lazy">
-        <figcaption>Taza (dos vistas) Temuco, 2024.</figcaption>
-      </figure>
+        <figure class="regalo noche" style="--h: 42vh; --y: 26vh; --rot: 1deg; --gap: 10rem;">
+          <button type="button" class="regalo-trigger">
+            <img src="assets/dos-guitarras.jpg"
+                 alt="Dibujo a lápiz grafito de dos guitarras cruzadas sobre hoja cuadriculada, con texto «Eres el mejor profesor del mundo»"
+                 width="2480" height="3508" loading="lazy">
+          </button>
+          <figcaption>Un mensaje muy lindo. Maquehue, 2023.</figcaption>
+        </figure>
 
-    </div>
+        <figure class="regalo noche" style="--h: 38vh; --y: 11vh; --rot: -2deg; --gap: 12rem;">
+          <button type="button" class="regalo-trigger">
+            <img src="assets/greda-flores.jpg"
+                 alt="Pieza de greda con forma de hoja y flores secas pegadas, presentada sobre papel decorado con espirales de colores"
+                 width="2480" height="3508" loading="lazy">
+          </button>
+          <figcaption>Pieza de greda con flores secas · 2026</figcaption>
+        </figure>
+
+        <figure class="regalo noche" style="--h: 30vh; --y: 32vh; --rot: 1.5deg; --gap: 14rem;">
+          <button type="button" class="regalo-trigger">
+            <img src="assets/taza-vista.jpg"
+                 alt="Dos tazas blancas con ilustración de lápiz con sombrero y nubes y textos del Día del Profesor"
+                 width="3508" height="2480" loading="lazy">
+          </button>
+          <figcaption>Taza (dos vistas) Temuco, 2024.</figcaption>
+        </figure>
+
+      </div>
+
+      <button type="button" class="paseo-avanzar" id="paseo-avanzar" aria-controls="paseo">
+        avanzar →
+      </button>
+
+    </section>
 
   </main>
 
@@ -257,7 +376,7 @@
   </footer>
 
   <dialog id="lightbox">
-    <img id="lightbox-img" src="" alt="">
+    <img id="lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
   </dialog>
 
   <script>
@@ -270,9 +389,37 @@
       nav.classList.toggle('active');
     });
 
+    /* --- El paseo: rueda vertical y botón avanzan en horizontal --- */
+    const paseo = document.getElementById('paseo');
+    const avanzar = document.getElementById('paseo-avanzar');
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    paseo.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      const alFinal = paseo.scrollLeft >= paseo.scrollWidth - paseo.clientWidth - 1;
+      const alInicio = paseo.scrollLeft <= 0;
+      if ((e.deltaY > 0 && alFinal) || (e.deltaY < 0 && alInicio)) return;
+      e.preventDefault();
+      paseo.scrollLeft += e.deltaY;
+    }, { passive: false });
+
+    avanzar.addEventListener('click', () => {
+      paseo.scrollBy({
+        left: paseo.clientWidth * 0.8,
+        behavior: sinMovimiento ? 'auto' : 'smooth'
+      });
+    });
+
+    paseo.addEventListener('scroll', () => {
+      const alFinal = paseo.scrollLeft >= paseo.scrollWidth - paseo.clientWidth - 4;
+      avanzar.hidden = alFinal;
+    }, { passive: true });
+
+    /* --- Lightbox --- */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const images = Array.from(document.querySelectorAll('.regalo-item img'));
+    const triggers = Array.from(document.querySelectorAll('.regalo-trigger'));
+    const images = triggers.map(t => t.querySelector('img'));
     let current = 0;
     let zoomed = false;
     let touchStartX = 0;
@@ -286,8 +433,8 @@
       lightboxImg.alt = images[i].alt;
     }
 
-    images.forEach((img, i) => {
-      img.addEventListener('click', () => {
+    triggers.forEach((trigger, i) => {
+      trigger.addEventListener('click', () => {
         current = i;
         show(current);
         lightbox.showModal();
