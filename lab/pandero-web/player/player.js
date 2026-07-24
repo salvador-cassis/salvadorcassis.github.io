@@ -481,7 +481,13 @@ function animLoop() {
 
   // Metronomic animation: odometer gives buffer position, equal-division maps
   // it to beat 0–5. Constant, no groove influence, works in both modes.
-  const elapsed     = accumulatedBufferTime + (audioCtx.currentTime - lastTempoChangeCtxTime) * currentRatio;
+  // [divergencia local vs. pandero-web upstream] audioCtx.currentTime marca
+  // cuándo se programa el audio, no cuándo suena: el sonido sale con un
+  // retraso de outputLatency (0,15–0,3 s por Bluetooth) y el visual quedaba
+  // adelantado justo por ese valor. Se compensa restándolo; Safari no expone
+  // outputLatency y el || 0 lo deja como estaba.
+  const heardTime   = audioCtx.currentTime - (audioCtx.outputLatency || 0);
+  const elapsed     = Math.max(0, accumulatedBufferTime + (heardTime - lastTempoChangeCtxTime) * currentRatio);
   const posInBuffer = elapsed % audioBuffer.duration;
   fireBeat(posToBeatIdx(posInBuffer));
 
