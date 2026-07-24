@@ -104,7 +104,7 @@
       </p>
 
       <div class="project-gallery">
-        <img src="../../images/MonoQueSaluda-3.gif" alt="Animación stop-motion de un mono de peluche saludando" width="640" loading="lazy">
+        <video src="../../images/MonoQueSaluda-3.mp4" poster="../../images/MonoQueSaluda-3-poster.jpg" width="640" loop muted playsinline preload="metadata" role="img" aria-label="Animación stop-motion de un mono de peluche saludando"></video>
         <iframe src="https://player.vimeo.com/video/1105830814?h=977e0005b6" width="640" height="360" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Animación stop-motion — Villa El Estero"></iframe>
         <iframe src="https://player.vimeo.com/video/1105830874?h=694ea94994" width="640" height="360" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Animación stop-motion — Villa El Estero (2)"></iframe>
       </div>
@@ -143,6 +143,21 @@
         });
       });
     }
+
+    /* Animación stop-motion: se comporta como el GIF que reemplazó — arranca
+       sola y sin controles a la vista. Solo si el usuario pidió menos movimiento
+       se queda quieta, y ahí sí aparecen los controles para verla a voluntad.
+       El play va por JS y no como atributo autoplay para no romper la validación. */
+    document.querySelectorAll('.project-gallery video').forEach(video => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        video.setAttribute('controls', '');
+        video.removeAttribute('role');
+      } else {
+        video.play().catch(() => {
+          /* Si el navegador bloquea la reproducción, queda el poster. */
+        });
+      }
+    });
   </script>
 
 </body>
