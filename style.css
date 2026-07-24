@@ -753,6 +753,24 @@ section > h2 {
   max-width: 500px;
 }
 
+.form-note {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.required-mark {
+  color: var(--color-accent);
+}
+
+.label-optional {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.honeypot {
+  display: none;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;

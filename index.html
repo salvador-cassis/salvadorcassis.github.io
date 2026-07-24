@@ -224,31 +224,31 @@
       <p>
         Para colaboración técnica o artística —diseño sonoro, mezcla, mastering y foley— gestiono esos servicios a través de <a href="https://soniketesur.com" target="_blank" rel="noopener noreferrer">SoniketeSur</a>.
       </p>
-      <p style="font-size:0.85rem;color:var(--color-text-muted)">Los campos marcados con <span aria-hidden="true" style="color:var(--color-accent)">*</span> son obligatorios.</p>
+      <p class="form-note">Los campos marcados con <span aria-hidden="true" class="required-mark">*</span> son obligatorios.</p>
       <div role="status" aria-live="polite" id="form-status"></div>
       <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
         <input type="hidden" name="access_key" value="865db929-b759-41d5-b3eb-de1a8b7e60d1">
         <input type="hidden" name="subject" value="Nuevo mensaje desde salvadorcassis.com">
         <!-- Honeypot anti-spam (Web3Forms): los humanos no lo ven; si un bot lo marca, se descarta el envío -->
-        <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+        <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" aria-hidden="true">
 
         <div class="form-group">
-          <label for="nombre">Nombre <span aria-hidden="true" style="color:var(--color-accent)">*</span></label>
+          <label for="nombre">Nombre <span aria-hidden="true" class="required-mark">*</span></label>
           <input type="text" id="nombre" name="nombre" required aria-required="true">
         </div>
 
         <div class="form-group">
-          <label for="email">Email <span aria-hidden="true" style="color:var(--color-accent)">*</span></label>
+          <label for="email">Email <span aria-hidden="true" class="required-mark">*</span></label>
           <input type="email" id="email" name="email" required aria-required="true">
         </div>
 
         <div class="form-group">
-          <label for="institucion">Institución / Contexto <span style="font-weight:400;color:var(--color-text-muted)">(opcional)</span></label>
+          <label for="institucion">Institución / Contexto <span class="label-optional">(opcional)</span></label>
           <input type="text" id="institucion" name="institucion">
         </div>
 
         <div class="form-group">
-          <label for="mensaje">Mensaje <span aria-hidden="true" style="color:var(--color-accent)">*</span></label>
+          <label for="mensaje">Mensaje <span aria-hidden="true" class="required-mark">*</span></label>
           <textarea id="mensaje" name="mensaje" rows="5" required aria-required="true"></textarea>
         </div>
 
