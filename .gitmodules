@@ -1,0 +1,3 @@
+[submodule "lab/pandero-web/player"]
+	path = lab/pandero-web/player
+	url = https://github.com/salvador-cassis/pandero-web.git
