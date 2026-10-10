@@ -7,9 +7,6 @@
 .idea/
 .vscode/
 
-# Config local de herramientas de IA (contiene rutas de disco)
-.claude/
-
 # Logs y temporales
 *.log
 node_modules/
@@ -97,9 +94,6 @@ salvadorcassis-workspace/.impeccable/design.json
 salvadorcassis-workspace/.impeccable/live/config.json
 salvadorcassis-workspace/assets/retrato-bosque.jpg
 salvadorcassis-workspace/assets/retrato-lago-2025-06-22.jpg
-salvadorcassis-workspace/CLAUDE.md
-salvadorcassis-workspace/codigo/AGENTS.md
-salvadorcassis-workspace/codigo/CLAUDE.md
 salvadorcassis-workspace/codigo/contenido.md
 salvadorcassis-workspace/codigo/conversion.md
 salvadorcassis-workspace/codigo/PENDIENTES.md

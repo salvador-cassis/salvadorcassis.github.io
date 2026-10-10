@@ -6,19 +6,9 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://salvadorcassis.com/proyectos/ritos-cotidianos/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://salvadorcassis.com/proyectos/sonidos-que-me-rodean/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://salvadorcassis.com/proyectos/animate/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://salvadorcassis.com/educacion-artistica/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://salvadorcassis.com/regalos/</loc>
