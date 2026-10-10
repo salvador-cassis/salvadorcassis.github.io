@@ -16,10 +16,8 @@ salvadorcassis.com/
 ├── style.css           # Estilos
 ├── CNAME               # Dominio personalizado
 ├── AGENTS.md           # Guía para agentes IA
-├── proyectos/          # Páginas individuales por proyecto (SEO)
-│   ├── ritos-cotidianos/
-│   ├── sonidos-que-me-rodean/
-│   └── animate/
+├── educacion-artistica/ # Portfolio de educación artística (los 3 proyectos)
+├── proyectos/          # Redirecciones de las URLs antiguas al portfolio
 ├── lab/                # Laboratorio interactivo (Strudel, piezas)
 │   ├── index.html
 │   ├── compas-flamenco/
@@ -58,7 +56,7 @@ Los cambios hechos push a `main` se publican automáticamente.
 ## Secciones
 
 - **Práctica**: Educación, Música, Arte medial, Producción
-- **Proyectos**: páginas individuales optimizadas para SEO
+- **Educación artística** (`/educacion-artistica/`): portfolio con los proyectos, fuera del home
 - **Instituciones**: sección de conversión institucional
 - **Enfoque**: Formación, Enfoque, Búsqueda actual
 - **Lab**: laboratorio interactivo con live coding

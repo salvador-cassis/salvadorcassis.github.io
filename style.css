@@ -89,7 +89,8 @@ html {
   opacity: 1;
 }
 
-section[id] {
+section[id],
+article[id] {
   scroll-margin-top: 6rem;
 }
 
@@ -593,7 +594,8 @@ section > h2 {
   border-top: 1px solid var(--color-border);
 }
 
-#proyectos h3 {
+#proyectos h3,
+#proyectos article h2 {
   margin-bottom: 0.25rem;
   color: var(--color-text);
 }
@@ -624,6 +626,54 @@ section > h2 {
   aspect-ratio: 16 / 9;
   height: auto;
   border: none;
+}
+
+/* Portfolio de educación artística — galería en mosaico.
+   .gallery-fill no aporta altura propia: toma la de su fila y recorta. */
+
+#proyectos > h1 {
+  margin-bottom: -0.5rem;
+}
+
+.project-caption {
+  max-width: 65ch;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.project-gallery--animate,
+.project-gallery--sonidos {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.project-gallery--sonidos {
+  grid-template-columns: 3fr 4fr;
+}
+
+.project-gallery .gallery-wide {
+  grid-column: 1 / -1;
+}
+
+.project-gallery--sonidos .gallery-fill {
+  height: 0;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 600px) {
+  .project-gallery--animate {
+    grid-template-columns: 1fr 1.6fr;
+  }
+
+  .project-gallery--animate .gallery-fill {
+    grid-row: span 2;
+    height: 0;
+    min-height: 100%;
+    object-fit: cover;
+  }
 }
 
 /* TRABAJO CON INSTITUCIONES */
