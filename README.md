@@ -15,7 +15,6 @@ salvadorcassis.com/
 ├── index.html          # Página principal
 ├── style.css           # Estilos
 ├── CNAME               # Dominio personalizado
-├── AGENTS.md           # Guía para agentes IA
 ├── educacion-artistica/ # Portfolio de educación artística (los 3 proyectos)
 ├── proyectos/          # Redirecciones de las URLs antiguas al portfolio
 ├── lab/                # Laboratorio interactivo (Strudel, piezas)
