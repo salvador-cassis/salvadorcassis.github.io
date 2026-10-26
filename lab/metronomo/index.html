@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Metrónomo flamenco</title>
+<link rel="stylesheet" href="../compas-shared/compas.css">
+</head>
+<body>
+<main class="panel">
+  <div class="bpm">
+    <span class="bpm-label">BPM</span>
+    <span class="bpm-value" id="bpm" role="button" tabindex="0" aria-label="Tempo. Mantén presionado para cambiar la cuenta">120</span>
+    <div class="flash" id="flash" aria-live="polite" data-on="false">&nbsp;</div>
+  </div>
+  <div class="ringbox" id="ring" role="button" tabindex="0" aria-label="Empezar"></div>
+  <div class="slider"><input class="range" id="range" type="range" min="30" max="320" step="1" value="120" aria-label="Tempo en BPM"></div>
+</main>
+<script src="../compas-shared/compas.js"></script>
+<script>
+(function () {
+  var TOTAL = Compas.TOTAL;
+  var state = { beat: -1, palmas: Compas.ACCENT_PATTERN.slice(), alt: false };
+  var bpm = 120, playing = false, ctx = null, master = null, timer = null, nbt = 0, sb = 0, timeouts = [];
+  var bpmEl = document.getElementById("bpm"), range = document.getElementById("range");
+
+  function initAudio() {
+    var r = Compas.unlockAudio(ctx);
+    ctx = r.ctx;
+    if (r.created) { master = ctx.createGain(); master.gain.value = 0.8; master.connect(ctx.destination); }
+  }
+  function beep(time) {
+    var o = ctx.createOscillator(), g = ctx.createGain();
+    o.connect(g); g.connect(master);
+    o.type = "triangle"; o.frequency.setValueAtTime(1100, time);
+    // Entrada de 2 ms para evitar el clic cuando el beep cae a mitad de un bloque de render.
+    g.gain.setValueAtTime(0.0001, time);
+    g.gain.exponentialRampToValueAtTime(0.55, time + 0.002);
+    g.gain.exponentialRampToValueAtTime(0.0001, time + 0.05);
+    o.start(time); o.stop(time + 0.06);
+  }
+  function schedule(beat, time) {
+    var delay = Math.max(0, (time - ctx.currentTime) * 1000);
+    timeouts.push(setTimeout(function () { if (playing) state.beat = beat; }, delay));
+    if (state.palmas[beat]) beep(time);
+  }
+  function loop() {
+    if (!playing) return;
+    while (nbt < ctx.currentTime + 0.1) {
+      schedule(sb, nbt);
+      nbt += 60 / bpm;
+      sb = (sb + 1) % TOTAL;
+    }
+    timer = setTimeout(loop, 25);
+  }
+  function toggle() {
+    if (playing) {
+      playing = false; state.beat = -1; clearTimeout(timer);
+      timeouts.forEach(clearTimeout); timeouts = [];
+    } else {
+      initAudio(); playing = true; state.beat = 0; sb = 0; nbt = ctx.currentTime + 0.08; loop();
+    }
+  }
+
+  Compas.createRing({
+    box: document.getElementById("ring"), variant: "outline",
+    getState: function () { return state; },
+    onCenterClick: toggle,
+    onToggle: function (i) { state.palmas[i] = !state.palmas[i]; }
+  });
+  Compas.bindBpm(bpmEl, document.getElementById("flash"), function () { return (state.alt = !state.alt); });
+  range.addEventListener("input", function () { bpm = parseInt(range.value, 10); bpmEl.textContent = bpm; });
+  document.getElementById("ring").addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+  });
+})();
+</script>
+</body>
+</html>

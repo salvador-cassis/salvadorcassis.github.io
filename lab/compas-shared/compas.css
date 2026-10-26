@@ -1,0 +1,38 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bg: #f4efe6; --fg: #14100a; --muted: #8a7a68; --track: #d9cfbf; --accent: #e97417; }
+html, body { height: 100%; background: var(--bg); color: var(--fg); }
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden; overscroll-behavior: none;
+  user-select: none; -webkit-user-select: none;
+}
+.panel {
+  height: 100dvh; display: flex; flex-direction: column; align-items: center;
+  padding: clamp(24px, 7.5dvh, 64px) 20px 0; position: relative;
+}
+.bpm { position: relative; text-align: center; }
+.bpm-label { display: block; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); }
+.bpm-value {
+  display: block; font-size: 40px; font-weight: 200; line-height: 1;
+  -webkit-touch-callout: none; touch-action: manipulation; cursor: default;
+}
+.flash {
+  position: absolute; left: 0; right: 0; top: 100%; margin-top: 4px; font-size: 12px;
+  letter-spacing: .2em; color: var(--muted); opacity: 0; transition: opacity .3s; pointer-events: none;
+}
+.flash[data-on="true"] { opacity: 1; }
+.ringbox { width: min(100%, 48dvh); margin: auto 0; aspect-ratio: 1; cursor: pointer; }
+.ringbox canvas { display: block; width: 100%; height: 100%; }
+.slider { width: 100%; padding: 18px 8px clamp(24px, 12dvh, 100px); }
+.range { appearance: none; -webkit-appearance: none; background: transparent; width: 100%; touch-action: pan-y; height: 34px; }
+.range::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--track); }
+.range::-moz-range-track { height: 6px; border-radius: 3px; background: var(--track); }
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 34px; height: 34px; border-radius: 50%;
+  border: 0; background: var(--fg); margin-top: calc((6px - 34px) / 2);
+}
+.range::-moz-range-thumb { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--fg); }
+.msg { position: absolute; left: 16px; right: 16px; bottom: 16px; font-size: 14px; text-align: center; }
+.msg button { font: inherit; margin-left: 8px; padding: 6px 12px; border: 1px solid var(--fg); background: transparent; border-radius: 6px; }
+.msg[data-error="true"] { color: #b3261e; }

@@ -21,7 +21,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://salvadorcassis.com/lab/compas-flamenco/</loc>
+    <loc>https://salvadorcassis.com/lab/metronomo/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://salvadorcassis.com/lab/solo-compas/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>

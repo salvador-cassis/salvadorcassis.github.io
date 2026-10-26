@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Solo compás</title>
+<link rel="stylesheet" href="../compas-shared/compas.css">
+</head>
+<body>
+<main class="panel">
+  <div class="bpm">
+    <span class="bpm-label">BPM</span>
+    <span class="bpm-value" id="bpm" role="button" tabindex="0" aria-label="Tempo. Mantén presionado para cambiar la cuenta"></span>
+    <div class="flash" id="flash" aria-live="polite" data-on="false">&nbsp;</div>
+  </div>
+  <div class="ringbox" id="ring" role="button" tabindex="0" aria-label="Empezar"></div>
+  <div class="slider"><input class="range" id="range" type="range" step="1" aria-label="Tempo en BPM"></div>
+  <div class="msg" id="msg" aria-live="polite"></div>
+</main>
+<script src="../compas-shared/compas.js"></script>
+<script src="engine.js"></script>
+<script>
+(function () {
+  var R = SoloCompasRange, bpm = SoloCompasDefaultBpm;
+  var state = { beat: -1, palmas: Compas.ACCENT_PATTERN, alt: false };
+  var status = "idle";
+  var bpmEl = document.getElementById("bpm"), range = document.getElementById("range"), msg = document.getElementById("msg");
+  range.min = R.min; range.max = R.max; range.value = bpm; bpmEl.textContent = bpm;
+
+  var engine = new SoloCompasEngine(function (s, detail) {
+    status = s;
+    msg.dataset.error = s === "error" || s === "unsupported" ? "true" : "false";
+    msg.textContent = "";
+    if (s === "suspended") {
+      msg.textContent = "El audio se pausó.";
+      var b = document.createElement("button");
+      b.type = "button"; b.textContent = "Toca para reanudar";
+      b.addEventListener("click", function () { engine.resume(); });
+      msg.appendChild(b);
+    } else if (s === "error" || s === "unsupported") {
+      msg.textContent = detail || "No se pudo iniciar el audio.";
+    }
+  });
+  engine.prefetch(bpm);
+
+  (function tick() {
+    state.beat = status === "playing" ? engine.getBeat() : -1;
+    requestAnimationFrame(tick);
+  })();
+
+  function toggle() {
+    if (status === "playing" || status === "loading" || status === "suspended") engine.stop();
+    else engine.start(bpm);
+  }
+  Compas.createRing({
+    box: document.getElementById("ring"), variant: "solid",
+    getState: function () { return state; },
+    onCenterClick: toggle
+  });
+  document.getElementById("ring").addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+  });
+  Compas.bindBpm(bpmEl, document.getElementById("flash"), function () { return (state.alt = !state.alt); });
+  range.addEventListener("input", function () {
+    bpm = Math.min(R.max, Math.max(R.min, Math.round(Number(range.value))));
+    bpmEl.textContent = bpm;
+    engine.setTargetBpm(bpm);
+  });
+})();
+</script>
+</body>
+</html>

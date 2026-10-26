@@ -19,7 +19,8 @@ salvadorcassis.com/
 ├── proyectos/          # Redirecciones de las URLs antiguas al portfolio
 ├── lab/                # Laboratorio interactivo (Strudel, piezas)
 │   ├── index.html
-│   ├── compas-flamenco/
+│   ├── metronomo/
+│   ├── solo-compas/
 │   ├── pandero-web/
 │   └── piezas/tangos-1/
 └── regalos/            # Galería personal

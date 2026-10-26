@@ -273,21 +273,6 @@
       letter-spacing: -0.01em;
     }
 
-    /* Instrucción contextual — la parte más importante */
-    .drawer-hint {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.85rem;
-      color: var(--color-text-muted);
-    }
-
-    .drawer-hint-arrow {
-      font-size: 1rem;
-      color: var(--color-accent);
-      flex-shrink: 0;
-    }
-
     .drawer-close {
       width: 44px;
       height: 44px;
@@ -362,21 +347,32 @@
       <h2>Herramientas</h2>
       <div class="tool-grid">
 
-        <!-- COMPÁS FLAMENCO -->
+        <!-- METRÓNOMO FLAMENCO -->
         <article class="tool-card">
           <button type="button" class="card-trigger"
-            data-src="./compas-flamenco/"
-            data-title="Compás flamenco"
-            data-hint="Aprieta «Empezar» para escuchar el compás"
-            aria-label="Abrir Compás flamenco"
+            data-src="./metronomo/"
+            data-title="Metrónomo flamenco"
+            aria-label="Abrir Metrónomo flamenco"
             aria-haspopup="dialog"
           ></button>
 
           <div class="tool-body">
-            <h3>Compás flamenco</h3>
-            <p class="tool-description">
-              Muestra visualmente los acentos del compás de doce tiempos y los hace sonar. Aprieta play y siente dónde cae cada golpe. Útil tanto para aprender como para enseñar.
-            </p>
+            <h3>Metrónomo flamenco</h3>
+            <span class="tool-cta-label" aria-hidden="true">Abrir herramienta →</span>
+          </div>
+        </article>
+
+        <!-- SOLO COMPÁS -->
+        <article class="tool-card">
+          <button type="button" class="card-trigger"
+            data-src="./solo-compas/"
+            data-title="Solo compás"
+            aria-label="Abrir Solo compás"
+            aria-haspopup="dialog"
+          ></button>
+
+          <div class="tool-body">
+            <h3>Solo compás</h3>
             <span class="tool-cta-label" aria-hidden="true">Abrir herramienta →</span>
           </div>
         </article>
@@ -386,16 +382,12 @@
           <button type="button" class="card-trigger"
             data-src="./pandero-web/bare.html"
             data-title="Pandero de cueca"
-            data-hint="Aprieta el botón de play para activar el pandero"
             aria-label="Abrir Pandero de cueca"
             aria-haspopup="dialog"
           ></button>
 
           <div class="tool-body">
             <h3>Pandero de cueca</h3>
-            <p class="tool-description">
-              Un pandero de cueca chilena que suena con un clic. Ponlo de fondo mientras practicas canto, guitarra o simplemente para escuchar cómo se siente el ritmo.
-            </p>
             <span class="tool-cta-label" aria-hidden="true">Abrir herramienta →</span>
           </div>
         </article>
@@ -413,16 +405,12 @@
           <button type="button" class="card-trigger"
             data-src="./piezas/tangos-1/bare.html"
             data-title="Tangos 1"
-            data-hint="Los «tangos» son un palo del flamenco, aquí recreado con código en vivo"
             aria-label="Abrir Tangos 1"
             aria-haspopup="dialog"
           ></button>
 
           <div class="tool-body">
             <h3>Tangos 1</h3>
-            <p class="tool-description">
-              Los «tangos» son un palo del flamenco. Aquí suenan generados en tiempo real con código: escuchas la pieza y ves, al mismo tiempo, el código que la crea.
-            </p>
             <span class="tool-cta-label" aria-hidden="true">Abrir pieza →</span>
           </div>
         </article>
@@ -446,10 +434,6 @@
     <div class="drawer-header">
       <div class="drawer-header-text">
         <p class="drawer-title" id="drawerTitle"></p>
-        <p class="drawer-hint">
-          <span class="drawer-hint-arrow" aria-hidden="true">→</span>
-          <span id="drawerHintText"></span>
-        </p>
       </div>
       <button type="button" class="drawer-close" id="drawerClose" aria-label="Cerrar herramienta">✕</button>
     </div>
@@ -486,7 +470,6 @@
     const overlay  = document.getElementById('toolOverlay');
     const frame    = document.getElementById('drawerFrame');
     const titleEl  = document.getElementById('drawerTitle');
-    const hintEl   = document.getElementById('drawerHintText');
     const closeBtn = document.getElementById('drawerClose');
 
     let lastTrigger = null;
@@ -512,10 +495,9 @@
       }
     }
 
-    function openDrawer(src, title, hint, trigger) {
+    function openDrawer(src, title, trigger) {
       lastTrigger = trigger || null;
       titleEl.textContent = title;
-      hintEl.textContent  = hint;
       frame.src = src;
       drawer.hidden = false;
       /* limpiar cualquier transform/transition residual de un arrastre previo */
@@ -554,7 +536,7 @@
 
     document.querySelectorAll('.card-trigger').forEach(btn => {
       btn.addEventListener('click', () => {
-        openDrawer(btn.dataset.src, btn.dataset.title, btn.dataset.hint, btn);
+        openDrawer(btn.dataset.src, btn.dataset.title, btn);
       });
     });
 
