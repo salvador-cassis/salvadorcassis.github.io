@@ -58,7 +58,7 @@ Los cambios hechos push a `main` se publican automáticamente.
 - **Práctica**: Educación, Música, Arte medial, Producción
 - **Educación artística** (`/educacion-artistica/`): portfolio con los proyectos, fuera del home
 - **Instituciones**: sección de conversión institucional
-- **Enfoque**: Formación, Enfoque, Búsqueda actual
+- **Enfoque** y enlace a **Regalos**: dentro de `/educacion-artistica/`
 - **Lab**: laboratorio interactivo con live coding
 - **Contacto**: Formulario (Web3Forms) y email
 
